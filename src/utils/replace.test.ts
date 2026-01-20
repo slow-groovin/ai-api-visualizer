@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { applyReplace, type ReplaceRule } from './replace';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { applyReplace, type ReplaceRule, restoreDefaultRules, DEFAULT_RULES } from './replace';
 
 describe('applyReplace', () => {
   it('should replace fixed string with highlighting', () => {
@@ -117,7 +117,63 @@ var react = require('react');
     expect(countDe).toBe(5); // 的 appears five times
   });
 
+  describe('restoreDefaultRules', () => {
+    beforeEach(() => {
+      // Clear localStorage before each test
+      localStorage.clear();
+    });
 
+    afterEach(() => {
+      // Clean up after each test
+      localStorage.clear();
+    });
+
+    it('should restore default rules when no rules exist', () => {
+      const rules = restoreDefaultRules();
+      expect(rules).toHaveLength(DEFAULT_RULES.length);
+      expect(rules).toEqual(DEFAULT_RULES);
+    });
+
+    it('should update existing default rules and keep custom rules', () => {
+      // First, add some custom rules
+      const customRules: ReplaceRule[] = [
+        { id: 11, match: { type: 'fixed', value: 'custom' }, target: { type: 'fixed', value: 'modified' } },
+        { id: 12, match: { type: 'fixed', value: 'another' }, target: { type: 'fixed', value: 'rule' } }
+      ];
+
+      // Simulate existing rules (some default, some custom)
+      const existingRules: ReplaceRule[] = [
+        { id: 1, match: { type: 'fixed', value: 'old' }, target: { type: 'fixed', value: 'value' } }, // modified default
+        { id: 11, match: { type: 'fixed', value: 'custom' }, target: { type: 'fixed', value: 'modified' } }, // custom
+        { id: 2, match: { type: 'fixed', value: 'existing' }, target: { type: 'fixed', value: 'default' } } // modified default
+      ];
+
+      // Manually set localStorage to simulate existing state
+      localStorage.setItem('replace-count', existingRules.length.toString());
+      existingRules.forEach((rule, index) => {
+        localStorage.setItem(`replace-rules-${index + 1}`, JSON.stringify(rule));
+      });
+
+      const rules = restoreDefaultRules();
+
+      // Should have all default rules + custom rules
+      expect(rules).toHaveLength(DEFAULT_RULES.length + 1); // 10 defaults + 1 custom (id 11)
+
+      // Check that default rules are restored
+      DEFAULT_RULES.forEach(defaultRule => {
+        const found = rules.find(r => r.id === defaultRule.id);
+        expect(found).toEqual(defaultRule);
+      });
+
+      // Check that custom rules are preserved
+      const customRule = rules.find(r => r.id === 11);
+      expect(customRule).toEqual(customRules[0]);
+
+      // Custom rule with id 12 should not be there (wasn't in existing rules)
+      const missingCustom = rules.find(r => r.id === 12);
+      expect(missingCustom).toBeUndefined();
+    });
+  });
 
   it('should handle long text with many replacements', () => {
     const rules: ReplaceRule[] = [

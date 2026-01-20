@@ -55,3 +55,74 @@ function escapeHtml(unsafe: string): string {
     .replace(/'/g, '&#039;');
 }
 
+// Default rules for testing
+export const DEFAULT_RULES: ReplaceRule[] = [
+  { id: 1, match: { type: 'fixed', value: 'hello' }, target: { type: 'fixed', value: 'hi' } },
+  { id: 2, match: { type: 'regex', value: '\\bworld\\b' }, target: { type: 'fixed', value: 'earth' } },
+  { id: 3, match: { type: 'fixed', value: 'test' }, target: { type: 'fixed', value: 'example' } },
+  { id: 4, match: { type: 'regex', value: '\\bvar\\b' }, target: { type: 'fixed', value: 'let' } },
+  { id: 5, match: { type: 'regex', value: '\\blet\\b' }, target: { type: 'fixed', value: 'const' } },
+  { id: 6, match: { type: 'regex', value: '/src/' }, target: { type: 'fixed', value: '/dist/' } },
+  { id: 7, match: { type: 'regex', value: '\\.js$' }, target: { type: 'fixed', value: '.ts' } },
+  { id: 8, match: { type: 'fixed', value: '你好' }, target: { type: 'fixed', value: '您好' } },
+  { id: 9, match: { type: 'fixed', value: '世界' }, target: { type: 'fixed', value: '地球' } },
+  { id: 10, match: { type: 'regex', value: '的' }, target: { type: 'fixed', value: '之' } }
+];
+
+// localStorage utilities
+const STORAGE_PREFIX = 'replace-';
+
+export function loadRules(): ReplaceRule[] {
+  const count = parseInt(localStorage.getItem(`${STORAGE_PREFIX}count`) || '0');
+  const rules: ReplaceRule[] = [];
+  for (let i = 1; i <= count; i++) {
+    const ruleJson = localStorage.getItem(`${STORAGE_PREFIX}rules-${i}`);
+    if (ruleJson) {
+      try {
+        rules.push(JSON.parse(ruleJson));
+      } catch (e) {
+        console.warn(`Failed to parse rule ${i}:`, e);
+      }
+    }
+  }
+  return rules;
+}
+
+export function saveRules(rules: ReplaceRule[]): void {
+  // Clear old rules
+  const oldCount = parseInt(localStorage.getItem(`${STORAGE_PREFIX}count`) || '0');
+  for (let i = 1; i <= oldCount; i++) {
+    localStorage.removeItem(`${STORAGE_PREFIX}rules-${i}`);
+  }
+
+  // Save new rules
+  localStorage.setItem(`${STORAGE_PREFIX}count`, rules.length.toString());
+  rules.forEach((rule, index) => {
+    localStorage.setItem(`${STORAGE_PREFIX}rules-${index + 1}`, JSON.stringify(rule));
+  });
+}
+
+export function getNextRuleId(): number {
+  const rules = loadRules();
+  return rules.length > 0 ? Math.max(...rules.map(r => r.id)) + 1 : 1;
+}
+
+export function restoreDefaultRules(): ReplaceRule[] {
+  const currentRules = loadRules();
+  const updatedRules = [...currentRules];
+
+  DEFAULT_RULES.forEach(defaultRule => {
+    const existingIndex = updatedRules.findIndex(r => r.id === defaultRule.id);
+    if (existingIndex >= 0) {
+      // Update existing default rule
+      updatedRules[existingIndex] = { ...defaultRule };
+    } else {
+      // Add missing default rule
+      updatedRules.push({ ...defaultRule });
+    }
+  });
+
+  saveRules(updatedRules);
+  return updatedRules;
+}
+
