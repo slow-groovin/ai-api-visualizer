@@ -34,12 +34,18 @@
             >
               Environment Info
             </router-link>
-            <router-link
-              to="/debug/opfs-viewer"
-              class="block text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-3 py-2 rounded"
-            >
-              OPFS Viewer (Origin Private File System)
-            </router-link>
+             <router-link
+               to="/debug/opfs-viewer"
+               class="block text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-3 py-2 rounded"
+             >
+               OPFS Viewer (Origin Private File System)
+             </router-link>
+             <router-link
+               to="/debug/replace"
+               class="block text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-3 py-2 rounded"
+             >
+               Replace Tool
+             </router-link>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import DatabaseTest from '../views/debug/DatabaseTest.vue'
 import DrizzleOrmTest from '../views/debug/DrizzleOrmTest.vue'
 import EnvironmentInfo from '../views/debug/EnvironmentInfo.vue'
 import OpfsViewer from '../views/debug/OpfsViewer.vue'
+import Replace from '../views/debug/Replace.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/debug/opfs-viewer',
       name: 'opfs-viewer',
       component: OpfsViewer
+    },
+    {
+      path: '/debug/replace',
+      name: 'replace',
+      component: Replace
     }
   ]
 })
