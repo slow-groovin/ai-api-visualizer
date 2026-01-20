@@ -2,7 +2,7 @@ import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 import { relations } from "drizzle-orm";
 
 // User table
-export const users = sqliteTable("users", {
+export const debugUsers = sqliteTable("debug_users", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -10,7 +10,7 @@ export const users = sqliteTable("users", {
 });
 
 // Task table
-export const tasks = sqliteTable("tasks", {
+export const debugTasks = sqliteTable("debug_tasks", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   title: text("title").notNull(),
   description: text("description"),
@@ -20,7 +20,7 @@ export const tasks = sqliteTable("tasks", {
 });
 
 // Context table (for context protection)
-export const contexts = sqliteTable("contexts", {
+export const debugContexts = sqliteTable("debug_contexts", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   description: text("description"),
@@ -41,13 +41,13 @@ export const debugReplaceHistory = sqliteTable("debug_replace_history", {
 });
 
 // Relations
-export const usersRelations = relations(users, ({ many }) => ({
-  tasks: many(tasks),
+export const debugUsersRelations = relations(debugUsers, ({ many }) => ({
+  tasks: many(debugTasks),
 }));
 
-export const tasksRelations = relations(tasks, ({ one }) => ({
-  user: one(users, {
-    fields: [tasks.userId],
-    references: [users.id],
+export const debugTasksRelations = relations(debugTasks, ({ one }) => ({
+  user: one(debugUsers, {
+    fields: [debugTasks.userId],
+    references: [debugUsers.id],
   }),
 }));

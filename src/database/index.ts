@@ -67,7 +67,7 @@ export async function runMigrations() {
 
     // Create tables using Drizzle run
     await db.run(sql`
-      CREATE TABLE IF NOT EXISTS users (
+      CREATE TABLE IF NOT EXISTS debug_users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         email TEXT NOT NULL UNIQUE,
@@ -76,19 +76,19 @@ export async function runMigrations() {
     `);
 
     await db.run(sql`
-      CREATE TABLE IF NOT EXISTS tasks (
+      CREATE TABLE IF NOT EXISTS debug_tasks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         title TEXT NOT NULL,
         description TEXT,
         completed INTEGER NOT NULL DEFAULT 0,
         user_id INTEGER NOT NULL,
         created_at TEXT NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users (id)
+        FOREIGN KEY (user_id) REFERENCES debug_users (id)
       )
     `);
 
     await db.run(sql`
-      CREATE TABLE IF NOT EXISTS contexts (
+      CREATE TABLE IF NOT EXISTS debug_contexts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         description TEXT,
@@ -98,10 +98,10 @@ export async function runMigrations() {
     `);
 
     await db.run(
-      sql`CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id)`,
+      sql`CREATE INDEX IF NOT EXISTS idx_debug_tasks_user_id ON debug_tasks(user_id)`,
     );
     await db.run(
-      sql`CREATE INDEX IF NOT EXISTS idx_contexts_created_at ON contexts(created_at)`,
+      sql`CREATE INDEX IF NOT EXISTS idx_debug_contexts_created_at ON debug_contexts(created_at)`,
     );
 
     await db.run(sql`
@@ -135,9 +135,9 @@ export async function resetDatabase() {
     }
 
     await db.run(sql`DROP TABLE IF EXISTS debug_replace_history`);
-    await db.run(sql`DROP TABLE IF EXISTS contexts`);
-    await db.run(sql`DROP TABLE IF EXISTS tasks`);
-    await db.run(sql`DROP TABLE IF EXISTS users`);
+    await db.run(sql`DROP TABLE IF EXISTS debug_contexts`);
+    await db.run(sql`DROP TABLE IF EXISTS debug_tasks`);
+    await db.run(sql`DROP TABLE IF EXISTS debug_users`);
 
     console.log("Database reset completed with Drizzle");
     isInitialized = false;
