@@ -117,6 +117,17 @@ export async function runMigrations() {
       )
     `);
 
+    await db.run(sql`
+      CREATE TABLE IF NOT EXISTS replace_rules (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        note TEXT,
+        match_type TEXT NOT NULL,
+        match_value TEXT NOT NULL,
+        target_value TEXT NOT NULL,
+        created_at TEXT NOT NULL
+      )
+    `);
+
     console.log("Migrations completed successfully with Drizzle");
   } catch (error) {
     console.error("Failed to run migrations:", error);

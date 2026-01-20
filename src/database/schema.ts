@@ -40,6 +40,16 @@ export const debugReplaceHistory = sqliteTable("debug_replace_history", {
   createdAt: text("created_at").notNull(),
 });
 
+// Replace rules table
+export const replaceRules = sqliteTable("replace_rules", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  note: text("note"), // Optional rule name
+  matchType: text("match_type").notNull(), // 'fixed' | 'regex'
+  matchValue: text("match_value").notNull(),
+  targetValue: text("target_value").notNull(),
+  createdAt: text("created_at").notNull(),
+});
+
 // Relations
 export const debugUsersRelations = relations(debugUsers, ({ many }) => ({
   tasks: many(debugTasks),
