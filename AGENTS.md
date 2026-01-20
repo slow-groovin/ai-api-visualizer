@@ -1,3 +1,8 @@
+# orders
+使用 `npm run tsc`验证代码是否正确编译
+
+
+## current stages
 当前是技术验证阶段
 遵循指令生成框架和易读易测试的实例
 
@@ -32,3 +37,30 @@
 
 高亮逻辑:
 加上半透明背景色, 背景色取决于规则id的hash
+
+### 任务6
+#### 实现restore功能, 在replace的页面内
+增加一行左右两栏, 
+左侧: input框, 输入大模型响应的内容
+右侧: 按历史restore后的内容
+
+#### pre functions:
+为replace功能加料, 将匹配的记录保存下来, 如 "世界"(fixed) -> "world"(fixed) 或 "123-45-6789"(^\d{3}-\d{2}-\d{4}$) -> "555-55-5555" 实际出发了替换, 那么记录倒插key-value键值对
+
+#### restore逻辑:
+将大模型输出内容中, 将内容替换会原来的内容 ,比如 "555-55-5555"->"123-45-6789"
+
+#### 匹配历史记录 存储和查询:
+使用sqlite-drizzle数据库进行CRUD, 表名需要有debug-开头
+每次"DO Replace"会创建一个任务(仅在内存中持久存储id,刷新即消失), 替换历史属于该任务
+
+#### 初始化表:
+给出单独的"初始化表"按钮执行具体初始化过程
+
+#### mock大模型输出内容功能:
+> 单独一个框
+根据当前任务的替换历史, 随机生成测试的大模型输出内容, 用以用户复制然后粘贴进入input框进行restore测试
+两个按钮, 一个生成中文, 一个生成英文, 
+中文模拟生成连续的句子,仅使用 "一"至"四"作为基础字, 比如 replace records: word->世界, 我的->你的.  mock: 一二四世界一二, 三三你的一三
+英文也是, 仅使用基础词 "my" "you" "this" "what" "can" "do", 如 replace records: const->let, opencode->claude. mock: what let claude can do. you you my let this.
+句子长度随机 len of replace records * (1~5), 保证每个替换记录至少存在一个

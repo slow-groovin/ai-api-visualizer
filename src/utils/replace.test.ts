@@ -8,7 +8,7 @@ describe('applyReplace', () => {
     ];
     const input = 'hello world';
     const result = applyReplace(input, rules);
-    expect(result).toBe('<span style="background-color: hsl(49, 70%, 90%);">hi</span> world');
+    expect(result.result).toBe('<span style="background-color: hsl(49, 70%, 90%);">hi</span> world');
   });
 
   it('should replace regex with highlighting', () => {
@@ -17,7 +17,7 @@ describe('applyReplace', () => {
     ];
     const input = 'hello world';
     const result = applyReplace(input, rules);
-    expect(result).toBe('<span style="background-color: hsl(98, 70%, 90%);">word</span> <span style="background-color: hsl(98, 70%, 90%);">word</span>');
+    expect(result.result).toBe('<span style="background-color: hsl(98, 70%, 90%);">word</span> <span style="background-color: hsl(98, 70%, 90%);">word</span>');
   });
 
   it('should handle multiple rules', () => {
@@ -27,7 +27,7 @@ describe('applyReplace', () => {
     ];
     const input = 'abc';
     const result = applyReplace(input, rules);
-    expect(result).toBe('<span style="background-color: hsl(49, 70%, 90%);">A</span><span style="background-color: hsl(98, 70%, 90%);">B</span>c');
+    expect(result.result).toBe('<span style="background-color: hsl(49, 70%, 90%);">A</span><span style="background-color: hsl(98, 70%, 90%);">B</span>c');
   });
 
   it('should escape HTML in target', () => {
@@ -36,7 +36,7 @@ describe('applyReplace', () => {
     ];
     const input = 'test';
     const result = applyReplace(input, rules);
-    expect(result).toBe('<span style="background-color: hsl(49, 70%, 90%);">&lt;script&gt;</span>');
+    expect(result.result).toBe('<span style="background-color: hsl(49, 70%, 90%);\">&lt;script&gt;</span>');
   });
 
   it('should handle no matches', () => {
@@ -45,7 +45,7 @@ describe('applyReplace', () => {
     ];
     const input = 'hello';
     const result = applyReplace(input, rules);
-    expect(result).toBe('hello');
+    expect(result.result).toBe('hello');
   });
 
   it('should replace multiple occurrences', () => {
@@ -54,7 +54,7 @@ describe('applyReplace', () => {
     ];
     const input = 'a b a';
     const result = applyReplace(input, rules);
-    expect(result).toBe('<span style="background-color: hsl(49, 70%, 90%);">A</span> b <span style="background-color: hsl(49, 70%, 90%);">A</span>');
+    expect(result.result).toBe('<span style="background-color: hsl(49, 70%, 90%);">A</span> b <span style="background-color: hsl(49, 70%, 90%);">A</span>');
   });
 
   // 测试预设input，但那是页面逻辑，这里只测函数
@@ -80,10 +80,10 @@ var react = require('react');
     const result = applyReplace(input, rules);
     // Note: replacements are applied in order, so 'var' -> 'let', then 'let' -> 'const', but since 'var' is already 'let', wait no
     // In this code, rules are applied sequentially, so first 'var' to 'let', then 'let' to 'const' on the result.
-    expect(result).toContain('<span style="background-color: hsl(49, 70%, 90%);">let</span>'); // var -> let
-    expect(result).toContain('<span style="background-color: hsl(98, 70%, 90%);">const</span>'); // let -> const
-    expect(result).toContain('<span style="background-color: hsl(147, 70%, 90%);">vue</span>'); // react -> vue
-    expect(result).toContain('<span style="background-color: hsl(196, 70%, 90%);">arrow</span>'); // function -> arrow
+    expect(result.result).toContain('<span style="background-color: hsl(49, 70%, 90%);">let</span>'); // var -> let
+    expect(result.result).toContain('<span style="background-color: hsl(98, 70%, 90%);">const</span>'); // let -> const
+    expect(result.result).toContain('<span style="background-color: hsl(147, 70%, 90%);">vue</span>'); // react -> vue
+    expect(result.result).toContain('<span style="background-color: hsl(196, 70%, 90%);">arrow</span>'); // function -> arrow
   });
 
   it('should handle path name replacements in code', () => {
@@ -93,8 +93,8 @@ var react = require('react');
     ];
     const input = 'import from /src/utils.js; const file = "/src/index.js";';
     const result = applyReplace(input, rules);
-    expect(result).toContain('<span style="background-color: hsl(245, 70%, 90%);">/dist/</span>');
-    expect(result).toContain('<span style="background-color: hsl(294, 70%, 90%);">.ts</span>');
+    expect(result.result).toContain('<span style="background-color: hsl(245, 70%, 90%);">/dist/</span>');
+    expect(result.result).toContain('<span style="background-color: hsl(294, 70%, 90%);">.ts</span>');
   });
 
   it('should handle Chinese text with multiple repeated replacements', () => {
@@ -105,13 +105,13 @@ var react = require('react');
     ];
     const input = '你好，世界！这是我的世界的你好。世界很大，的的的。';
     const result = applyReplace(input, rules);
-    expect(result).toContain('<span style="background-color: hsl(343, 70%, 90%);">您好</span>');
-    expect(result).toContain('<span style="background-color: hsl(32, 70%, 90%);">地球</span>');
-    expect(result).toContain('<span style="background-color: hsl(81, 70%, 90%);">之</span>');
+    expect(result.result).toContain('<span style="background-color: hsl(343, 70%, 90%);">您好</span>');
+    expect(result.result).toContain('<span style="background-color: hsl(32, 70%, 90%);">地球</span>');
+    expect(result.result).toContain('<span style="background-color: hsl(81, 70%, 90%);">之</span>');
     // Count occurrences
-    const countNihao = (result.match(/您好/g) || []).length;
-    const countWorld = (result.match(/地球/g) || []).length;
-    const countDe = (result.match(/之/g) || []).length;
+    const countNihao = (result.result.match(/您好/g) || []).length;
+    const countWorld = (result.result.match(/地球/g) || []).length;
+    const countDe = (result.result.match(/之/g) || []).length;
     expect(countNihao).toBe(2); // 你好 appears twice
     expect(countWorld).toBe(3); // 世界 appears three times
     expect(countDe).toBe(5); // 的 appears five times
@@ -181,7 +181,7 @@ var react = require('react');
     ];
     const input = 'The quick brown fox jumps over the lazy dog. The dog is lazy, and the fox is quick. The the the.';
     const result = applyReplace(input, rules);
-    const count = (result.match(/THE/g) || []).length;
+    const count = (result.result.match(/THE/g) || []).length;
     expect(count).toBe(4); // 4 'the'
   });
 });

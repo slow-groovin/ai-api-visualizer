@@ -10,9 +10,23 @@ export interface ReplaceRule {
   };
 }
 
-export function applyReplace(input: string, rules: ReplaceRule[]): string {
+export interface ReplaceResult {
+  result: string;
+  history: ReplaceHistoryEntry[];
+}
+
+export interface ReplaceHistoryEntry {
+  originalMatch: string;
+  originalMatchType: 'fixed' | 'regex';
+  replacedWith: string;
+  replacedWithType: 'fixed';
+  ruleId: number;
+}
+
+export function applyReplace(input: string, rules: ReplaceRule[]): ReplaceResult {
   let result = input;
-  const placeholders: { id: string; target: string; ruleId: number }[] = [];
+  const placeholders: { id: string; target: string; ruleId: number; originalMatch: string; originalMatchType: 'fixed' | 'regex' }[] = [];
+  const history: ReplaceHistoryEntry[] = [];
 
   rules.forEach((rule, index) => {
     const { match, target } = rule;
@@ -24,10 +38,27 @@ export function applyReplace(input: string, rules: ReplaceRule[]): string {
     }
     // 使用占位符先替换
     const placeholder = `__REPLACE_${index}__`;
-    result = result.replace(regex, () => {
+    result = result.replace(regex, (matchStr) => {
       const uniqueId = `${placeholder}_${placeholders.length}`;
-      placeholders.push({ id: uniqueId, target: target.value, ruleId: rule.id });
+      placeholders.push({
+        id: uniqueId,
+        target: target.value,
+        ruleId: rule.id,
+        originalMatch: matchStr,
+        originalMatchType: match.type
+      });
       return uniqueId;
+    });
+  });
+
+  // 收集历史记录
+  placeholders.forEach(({ originalMatch, originalMatchType, target, ruleId }) => {
+    history.push({
+      originalMatch,
+      originalMatchType,
+      replacedWith: target,
+      replacedWithType: 'fixed',
+      ruleId
     });
   });
 
@@ -39,10 +70,10 @@ export function applyReplace(input: string, rules: ReplaceRule[]): string {
     result = result.replace(new RegExp(escapeRegExp(id), 'g'), highlighted);
   });
 
-  return result;
+  return { result, history };
 }
 
-function escapeRegExp(string: string): string {
+export function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 

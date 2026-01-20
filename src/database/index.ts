@@ -97,8 +97,25 @@ export async function runMigrations() {
       )
     `);
 
-    await db.run(sql`CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id)`);
-    await db.run(sql`CREATE INDEX IF NOT EXISTS idx_contexts_created_at ON contexts(created_at)`);
+    await db.run(
+      sql`CREATE INDEX IF NOT EXISTS idx_tasks_user_id ON tasks(user_id)`,
+    );
+    await db.run(
+      sql`CREATE INDEX IF NOT EXISTS idx_contexts_created_at ON contexts(created_at)`,
+    );
+
+    await db.run(sql`
+      CREATE TABLE IF NOT EXISTS debug_replace_history (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        task_id TEXT NOT NULL,
+        original_match TEXT NOT NULL,
+        original_match_type TEXT NOT NULL,
+        replaced_with TEXT NOT NULL,
+        replaced_with_type TEXT NOT NULL,
+        rule_id INTEGER NOT NULL,
+        created_at TEXT NOT NULL
+      )
+    `);
 
     console.log("Migrations completed successfully with Drizzle");
   } catch (error) {
@@ -117,6 +134,7 @@ export async function resetDatabase() {
       throw new Error("Database not initialized");
     }
 
+    await db.run(sql`DROP TABLE IF EXISTS debug_replace_history`);
     await db.run(sql`DROP TABLE IF EXISTS contexts`);
     await db.run(sql`DROP TABLE IF EXISTS tasks`);
     await db.run(sql`DROP TABLE IF EXISTS users`);
