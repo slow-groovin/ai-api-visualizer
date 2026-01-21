@@ -1,13 +1,11 @@
 ## NOTES
 - 使用 `npm run tsc`验证代码是否正确编译
-- 无需再启动开发服务器, 作者已经启动了 npm run dev http://localhost:5173, 需要时直接访问, 不必单独额外启动
+- 然后才能使用 `npm run build:dev`验证代码是否正确运行
 
 
 ## TODO
-- [] 复制成功notify
-- [] 替换按钮
-- [] Replace按钮靠右
-- [] Replace按钮旁边clear按钮
+- [x] 复制成功notify
+- [] Replace按钮靠右,Replace按钮旁边clear按钮
 - [] Next/Previous 快捷键
 - [] 规则配置页面, 悬浮式下拉, 而不是扩展元素高度
 - [] 设计: 顶部Icon(text)右下方小字站点名(import.meta.vite_site_name)
