@@ -56,29 +56,104 @@
     </header>
 
     <!-- Main Workspace -->
-    <main class="flex-1 w-full px-2 py-2 overflow-hidden flex flex-col">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 h-full">
-        <!-- ================= INPUT COLUMN ================= -->
-        <div class="flex flex-col h-full">
-          <!-- Input Toolbar (External) -->
-          <div class="flex items-center justify-between px-1 mb-2">
-            <h2 class="text-sm font-bold text-gray-600 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-              原始输入
-            </h2>
-            <div class="flex gap-2">
-              <button
-                v-if="inputText"
-                @click="clearInput"
-                class="px-3 py-1 text-xs font-medium text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+    <main
+      class="grid grid-cols-1 lg:grid-cols-2 gap-2 min-h-[calc(100vh-16rem)] p-2"
+    >
+      <!-- ================= INPUT COLUMN ================= -->
+      <div class="flex flex-col h-full">
+        <!-- Input Toolbar (External) -->
+        <div class="flex items-center justify-between px-1 mb-2">
+          <h2 class="text-sm font-bold text-gray-600 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            原始输入
+          </h2>
+          <div class="flex gap-2">
+            <button
+              v-if="inputText"
+              @click="clearInput"
+              class="px-3 py-1 text-xs font-medium text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+            >
+              清空
+            </button>
+            <button
+              @click="doReplace"
+              :disabled="!inputText.trim()"
+              class="flex items-center gap-1.5 px-4 py-1.5 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-sm hover:bg-blue-700 hover:shadow-md active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
+              title="快捷键: Ctrl+Enter"
+            >
+              <svg
+                class="w-3.5 h-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                清空
-              </button>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+              执行替换
+            </button>
+          </div>
+        </div>
+
+        <!-- Input Area (Card) -->
+        <div
+          class="flex-1 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative group hover:border-blue-300 transition-colors"
+        >
+          <textarea
+            v-model="inputText"
+            ref="inputTextarea"
+            class="w-full h-full p-4 bg-transparent border-none resize-none focus:ring-0 text-sm font-mono leading-relaxed text-gray-800 placeholder-gray-400"
+            placeholder="在此粘贴代码..."
+            @paste="handlePaste"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- ================= OUTPUT COLUMN ================= -->
+      <div class="flex flex-col relative">
+        <!-- Output Toolbar (External) -->
+        <div class="flex items-center justify-between px-1 mb-2">
+          <div class="flex items-center gap-4">
+            <h2 class="text-sm font-bold text-gray-600 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-green-500"></span>
+              处理结果
+            </h2>
+            <!-- Stats Badge -->
+            <div
+              v-if="replaceCount > 0"
+              class="text-xs font-medium px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md border border-blue-100"
+            >
+              {{ replaceCount }} 处替换
+            </div>
+
+            <!-- 【修改点3：复制控件移到此处】 -->
+            <div
+              class="flex items-center gap-3 ml-2 border-l pl-4 border-gray-300"
+            >
+              <!-- Auto Copy Checkbox -->
+              <label
+                class="flex items-center gap-1.5 cursor-pointer select-none"
+              >
+                <input
+                  v-model="autoCopy"
+                  type="checkbox"
+                  class="w-3.5 h-3.5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
+                />
+                <span class="text-xs text-gray-600 hover:text-gray-900"
+                  >自动复制</span
+                >
+              </label>
+
+              <!-- Main Copy Button -->
               <button
-                @click="doReplace"
-                :disabled="!inputText.trim()"
-                class="flex items-center gap-1.5 px-4 py-1.5 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-sm hover:bg-blue-700 hover:shadow-md active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
-                title="快捷键: Ctrl+Enter"
+                @click="copyToClipboard"
+                :disabled="!outputText"
+                class="flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded shadow-sm hover:bg-gray-800 hover:text-white active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400"
+                title="Ctrl+C"
               >
                 <svg
                   class="w-3.5 h-3.5"
@@ -89,159 +164,82 @@
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-width="2.5"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                    stroke-width="2"
+                    d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
                   />
                 </svg>
-                执行替换
+                复制
               </button>
             </div>
           </div>
 
-          <!-- Input Area (Card) -->
-          <div
-            class="flex-1 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative group hover:border-blue-300 transition-colors"
-          >
-            <textarea
-              v-model="inputText"
-              ref="inputTextarea"
-              class="w-full h-full p-4 bg-transparent border-none resize-none focus:ring-0 text-sm font-mono leading-relaxed text-gray-800 placeholder-gray-400"
-              placeholder="在此粘贴代码..."
-              @paste="handlePaste"
-            ></textarea>
-          </div>
+          <!-- 原导航栏位置已移除 -->
         </div>
 
-        <!-- ================= OUTPUT COLUMN ================= -->
-        <div class="flex flex-col relative">
-          <!-- Output Toolbar (External) -->
-          <div class="flex items-center justify-between px-1 mb-2">
-            <div class="flex items-center gap-4">
-              <h2
-                class="text-sm font-bold text-gray-600 flex items-center gap-2"
+        <!-- Output Area (Card) -->
+        <!-- 添加 relative 用于内部绝对定位浮动按钮 -->
+        <div
+          class="flex-1 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative hover:border-green-300 transition-colors"
+        >
+          <!-- 【修改点1：悬浮导航按钮】 -->
+          <div
+            v-if="replaceCount > 0"
+            class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-30"
+          >
+            <button
+              @click="searchPrevious"
+              class="w-10 h-10 flex items-center justify-center bg-white text-gray-600 rounded-full shadow-lg border border-gray-100 hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
+              title="上一个 (Ctrl+↑)"
+            >
+              <svg
+                class="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <span class="w-2 h-2 rounded-full bg-green-500"></span>
-                处理结果
-              </h2>
-              <!-- Stats Badge -->
-              <div
-                v-if="replaceCount > 0"
-                class="text-xs font-medium px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md border border-blue-100"
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M5 15l7-7 7 7"
+                />
+              </svg>
+            </button>
+            <button
+              @click="searchNext"
+              class="w-10 h-10 flex items-center justify-center bg-white text-gray-600 rounded-full shadow-lg border border-gray-100 hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
+              title="下一个 (Ctrl+↓)"
+            >
+              <svg
+                class="w-6 h-6 transform group-hover:translate-y-0.5 transition-transform"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                {{ replaceCount }} 处替换
-              </div>
-
-              <!-- 【修改点3：复制控件移到此处】 -->
-              <div
-                class="flex items-center gap-3 ml-2 border-l pl-4 border-gray-300"
-              >
-                <!-- Auto Copy Checkbox -->
-                <label
-                  class="flex items-center gap-1.5 cursor-pointer select-none"
-                >
-                  <input
-                    v-model="autoCopy"
-                    type="checkbox"
-                    class="w-3.5 h-3.5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
-                  />
-                  <span class="text-xs text-gray-600 hover:text-gray-900"
-                    >自动复制</span
-                  >
-                </label>
-
-                <!-- Main Copy Button -->
-                <button
-                  @click="copyToClipboard"
-                  :disabled="!outputText"
-                  class="flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded shadow-sm hover:bg-gray-800 hover:text-white active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400"
-                  title="Ctrl+C"
-                >
-                  <svg
-                    class="w-3.5 h-3.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
-                    />
-                  </svg>
-                  复制
-                </button>
-              </div>
-            </div>
-
-            <!-- 原导航栏位置已移除 -->
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
           </div>
 
-          <!-- Output Area (Card) -->
-          <!-- 添加 relative 用于内部绝对定位浮动按钮 -->
           <div
-            class="flex-1 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative hover:border-green-300 transition-colors"
+            ref="outputContainer"
+            class="w-full h-full p-4 overflow-auto font-mono text-sm whitespace-pre-wrap leading-relaxed selection:bg-green-100 selection:text-green-900 pb-20"
+            :class="{
+              'text-gray-400 italic flex items-center justify-center':
+                !outputText,
+            }"
           >
-            <!-- 【修改点1：悬浮导航按钮】 -->
-            <div
-              v-if="replaceCount > 0"
-              class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-30"
-            >
-              <button
-                @click="searchPrevious"
-                class="w-10 h-10 flex items-center justify-center bg-white text-gray-600 rounded-full shadow-lg border border-gray-100 hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
-                title="上一个 (Ctrl+↑)"
-              >
-                <svg
-                  class="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2.5"
-                    d="M5 15l7-7 7 7"
-                  />
-                </svg>
-              </button>
-              <button
-                @click="searchNext"
-                class="w-10 h-10 flex items-center justify-center bg-white text-gray-600 rounded-full shadow-lg border border-gray-100 hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
-                title="下一个 (Ctrl+↓)"
-              >
-                <svg
-                  class="w-6 h-6 transform group-hover:translate-y-0.5 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2.5"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            <div
-              ref="outputContainer"
-              class="w-full h-full p-4 overflow-auto font-mono text-sm whitespace-pre-wrap leading-relaxed selection:bg-green-100 selection:text-green-900 pb-20"
-              :class="{
-                'text-gray-400 italic flex items-center justify-center':
-                  !outputText,
-              }"
-            >
-              <template v-if="outputText">
-                <div v-html="outputText"></div>
-              </template>
-              <template v-else>
-                <span>等待输入...</span>
-              </template>
-            </div>
+            <template v-if="outputText">
+              <div v-html="outputText"></div>
+            </template>
+            <template v-else>
+              <span>等待输入...</span>
+            </template>
           </div>
         </div>
       </div>

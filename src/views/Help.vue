@@ -1,4 +1,7 @@
 <template>
+  <div class="goback-link">
+    <button @click="$router.go(-1)" class="goback-button">← Back</button>
+  </div>
   <div class="flex justify-center items-center min-h-screen">
     <div class="browser-window">
       <!-- Browser Header -->
@@ -40,6 +43,27 @@ const posterSrc =
 </script>
 
 <style scoped>
+.goback-link {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+}
+
+.goback-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.goback-button:hover {
+  background: #0056b3;
+}
+
 .browser-window {
   /*width: vw;*/
   aspect-ratio: 16/9;
