@@ -7,7 +7,119 @@
 - 追求极致的代码质量,代码整洁程度,  单一职责原则
 - 生成的代码应该有清晰适当的注释
 
+## 任务
+### 任务23 多语言
+#### 技术方案
 
+```typescript
+// types/i18n.ts
+export const LOCALES = ['zh-CN', 'en-US', 'ja-JP'] as const;
+export type Locale = typeof LOCALES[number];
+
+export const MESSAGES = {
+  'zh-CN': {
+    welcome: '欢迎',
+    hello: `你好, ${name}`,
+  },
+  'en-US': {
+    welcome: 'Welcome',
+    hello: `Hello`,
+  },
+  'ja-JP': {
+    welcome: 'ようこそ',
+    hello: `こんにちは`,
+  },
+} as const;
+
+type MessageKeys = keyof typeof MESSAGES['zh-CN'];
+```
+
+```typescript
+// composables/useI18n.ts
+import { ref, computed } from 'vue';
+import { LOCALES, MESSAGES, type Locale } from '@/types/i18n';
+
+const STORAGE_KEY = 'app-locale';
+
+// 检测浏览器语言
+function detectBrowserLocale(): Locale {
+  const browserLangs = navigator.languages || [navigator.language];
+  
+  for (const lang of browserLangs) {
+    const normalized = lang.toLowerCase();
+    // 完全匹配
+    const exact = LOCALES.find(l => l.toLowerCase() === normalized);
+    if (exact) return exact;
+    
+    // 匹配语言代码部分 (如 en-GB -> en-US)
+    const langCode = normalized.split('-')[0];
+    const partial = LOCALES.find(l => l.toLowerCase().startsWith(langCode));
+    if (partial) return partial;
+  }
+  
+  return LOCALES[0]; // 默认第一个
+}
+
+// 全局状态
+const currentLocale = ref<Locale>(
+  (localStorage.getItem(STORAGE_KEY) as Locale) || detectBrowserLocale()
+);
+
+export function useI18n() {
+  const locale = computed(() => currentLocale.value);
+  
+  const t = computed(() => {
+    return new Proxy({} as typeof MESSAGES['zh-CN'], {
+      get: (_, key: string) => {
+        const value = MESSAGES[currentLocale.value][key as keyof typeof MESSAGES['zh-CN']];
+        return value || key;
+      }
+    });
+  });
+  
+  const setLocale = (newLocale: Locale) => {
+    currentLocale.value = newLocale;
+    localStorage.setItem(STORAGE_KEY, newLocale);
+    document.documentElement.lang = newLocale;
+  };
+  
+  return { locale, t, setLocale, availableLocales: LOCALES };
+}
+```
+
+```vue
+<!-- 使用示例 -->
+<script setup lang="ts">
+import { useI18n } from '@/composables/useI18n';
+
+const { t, locale, setLocale, availableLocales } = useI18n();
+const userName = 'Alice';
+</script>
+
+<template>
+  <div>
+    <!-- 类型安全的翻译 -->
+    <h1>{{ t.welcome }}</h1>
+    <p>{{ t.hello}} {{userName}}</p>
+    
+    <!-- 语言切换 -->
+    <select :value="locale" @change="setLocale($event.target.value)">
+      <option v-for="lang in availableLocales" :key="lang" :value="lang">
+        {{ lang }}
+      </option>
+    </select>
+  </div>
+</template>
+```
+
+**核心优势:**
+1. ✅ 初次访问自动检测浏览器语言
+2. ✅ localStorage 持久化用户选择
+3. ✅ TypeScript 类型检查翻译键
+4. ✅ Proxy 实现自动补全和类型推导
+5. ✅ 支持函数式翻译(带参数)
+6. ✅ 响应式设计,切换即时生效
+7. 
 ## TODO
 
 - [x]  快捷键:  Next/Previous, 复制 

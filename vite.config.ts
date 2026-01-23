@@ -26,7 +26,7 @@ export default defineConfig(({}) => ({
         theme_color: "#ffffff",
         // id: "/",  // 固定应用 ID
         start_url: "/",
-        display: "standalone",
+        display: "fullscreen", // 👈 关键
         icons: [
           {
             src: "/icon-192.png", // 至少 192x192

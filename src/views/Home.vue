@@ -47,6 +47,21 @@
             >
               ?
             </router-link>
+
+            <!-- 语言切换 -->
+            <select
+              :value="locale"
+              @change="setLocale(($event?.target as any).value)"
+              class="px-2 py-1 text-xs bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900 rounded-md border-none outline-none"
+            >
+              <option
+                v-for="lang in availableLocales"
+                :key="lang"
+                :value="lang"
+              >
+                {{ lang }}
+              </option>
+            </select>
           </div>
         </div>
 
@@ -94,7 +109,8 @@
                   d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               </svg>
-              执行替换
+              {{ t.replace }}
+              <!-- TODO: 这里进行测试多语言 -->
             </button>
           </div>
         </div>
@@ -257,10 +273,12 @@ import { applyReplace, type ReplaceResult } from "../utils/replace";
 import { toast } from "vue-sonner";
 import { handleKeyboardShortcuts } from "../utils/shortcuts";
 import { sleep } from "radash";
+import { useI18n } from "../composables/useI18n";
 
 // --- State & Constants ---
 const siteName = import.meta.env.VITE_SITE_NAME || "Context Protector";
 const rulesStore = useRulesStore();
+const { locale, setLocale, availableLocales, t } = useI18n();
 
 // UI References
 const inputText = ref("");
