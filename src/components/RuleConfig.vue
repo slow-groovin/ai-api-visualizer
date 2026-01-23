@@ -76,9 +76,7 @@
 
     <div class="mt-3 space-y-2 pl-2">
       <!-- 1. Add New Rule (Strict Single Row) -->
-      <div
-        class="border border-green-200 rounded p-1 bg-green-200/60 dark:bg-gray-300/30"
-      >
+      <div class="border border-green-200 rounded p-1 dark:bg-gray-300/30">
         <form @submit.prevent="handleAddRule" class="flex items-center gap-1">
           <!-- Type Select -->
           <select
@@ -454,10 +452,7 @@ const exportConfig = async () => {
   };
 
   const configStr = JSON.stringify(config);
-  const encoded = btoa(
-    String.fromCharCode(...new TextEncoder().encode(configStr)),
-  );
-  const url = `context-protector://import/${encoded}`;
+  const url = `context-protector://import/${configStr}`;
 
   try {
     await navigator.clipboard.writeText(url);
@@ -487,10 +482,7 @@ const importConfig = async () => {
     // Optional: Ask for confirmation if we read automatically to avoid confusion
     // but "One click import" is usually preferred.
     // Checking if it looks like our config
-    if (
-      !clipText.includes("context-protector") &&
-      !clipText.trim().startsWith("ey")
-    ) {
+    if (!clipText.includes("context-protector")) {
       // If clipboard content doesn't look like config, prompt user
       const input = prompt("the input text is not a valid config", "");
       if (input) clipText = input;
@@ -503,15 +495,10 @@ const importConfig = async () => {
   try {
     // 1. Clean format
     const prefix = "context-protector://import/";
-    let base64Str = clipText.trim();
-    if (base64Str.startsWith(prefix)) {
-      base64Str = base64Str.slice(prefix.length);
+    let jsonStr = clipText.trim();
+    if (jsonStr.startsWith(prefix)) {
+      jsonStr = jsonStr.slice(prefix.length);
     }
-
-    // 2. Decode
-    const jsonStr = new TextDecoder().decode(
-      Uint8Array.from(atob(base64Str), (c) => c.charCodeAt(0)),
-    );
 
     const config = JSON.parse(jsonStr);
 

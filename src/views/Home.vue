@@ -309,9 +309,8 @@ const convertRulesForApply = (rules: any[]) => {
 
 const importConfig = (configStr: string) => {
   try {
-    const encoded = configStr.replace("context-protector://import/", "");
-    const decoded = atob(encoded);
-    const config = JSON.parse(decoded);
+    const jsonStr = configStr.replace("context-protector://import/", "");
+    const config = JSON.parse(jsonStr);
 
     if (config.version === 1 && config.rules) {
       config.rules.forEach(async (rule: any) => {
