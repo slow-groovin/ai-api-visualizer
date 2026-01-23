@@ -213,7 +213,7 @@
 
             <!-- Note (Visible if short, truncated if long) -->
             <div
-              class="w-32 text-foreground-secondary truncate text-right shrink-0"
+              class="w-32 text-foreground-secondary truncate text-left shrink-0"
               :title="rule.note"
             >
               {{ rule.note }}

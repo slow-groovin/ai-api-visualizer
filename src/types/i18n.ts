@@ -9,7 +9,7 @@ export const MESSAGES = {
     rawInput: "Raw Input",
     clear: "Clear",
     pasteCodePlaceholder: "Paste your code here...",
-    processedResult: "Processed Result",
+    processedResult: "Result",
     replacements: (count: string) => `${count} replacements`,
     autoCopy: "Auto copy",
     copy: "Copy",
@@ -17,7 +17,8 @@ export const MESSAGES = {
     configImported: "Configuration imported!",
     invalidConfig: "Invalid configuration format",
     importFailed: "Import configuration failed",
-    replaceCompleted: (count: string) => `Replacement completed, ${count} changes`,
+    replaceCompleted: (count: string) =>
+      `Replacement completed, ${count} changes`,
     copiedToClipboard: "Copied to clipboard!",
     copyFailed: "Copy failed, please copy manually",
     initFailed: "System initialization failed, please refresh the page",
@@ -41,9 +42,12 @@ export const MESSAGES = {
     noRulesToExport: "No rules to export",
     configCopied: "Configuration copied to clipboard!",
     copyFailedManual: "Failed to write to clipboard, please copy manually.",
-    pasteConfigCode: "Cannot read clipboard directly, please paste configuration code:",
-    clipboardNotConfig: "Clipboard content does not seem to be configuration code, please paste manually:",
-    importCompleted: (added: string, skipped: string) => `Import completed.\nSuccessfully added: ${added} entries\nSkipped existing: ${skipped} entries`,
+    pasteConfigCode:
+      "Cannot read clipboard directly, please paste configuration code:",
+    clipboardNotConfig:
+      "Clipboard content does not seem to be configuration code, please paste manually:",
+    importCompleted: (added: string, skipped: string) =>
+      `Import completed.\nSuccessfully added: ${added} entries\nSkipped existing: ${skipped} entries`,
     importFailedFormat: "Import failed: incorrect content format.",
   },
   "zh-CN": {
@@ -53,7 +57,7 @@ export const MESSAGES = {
     rawInput: "原始输入",
     clear: "清空",
     pasteCodePlaceholder: "在此粘贴代码...",
-    processedResult: "处理结果",
+    processedResult: "替换结果",
     replacements: (count: string) => `${count} 处替换`,
     autoCopy: "自动复制",
     copy: "复制",
@@ -87,7 +91,8 @@ export const MESSAGES = {
     copyFailedManual: "写入剪切板失败，请手动复制。",
     pasteConfigCode: "无法直接读取剪切板，请粘贴配置代码:",
     clipboardNotConfig: "剪切板内容似乎不是配置代码，请手动粘贴:",
-    importCompleted: (added: string, skipped: string) => `导入完成。\n成功添加：${added} 条\n已存在跳过：${skipped} 条`,
+    importCompleted: (added: string, skipped: string) =>
+      `导入完成。\n成功添加：${added} 条\n已存在跳过：${skipped} 条`,
     importFailedFormat: "导入失败：内容格式不正确。",
   },
   "ja-JP": {
@@ -128,10 +133,14 @@ export const MESSAGES = {
     confirmDeleteRule: "このルールを削除してもよろしいですか？",
     noRulesToExport: "エクスポートするルールがありません",
     configCopied: "設定がクリップボードにコピーされました！",
-    copyFailedManual: "クリップボードへの書き込みに失敗しました、手動でコピーしてください。",
-    pasteConfigCode: "クリップボードを直接読み取れません、設定コードを貼り付けてください:",
-    clipboardNotConfig: "クリップボードの内容が設定コードではないようです、手動で貼り付けてください:",
-    importCompleted: (added: string, skipped: string) => `インポート完了。\n正常に追加: ${added} 件\n既存をスキップ: ${skipped} 件`,
+    copyFailedManual:
+      "クリップボードへの書き込みに失敗しました、手動でコピーしてください。",
+    pasteConfigCode:
+      "クリップボードを直接読み取れません、設定コードを貼り付けてください:",
+    clipboardNotConfig:
+      "クリップボードの内容が設定コードではないようです、手動で貼り付けてください:",
+    importCompleted: (added: string, skipped: string) =>
+      `インポート完了。\n正常に追加: ${added} 件\n既存をスキップ: ${skipped} 件`,
     importFailedFormat: "インポート失敗: 内容形式が正しくありません。",
   },
 } as const;

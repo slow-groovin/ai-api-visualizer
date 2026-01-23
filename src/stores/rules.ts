@@ -104,19 +104,19 @@ export const useRulesStore = defineStore("rules", () => {
     if (rules.value.length === 0) {
       const defaultRules: Omit<ReplaceRule, "id" | "createdAt">[] = [
         {
-          note: "示例：Windows 用户路径替换",
+          note: "eg. Windows user path",
           matchType: "fixed",
-          matchValue: "/xx/documents",
-          targetValue: "/samaltman/documents",
+          matchValue: "C:\\Users\\you\\",
+          targetValue: "C:\\Users\\samaltman\\",
         },
         {
-          note: "示例：Linux 用户路径替换",
+          note: "eg. Linux user path",
           matchType: "fixed",
-          matchValue: "/home/xx/",
+          matchValue: "/home/you/",
           targetValue: "/home/samaltman/",
         },
         {
-          note: "示例：正则表达式替换",
+          note: "eg. SSN",
           matchType: "regex",
           matchValue: "\\d{3}-\\d{2}-\\d{4}",
           targetValue: "***-**-****",
