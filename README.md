@@ -1,14 +1,13 @@
 # Context Protector
-
-
 ![Context Protector](/public/icon-512.png)
-
 
 **Protect your privacy when using AI models**
 
 **Replace your sensitive data before pasting it to ChatGPT, Claude, Gemini, or any other AI sites**
 
-[Live Demo](https://context-protector.api2o.com) | [中文文档](./README_CN.md) 
+[online](https://context-protector.api2o.com) | [中文文档](./README_CN.md) 
+
+[![Usage](./public/usage-video-first.png)](./public/usage.webm)
 
 
 ## ✨ Why Context Protector?
@@ -35,6 +34,10 @@ Clone, build and deploy locally.
 ## 📊 Data Storage
 
 Context Protector stores all your data locally in your browser using the **Origin Private File System (OPFS)**.
+
+## 🎥 Usage Demo
+
+
 
 ## 🛠️ Development Setup
 ```bash
