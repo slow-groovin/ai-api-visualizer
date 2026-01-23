@@ -18,7 +18,7 @@
       >
         <!-- Custom Triangle Arrow to ensure flex layout works perfectly -->
         <svg
-          class="w-3 h-3 text-foreground-secondary transition-transform duration-200 transform group-open:rotate-90"
+          class="size-6 text-foreground-secondary transition-transform duration-200 transform group-open:rotate-90"
           viewBox="0 0 24 24"
           fill="currentColor"
         >
@@ -32,7 +32,7 @@
         <button
           @click="importConfig"
           class="flex items-center gap-1 px-2 py-1 text-xs bg-background-secondary border border-border rounded text-foreground-secondary hover:text-blue-600 hover:border-blue-400 hover:bg-background transition"
-          title="读取剪切板内容并导入"
+          :title="t.readClipboardImport"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@
         <button
           @click="exportConfig"
           class="flex items-center gap-1 px-2 py-1 text-xs bg-background-secondary border border-border rounded text-foreground-secondary hover:text-blue-600 hover:border-blue-400 hover:bg-background transition"
-          title="导出配置到剪切板"
+          :title="t.exportConfigClipboard"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@
           <select
             v-model="newRule.matchType"
             class="w-16 p-1 text-xs border border-border rounded focus:ring-1 focus:ring-green-500 bg-background"
-            title="匹配类型"
+            :title="t.matchType"
           >
             <option value="fixed">{{ t.text }}</option>
             <option value="regex">{{ t.regex }}</option>
@@ -131,7 +131,7 @@
             v-model="newRule.note"
             type="text"
             class="flex-1 min-w-[7ch] p-1 text-xs border border-border rounded focus:ring-1 focus:ring-green-500"
-            placeholder="备注"
+            :placeholder="t.note"
           />
 
           <!-- Add Button -->
@@ -205,7 +205,7 @@
               <div
                 class="truncate text-sm font-mono bg-green-300/33 dark:bg-green-600/30 rounded px-1"
               >
-                {{ rule.targetValue || "(空)" }}
+                {{ rule.targetValue || t.empty }}
               </div>
             </div>
 

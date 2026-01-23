@@ -25,8 +25,8 @@
           <div class="flex items-center gap-2">
             <HoverInfo
               icon-src="/offline.png"
-              alt-text="离线功能"
-              tooltip="完全不联网功能"
+              :alt-text="t.offlineFunction"
+              :tooltip="t.offlineTooltip"
             />
             <a
               href="https://github.com/anomalyco/opencode"
@@ -87,7 +87,7 @@
               @click="doReplace"
               :disabled="!inputText.trim()"
               class="flex items-center gap-1.5 px-4 py-1.5 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-sm hover:bg-blue-700 hover:shadow-md active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none"
-              title="快捷键: Ctrl+Enter"
+              :title="t.shortcutReplace"
             >
               <svg
                 class="w-3.5 h-3.5"
@@ -201,7 +201,7 @@
             <button
               @click="searchPrevious"
               class="w-10 h-10 flex items-center justify-center bg-search-button-bg text-foreground-secondary rounded-full shadow-lg border border-search-button-border hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
-              title="上一个 (Ctrl+↑)"
+              :title="t.previousItem"
             >
               <svg
                 class="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform"
@@ -220,7 +220,7 @@
             <button
               @click="searchNext"
               class="w-10 h-10 flex items-center justify-center bg-search-button-bg text-foreground-secondary rounded-full shadow-lg border border-search-button-border hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
-              title="下一个 (Ctrl+↓)"
+              :title="t.nextItem"
             >
               <svg
                 class="w-6 h-6 transform group-hover:translate-y-0.5 transition-transform"

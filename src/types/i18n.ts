@@ -49,6 +49,15 @@ export const MESSAGES = {
     importCompleted: (added: string, skipped: string) =>
       `Import completed.\nSuccessfully added: ${added} entries\nSkipped existing: ${skipped} entries`,
     importFailedFormat: "Import failed: incorrect content format.",
+    readClipboardImport: "Read clipboard content and import",
+    exportConfigClipboard: "Export configuration to clipboard",
+    matchType: "Match type",
+    empty: "(Empty)",
+    offlineFunction: "Offline function",
+    offlineTooltip: "Completely offline functionality",
+    shortcutReplace: "Shortcut: Ctrl+Enter",
+    previousItem: "Previous (Ctrl+↑)",
+    nextItem: "Next (Ctrl+↓)",
   },
   "zh-CN": {
     welcome: "欢迎",
@@ -94,6 +103,15 @@ export const MESSAGES = {
     importCompleted: (added: string, skipped: string) =>
       `导入完成。\n成功添加：${added} 条\n已存在跳过：${skipped} 条`,
     importFailedFormat: "导入失败：内容格式不正确。",
+    readClipboardImport: "读取剪切板内容并导入",
+    exportConfigClipboard: "导出配置到剪切板",
+    matchType: "匹配类型",
+    empty: "(空)",
+    offlineFunction: "离线功能",
+    offlineTooltip: "完全不联网功能",
+    shortcutReplace: "快捷键: Ctrl+Enter",
+    previousItem: "上一个 (Ctrl+↑)",
+    nextItem: "下一个 (Ctrl+↓)",
   },
   "ja-JP": {
     welcome: "ようこそ",
@@ -142,6 +160,15 @@ export const MESSAGES = {
     importCompleted: (added: string, skipped: string) =>
       `インポート完了。\n正常に追加: ${added} 件\n既存をスキップ: ${skipped} 件`,
     importFailedFormat: "インポート失敗: 内容形式が正しくありません。",
+    readClipboardImport: "クリップボードの内容を読み取ってインポート",
+    exportConfigClipboard: "設定をクリップボードにエクスポート",
+    matchType: "一致タイプ",
+    empty: "(空)",
+    offlineFunction: "オフライン機能",
+    offlineTooltip: "完全にオフラインの機能",
+    shortcutReplace: "ショートカット: Ctrl+Enter",
+    previousItem: "前へ (Ctrl+↑)",
+    nextItem: "次へ (Ctrl+↓)",
   },
 } as const;
 
