@@ -10,15 +10,15 @@
         <!-- Brand & Info -->
         <div class="flex items-center gap-4 pt-1">
           <div class="flex flex-col">
-            <h1
-              class="text-xl font-bold tracking-tight text-foreground leading-none"
-            >
-              Context Protector
-            </h1>
-            <span
-              class="text-[10px] font-medium text-foreground-secondary uppercase tracking-wider mt-1"
-            >
-              {{ siteName }}
+            <div class="relative">
+              <h1
+                class="text-xl font-bold tracking-tight text-foreground leading-none"
+              >
+                Context Protector
+              </h1>
+            </div>
+            <span class="text-xs font-medium text-foreground-secondary mt-1">
+              An offline tool to replace sensitive text in your context
             </span>
           </div>
 
@@ -165,7 +165,7 @@
                 @click="copyToClipboard"
                 :disabled="!outputText"
                 class="flex items-center gap-1.5 px-3 py-1 bg-background-secondary text-foreground-secondary text-xs font-bold rounded shadow-sm hover:bg-background-dark hover:text-foreground active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-background-secondary disabled:text-foreground-secondary"
-                title="Ctrl+C"
+                title="copy"
               >
                 <svg
                   class="w-3.5 h-3.5"

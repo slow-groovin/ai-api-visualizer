@@ -22,7 +22,8 @@ export default defineConfig(({}) => ({
       manifest: {
         name: "Context Protector",
         short_name: "Context Protector",
-        description: "A tool to protect and replace context in text",
+        description:
+          "An offline tool to replace sensitive text in your context",
         theme_color: "#ffffff",
         // id: "/",  // 固定应用 ID
         start_url: "/",
