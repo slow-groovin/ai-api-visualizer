@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-background text-foreground font-sans flex flex-col overflow-hidden"
+    class="min-h-screen bg-background text-foreground font-sans flex flex-col"
   >
     <!-- Top App Bar -->
     <header
@@ -62,9 +62,7 @@
     </header>
 
     <!-- Main Workspace -->
-    <main
-      class="grid grid-cols-1 lg:grid-cols-2 gap-2 min-h-[calc(100vh-16rem)] p-2"
-    >
+    <main class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 p-2 min-h-0">
       <!-- ================= INPUT COLUMN ================= -->
       <div class="flex flex-col h-full">
         <!-- Input Toolbar (External) -->
@@ -256,6 +254,9 @@
         </div>
       </div>
     </main>
+
+    <!-- Footer -->
+    <AppFooter />
   </div>
 </template>
 
@@ -271,8 +272,8 @@ import { handleKeyboardShortcuts } from "../utils/shortcuts";
 import { sleep } from "radash";
 import { useI18n } from "../composables/useI18n";
 import LanguageSwitcher from "../components/LanguageSwitcher.vue";
+import AppFooter from "../components/AppFooter.vue";
 // --- State & Constants ---
-const siteName = import.meta.env.VITE_SITE_NAME || "Context Protector";
 const rulesStore = useRulesStore();
 const { t } = useI18n();
 
