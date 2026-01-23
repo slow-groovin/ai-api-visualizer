@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import { useI18n } from "../composables/useI18n"; // 确保路径对应你的实际位置
+import { useI18n } from "../composables/useI18n"; // Ensure path matches your actual location
 import type { Locale } from "../types/i18n";
 
 const { locale, setLocale, availableLocales } = useI18n();
@@ -8,16 +8,16 @@ const { locale, setLocale, availableLocales } = useI18n();
 const isOpen = ref(false);
 const containerRef = ref<HTMLElement | null>(null);
 
-// 切换显示
+// Toggle display
 const toggle = () => (isOpen.value = !isOpen.value);
 
-// 选择语言
+// Select language
 const handleSelect = (lang: Locale) => {
   setLocale(lang);
   isOpen.value = false;
 };
 
-// 点击外部自动关闭 (精简版)
+// Click outside to auto-close (simplified version)
 const handleClickOutside = (e: MouseEvent) => {
   if (
     isOpen.value &&
@@ -34,18 +34,18 @@ onUnmounted(() => window.removeEventListener("click", handleClickOutside));
 
 <template>
   <div ref="containerRef" class="relative">
-    <!-- 1. 触发按钮 (Size 7 = 1.75rem = 28px) -->
+    <!-- 1. Trigger button (Size 7 = 1.75rem = 28px) -->
     <button
       type="button"
       @click.stop="toggle"
       class="flex size-full items-center justify-center rounded-md transition-colors"
       title="Switch Language"
     >
-      <!-- 图标: Language / Translate (A + 文) -->
+      <!-- Icon: Language / Translate (A + 文) -->
       <img src="/lang-switch.png" alt="lang switch" class="size-5" />
     </button>
 
-    <!-- 2. 下拉菜单 -->
+    <!-- 2. Dropdown menu -->
     <div
       v-if="isOpen"
       class="absolute right-0 top-full mt-2 w-24 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50"

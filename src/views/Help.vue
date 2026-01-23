@@ -1,10 +1,10 @@
 <template>
-  <!-- //TODO 这里改成超链接方式, 方便seo跳转 -->
+  <!-- //TODO Change to hyperlink method for better SEO -->
   <div class="goback-link">
     <button @click="$router.go(-1)" class="goback-button">← Back</button>
   </div>
 
-  <!-- TODO 这里加一些功能文字说明  -->
+  <!-- TODO Add some functional description here -->
   <div class="flex justify-center items-center min-h-screen">
     <div class="browser-window">
       <!-- Browser Header -->

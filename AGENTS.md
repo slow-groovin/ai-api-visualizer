@@ -8,122 +8,11 @@
 - 生成的代码应该有清晰适当的注释
 
 ## 任务
-### 任务24
-将项目内所有界面的文字替换为多语言方式
+### 暗黑模式
+当前背景色和其他色都是写死的, 但是需要适配背景色
+- 使用"dark" class控制, 使用vueuse获取浏览器设置的外观模式, 决定dark
+- 对于自定义的颜色, 抽出为tailwind 颜色配置项
 
-## 已经完成任务
-### 任务23 多语言
-#### 技术方案
-
-```typescript
-// types/i18n.ts
-export const LOCALES = ['zh-CN', 'en-US', 'ja-JP'] as const;
-export type Locale = typeof LOCALES[number];
-
-export const MESSAGES = {
-  'zh-CN': {
-    welcome: '欢迎',
-    hello: `你好, ${name}`,
-  },
-  'en-US': {
-    welcome: 'Welcome',
-    hello: `Hello`,
-  },
-  'ja-JP': {
-    welcome: 'ようこそ',
-    hello: `こんにちは`,
-  },
-} as const;
-
-type MessageKeys = keyof typeof MESSAGES['zh-CN'];
-```
-
-```typescript
-// composables/useI18n.ts
-import { ref, computed } from 'vue';
-import { LOCALES, MESSAGES, type Locale } from '@/types/i18n';
-
-const STORAGE_KEY = 'app-locale';
-
-// 检测浏览器语言
-function detectBrowserLocale(): Locale {
-  const browserLangs = navigator.languages || [navigator.language];
-  
-  for (const lang of browserLangs) {
-    const normalized = lang.toLowerCase();
-    // 完全匹配
-    const exact = LOCALES.find(l => l.toLowerCase() === normalized);
-    if (exact) return exact;
-    
-    // 匹配语言代码部分 (如 en-GB -> en-US)
-    const langCode = normalized.split('-')[0];
-    const partial = LOCALES.find(l => l.toLowerCase().startsWith(langCode));
-    if (partial) return partial;
-  }
-  
-  return LOCALES[0]; // 默认第一个
-}
-
-// 全局状态
-const currentLocale = ref<Locale>(
-  (localStorage.getItem(STORAGE_KEY) as Locale) || detectBrowserLocale()
-);
-
-export function useI18n() {
-  const locale = computed(() => currentLocale.value);
-  
-  const t = computed(() => {
-    return new Proxy({} as typeof MESSAGES['zh-CN'], {
-      get: (_, key: string) => {
-        const value = MESSAGES[currentLocale.value][key as keyof typeof MESSAGES['zh-CN']];
-        return value || key;
-      }
-    });
-  });
-  
-  const setLocale = (newLocale: Locale) => {
-    currentLocale.value = newLocale;
-    localStorage.setItem(STORAGE_KEY, newLocale);
-    document.documentElement.lang = newLocale;
-  };
-  
-  return { locale, t, setLocale, availableLocales: LOCALES };
-}
-```
-
-```vue
-<!-- 使用示例 -->
-<script setup lang="ts">
-import { useI18n } from '@/composables/useI18n';
-
-const { t, locale, setLocale, availableLocales } = useI18n();
-const userName = 'Alice';
-</script>
-
-<template>
-  <div>
-    <!-- 类型安全的翻译 -->
-    <h1>{{ t.welcome }}</h1>
-    <p>{{ t.hello}} {{userName}}</p>
-    
-    <!-- 语言切换 -->
-    <select :value="locale" @change="setLocale($event.target.value)">
-      <option v-for="lang in availableLocales" :key="lang" :value="lang">
-        {{ lang }}
-      </option>
-    </select>
-  </div>
-</template>
-```
-
-**核心优势:**
-1. ✅ 初次访问自动检测浏览器语言
-2. ✅ localStorage 持久化用户选择
-3. ✅ TypeScript 类型检查翻译键
-4. ✅ Proxy 实现自动补全和类型推导
-5. ✅ 支持函数式翻译(带参数)
-6. ✅ 响应式设计,切换即时生效
-7. 
 ## TODO
 
 - [x]  快捷键:  Next/Previous, 复制 
@@ -131,7 +20,7 @@ const userName = 'Alice';
 - [x] 设计: 顶部Icon(text)右下方小字站点名(import.meta.vite_site_name)
 - [x] 设计: 顶部Icon右侧留出github link, offline(no internet)说明, download按钮
 - [ ] pwa详细配置
-- [ ] 本地化
+- [x] 本地化
 - [] ~~支持single html, 添加流程:打包至静态资源目录, 作为下载连接~~
 - [x] "?"使用说明, 动态视频
 - [x] 配置 剪切板导出 以context-protector:// 开头
@@ -161,9 +50,7 @@ const userName = 'Alice';
 2. 通过环境变量控制DEBUG页, 在正式打包时可以隐藏
 3.
 
-```
-当前项目目录是 /home/user13500/code/repo/context-protector/context-protector-web
-```
+
 
 ## 任务
 ### 任务12

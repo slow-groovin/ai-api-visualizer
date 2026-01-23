@@ -303,7 +303,7 @@ import { initDatabase, runMigrations, getDatabase } from "../../database/index";
 import { debugReplaceHistory } from "../../database/schema";
 import { eq } from "drizzle-orm";
 
-// 加载规则
+// Load rules
 const rules = ref<ReplaceRule[]>(loadRules());
 
 const inputText = ref("");
@@ -578,6 +578,6 @@ const editRule = (rule: ReplaceRule) => {
     deleteRule(rule.id); // Remove the old one, user can re-add
 };
 
-// 初始显示
+// Initial display
 doReplace();
 </script>

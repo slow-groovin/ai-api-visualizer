@@ -22,7 +22,7 @@
         >
           <path d="M8 5v14l11-7z" />
         </svg>
-        规则配置
+        {{ t.ruleConfig }}
       </div>
 
       <!-- Right: Clipboard Actions (Prevent detail toggle with @click.stop) -->
@@ -46,7 +46,7 @@
               d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
             />
           </svg>
-          导入
+           {{ t.import }}
         </button>
         <button
           @click="exportConfig"
@@ -67,7 +67,7 @@
               d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
             />
           </svg>
-          导出
+           {{ t.export }}
         </button>
       </div>
     </summary>
@@ -82,8 +82,8 @@
             class="w-16 p-1 text-xs border border-gray-300 rounded focus:ring-1 focus:ring-green-500 bg-white"
             title="匹配类型"
           >
-            <option value="fixed">文本</option>
-            <option value="regex">正则</option>
+             <option value="fixed">{{ t.text }}</option>
+             <option value="regex">{{ t.regex }}</option>
           </select>
 
           <!-- Match Value (Textarea for resizing) -->
@@ -93,7 +93,7 @@
               rows="1"
               required
               class="w-full p-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-green-500 min-h-[30px] resize-y align-middle leading-5"
-              placeholder="匹配值"
+               :placeholder="t.matchValue"
             ></textarea>
           </div>
 
@@ -120,7 +120,7 @@
               v-model="newRule.targetValue"
               rows="1"
               class="w-full p-1 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-green-500 min-h-[30px] resize-y align-middle leading-5"
-              placeholder="替换为"
+               :placeholder="t.replaceWith"
             ></textarea>
           </div>
 
@@ -137,7 +137,7 @@
             type="submit"
             :disabled="isAdding"
             class="p-1.5 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 shrink-0"
-            title="添加规则"
+             :title="t.addRule"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,7 @@
           v-if="rulesStore.rules.length === 0"
           class="text-center text-gray-400 text-sm py-2"
         >
-          暂无规则，请在上方添加
+           {{ t.noRules }}
         </div>
 
         <div
@@ -222,7 +222,7 @@
               <button
                 @click="startEdit(rule)"
                 class="text-blue-500 hover:text-blue-700 p-0.5"
-                title="编辑"
+                 :title="t.edit"
               >
                 <svg
                   class="w-4 h-4"
@@ -241,7 +241,7 @@
               <button
                 @click="handleDeleteRule(rule.id)"
                 class="text-red-500 hover:text-red-700 p-0.5"
-                title="删除"
+                 :title="t.delete"
               >
                 <svg
                   class="w-4 h-4"
@@ -277,24 +277,24 @@
               v-model="rule.editMatchValue"
               rows="1"
               class="flex-1 min-w-0 p-1 text-sm border border-blue-200 rounded min-h-[28px] resize-y align-middle"
-              placeholder="匹配"
+               :placeholder="t.match"
             />
             <span class="text-blue-300">➜</span>
             <textarea
               v-model="rule.editTargetValue"
               rows="1"
               class="flex-1 min-w-0 p-1 text-sm border border-blue-200 rounded min-h-[28px] resize-y align-middle"
-              placeholder="替换"
+               :placeholder="t.replace"
             />
             <input
               v-model="rule.editNote"
               class="flex-1 min-w-[7ch] p-1 text-xs border border-blue-200 rounded"
-              placeholder="备注"
+              :placeholder="t.note"
             />
             <button
               type="submit"
               class="text-green-600 hover:bg-green-100 rounded p-1"
-              title="保存"
+               :title="t.save"
             >
               <svg
                 class="w-4 h-4"
@@ -314,7 +314,7 @@
               type="button"
               @click="cancelEdit(rule)"
               class="text-gray-500 hover:bg-gray-200 rounded p-1"
-              title="取消"
+               :title="t.cancel"
             >
               <svg
                 class="w-4 h-4"
@@ -341,6 +341,7 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRulesStore, type ReplaceRule } from "../stores/rules";
 import { toast } from "vue-sonner";
+import { useI18n } from "../composables/useI18n";
 interface EditableReplaceRule extends ReplaceRule {
   isEditing?: boolean;
   editNote?: string;
@@ -353,6 +354,7 @@ interface EditableReplaceRule extends ReplaceRule {
 const isOpen = ref(false);
 const rulesStore = useRulesStore();
 const isAdding = ref(false);
+const { t } = useI18n();
 
 const newRule = reactive({
   note: "",
@@ -367,7 +369,7 @@ onMounted(() => {
     isOpen.value = true;
     localStorage.setItem("ruleConfigFirstUse", "used");
     // @ts-ignore
-    toast("请先配置规则吧");
+    toast(t.configRulesFirst);
   }
 });
 
@@ -423,7 +425,7 @@ const handleUpdateRule = async (rule: EditableReplaceRule) => {
 };
 
 const handleDeleteRule = async (id: number) => {
-  if (confirm("确定删除此规则？")) {
+  if (confirm(t.confirmDeleteRule)) {
     await rulesStore.deleteRule(id);
   }
 };
@@ -433,7 +435,7 @@ const handleDeleteRule = async (id: number) => {
 const exportConfig = async () => {
   const rules = rulesStore.rules;
   if (rules.length === 0) {
-    alert("当前没有规则可导出");
+    alert(t.noRulesToExport);
     return;
   }
 
@@ -453,10 +455,10 @@ const exportConfig = async () => {
 
   try {
     await navigator.clipboard.writeText(url);
-    alert("配置已复制到剪切板！");
+    alert(t.configCopied);
   } catch (error) {
     console.error("Failed to copy:", error);
-    alert("写入剪切板失败，请手动复制。");
+    alert(t.copyFailedManual);
   }
 };
 
@@ -472,7 +474,7 @@ const importConfig = async () => {
   // Always show prompt if clipboard is empty or access denied,
   // or confirm the content if read successfully
   if (!clipText) {
-    const input = prompt("无法直接读取剪切板，请粘贴配置代码:");
+     const input = prompt(t.pasteConfigCode);
     if (input) clipText = input;
   } else {
     // Optional: Ask for confirmation if we read automatically to avoid confusion
@@ -483,7 +485,7 @@ const importConfig = async () => {
       !clipText.trim().startsWith("ey")
     ) {
       // If clipboard content doesn't look like config, prompt user
-      const input = prompt("剪切板内容似乎不是配置代码，请手动粘贴:", "");
+       const input = prompt(t.clipboardNotConfig, "");
       if (input) clipText = input;
       else return;
     }
@@ -540,11 +542,11 @@ const importConfig = async () => {
     }
 
     alert(
-      `导入完成。\n成功添加：${addedCount} 条\n已存在跳过：${skippedCount} 条`,
+      t.importCompleted(addedCount.toString(), skippedCount.toString()),
     );
   } catch (error) {
     console.error("Import failed:", error);
-    alert("导入失败：内容格式不正确。");
+    alert(t.importFailedFormat);
   }
 };
 </script>

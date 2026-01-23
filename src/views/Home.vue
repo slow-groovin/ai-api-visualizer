@@ -41,7 +41,7 @@
               </svg>
             </a>
 
-            <!-- 语言切换 -->
+            <!-- Language Switch -->
             <LanguageSwitcher
               class="size-8 p-1 bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-gray-900 rounded-md"
             />
@@ -71,7 +71,7 @@
         <div class="flex items-center justify-between px-1 mb-2">
           <h2 class="text-sm font-bold text-gray-600 flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-            原始输入
+            {{ t.rawInput }}
           </h2>
           <div class="flex gap-2">
             <button
@@ -79,7 +79,7 @@
               @click="clearInput"
               class="px-3 py-1 text-xs font-medium text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
             >
-              清空
+              {{ t.clear }}
             </button>
             <button
               @click="doReplace"
@@ -101,7 +101,7 @@
                 />
               </svg>
               {{ t.replace }}
-              <!-- TODO: 这里进行测试多语言 -->
+              <!-- TODO: Test i18n here -->
             </button>
           </div>
         </div>
@@ -114,7 +114,7 @@
             v-model="inputText"
             ref="inputTextarea"
             class="w-full h-full p-4 bg-transparent border-none resize-none focus:ring-0 text-sm font-mono leading-relaxed text-gray-800 placeholder-gray-400"
-            placeholder="在此粘贴代码..."
+             :placeholder="t.pasteCodePlaceholder"
             @paste="handlePaste"
           ></textarea>
         </div>
@@ -127,17 +127,17 @@
           <div class="flex items-center gap-4">
             <h2 class="text-sm font-bold text-gray-600 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-green-500"></span>
-              处理结果
+              {{ t.processedResult }}
             </h2>
             <!-- Stats Badge -->
             <div
               v-if="replaceCount > 0"
               class="text-xs font-medium px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md border border-blue-100"
             >
-              {{ replaceCount }} 处替换
+              {{ t.replacements(replaceCount.toString()) }}
             </div>
 
-            <!-- 【修改点3：复制控件移到此处】 -->
+            <!-- [Modification 3: Move copy controls here] -->
             <div
               class="flex items-center gap-3 ml-2 border-l pl-4 border-gray-300"
             >
@@ -151,7 +151,7 @@
                   class="w-3.5 h-3.5 text-blue-600 rounded focus:ring-blue-500 border-gray-300"
                 />
                 <span class="text-xs text-gray-600 hover:text-gray-900"
-                  >自动复制</span
+                  >{{ t.autoCopy }}</span
                 >
               </label>
 
@@ -175,20 +175,20 @@
                     d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
                   />
                 </svg>
-                复制
+                 {{ t.copy }}
               </button>
             </div>
           </div>
 
-          <!-- 原导航栏位置已移除 -->
+          <!-- Original navigation bar location removed -->
         </div>
 
         <!-- Output Area (Card) -->
-        <!-- 添加 relative 用于内部绝对定位浮动按钮 -->
+        <!-- Add relative for internal absolute positioning of floating buttons -->
         <div
           class="flex-1 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden relative hover:border-green-300 transition-colors"
         >
-          <!-- 【修改点1：悬浮导航按钮】 -->
+          <!-- [Modification 1: Floating navigation buttons] -->
           <div
             v-if="replaceCount > 0"
             class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-30"
@@ -245,7 +245,7 @@
               <div v-html="outputText"></div>
             </template>
             <template v-else>
-              <span>等待输入...</span>
+              <span>{{ t.waitingForInput }}</span>
             </template>
           </div>
         </div>
@@ -280,7 +280,7 @@ const autoCopy = ref(false);
 // Logic State
 const replaceCount = ref(0);
 const currentSearchIndex = ref(-1);
-// bounce 状态已废弃，改用直接样式操作
+// Bounce state deprecated, use direct style manipulation instead
 const currentTaskHistory = ref<any[]>([]);
 const originalInput = ref("");
 const showRestore = ref(false);
@@ -317,13 +317,13 @@ const importConfig = (configStr: string) => {
           targetValue: rule.targetValue,
         });
       });
-      toast.success("配置已导入！");
+      toast.success(t.configImported);
     } else {
-      toast.error("无效的配置格式");
+      toast.error(t.invalidConfig);
     }
   } catch (error) {
     console.error("Failed to import config:", error);
-    toast.error("导入配置失败");
+    toast.error(t.importFailed);
   }
 };
 
@@ -334,7 +334,7 @@ const importConfig = (configStr: string) => {
 const updateMatchHighlighting = (targetIndex: number) => {
   if (!outputContainer.value) return;
 
-  // 获取所有高亮 span
+  // Get all highlighted spans
   const highlights = outputContainer.value.querySelectorAll(
     'span[style*="background-color"]',
   );
@@ -345,9 +345,9 @@ const updateMatchHighlighting = (targetIndex: number) => {
     const htmlEl = el as HTMLElement;
 
     if (index === targetIndex) {
-      // === 当前选中项：醒目样式 ===
+      // === Current selected item: prominent style ===
       htmlEl.style.transition = "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)";
-      // 使用红色 outline 替代 border 以免影响布局
+      // Use red outline instead of border to avoid affecting layout
       htmlEl.style.outline = "3px solid #ef4444";
       htmlEl.style.outlineOffset = "2px";
       htmlEl.style.borderRadius = "2px";
@@ -358,11 +358,11 @@ const updateMatchHighlighting = (targetIndex: number) => {
 
       htmlEl.scrollIntoView({ behavior: "smooth", block: "center" });
     } else {
-      // === 其他项：立即复原 ===
-      // 仅保留原本的背景色样式（通过 CSS/style 属性），移除额外的强调
+      // === Other items: restore immediately ===
+      // Only keep original background color style (via CSS/style attribute), remove additional emphasis
       htmlEl.style.outline = "";
       htmlEl.style.outlineOffset = "";
-      htmlEl.style.borderRadius = ""; // 复原到 CSS 定义
+      htmlEl.style.borderRadius = ""; // Restore to CSS definition
       htmlEl.style.transform = "";
       htmlEl.style.zIndex = "";
       htmlEl.style.position = "";
@@ -388,9 +388,9 @@ const doReplace = async () => {
   originalInput.value = inputText.value;
   showRestore.value = result.history.length > 0;
 
-  // 重置滚动位置
+  // Reset scroll position
   if (outputContainer.value) outputContainer.value.scrollTop = 0;
-  toast.success(`替换完成，共 ${replaceCount.value} 处变更`);
+   toast.success(t.replaceCompleted(replaceCount.value.toString()));
 
   if (autoCopy.value) {
     await copyToClipboard();
@@ -411,10 +411,10 @@ const copyToClipboard = async () => {
 
     await navigator.clipboard.writeText(plainText);
     await sleep(500);
-    toast.success("已复制到剪贴板！", { duration: 1500 });
+    toast.success(t.copiedToClipboard, { duration: 1500 });
   } catch (error) {
     console.error("Failed to copy:", error);
-    toast.error("复制失败，请手动复制");
+    toast.error(t.copyFailed);
   }
 };
 
@@ -454,7 +454,7 @@ const searchNext = () => {
   if (highlights.length === 0) return;
 
   currentSearchIndex.value = (currentSearchIndex.value + 1) % highlights.length;
-  // 调用新的高亮函数
+  // Call new highlight function
   updateMatchHighlighting(currentSearchIndex.value);
 };
 
@@ -471,7 +471,7 @@ const searchPrevious = () => {
       ? highlights.length - 1
       : currentSearchIndex.value - 1;
 
-  // 调用新的高亮函数
+  // Call new highlight function
   updateMatchHighlighting(currentSearchIndex.value);
 };
 
@@ -514,7 +514,7 @@ onMounted(async () => {
     window.addEventListener("keydown", handleKeydown);
   } catch (error) {
     console.error("Initialization failed:", error);
-    toast.error("系统初始化失败，请刷新页面");
+    toast.error(t.initFailed);
   }
 });
 
@@ -549,7 +549,7 @@ div::-webkit-scrollbar-thumb:hover {
 :deep(span[style*="background-color"]) {
   border-radius: 2px;
   cursor: pointer;
-  /* 确保有足够的空间不被遮挡 */
+  /* Ensure sufficient space is not blocked */
   display: inline-block;
 }
 </style>

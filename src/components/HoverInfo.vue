@@ -26,7 +26,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style scoped>
-/* 悬停时保持一致的视觉效果 */
+/* Maintain consistent visual effect on hover */
 div:hover {
   opacity: 0.9;
 }
