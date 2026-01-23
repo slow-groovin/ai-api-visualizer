@@ -1,10 +1,15 @@
-# Context Protector ![Context Protector](/public/favicon.ico)
- [中文文档](./README_CN.md) 
+<!--# Context Protector ![Context Protector](/public/favicon.ico)-->
+<h1 align="center">
+  <img src="/public/favicon.ico" alt="icon" width="16" height="16">Context Protector
+</h1>
+
+[中文文档](./README_CN.md) 
 **Protect your privacy when using AI models**
 
 **Replace your sensitive data before pasting it to ChatGPT, Claude, Gemini, or any other AI sites**
 
-[online](https://context-protector.api2o.com) 
+
+[try it](https://context-protector.api2o.com) 
 
 [![Usage](./public/usage-video-first.png)](./public/usage.webm)
 
