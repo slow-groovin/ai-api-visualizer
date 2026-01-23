@@ -13,7 +13,9 @@
       class="list-none flex items-center justify-between cursor-pointer select-none p-1"
     >
       <!-- Left: Arrow + Title -->
-      <div class="flex items-center gap-2 text-lg font-semibold text-foreground">
+      <div
+        class="flex items-center gap-2 text-lg font-semibold text-foreground"
+      >
         <!-- Custom Triangle Arrow to ensure flex layout works perfectly -->
         <svg
           class="w-3 h-3 text-foreground-secondary transition-transform duration-200 transform group-open:rotate-90"
@@ -46,7 +48,7 @@
               d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
             />
           </svg>
-           {{ t.import }}
+          {{ t.import }}
         </button>
         <button
           @click="exportConfig"
@@ -67,7 +69,7 @@
               d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
             />
           </svg>
-           {{ t.export }}
+          {{ t.export }}
         </button>
       </div>
     </summary>
@@ -82,8 +84,8 @@
             class="w-16 p-1 text-xs border border-border rounded focus:ring-1 focus:ring-green-500 bg-background"
             title="匹配类型"
           >
-             <option value="fixed">{{ t.text }}</option>
-             <option value="regex">{{ t.regex }}</option>
+            <option value="fixed">{{ t.text }}</option>
+            <option value="regex">{{ t.regex }}</option>
           </select>
 
           <!-- Match Value (Textarea for resizing) -->
@@ -92,8 +94,8 @@
               v-model="newRule.matchValue"
               rows="1"
               required
-              class="w-full p-1 text-sm border border-border rounded focus:ring-1 focus:ring-green-500 min-h-[30px] resize-y align-middle leading-5"
-               :placeholder="t.matchValue"
+              class="w-full p-1 text-sm border border-border rounded focus:ring-1 focus:ring-green-500 min-h-7.5 resize-y align-middle leading-5"
+              :placeholder="t.matchValue"
             ></textarea>
           </div>
 
@@ -119,8 +121,8 @@
             <textarea
               v-model="newRule.targetValue"
               rows="1"
-              class="w-full p-1 text-sm border border-border rounded focus:ring-1 focus:ring-green-500 min-h-[30px] resize-y align-middle leading-5"
-               :placeholder="t.replaceWith"
+              class="w-full p-1 text-sm border border-border rounded focus:ring-1 focus:ring-green-500 min-h-7.5 resize-y align-middle leading-5"
+              :placeholder="t.replaceWith"
             ></textarea>
           </div>
 
@@ -137,7 +139,7 @@
             type="submit"
             :disabled="isAdding"
             class="p-1.5 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 shrink-0"
-             :title="t.addRule"
+            :title="t.addRule"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -157,11 +159,11 @@
 
       <!-- 2. Rules List (Strict Single Row) -->
       <div class="space-y-1">
-          <div
-            v-if="rulesStore.rules.length === 0"
-            class="text-center text-foreground-secondary text-sm py-2"
-          >
-           {{ t.noRules }}
+        <div
+          v-if="rulesStore.rules.length === 0"
+          class="text-center text-foreground-secondary text-sm py-2"
+        >
+          {{ t.noRules }}
         </div>
 
         <div
@@ -174,38 +176,38 @@
             v-if="!rule.isEditing"
             class="flex items-center gap-2 p-1.5 pl-2"
           >
-             <!-- Type Badge -->
-             <span
-               :class="[
-                 'shrink-0 px-1 rounded text-[10px] font-mono border',
-                 rule.matchType === 'regex'
-                   ? 'bg-badge-reg-bg text-badge-reg-fg border-badge-reg-bg'
-                   : 'bg-badge-txt-bg text-badge-txt-fg border-badge-txt-bg',
-               ]"
-             >
-               {{ rule.matchType === "regex" ? "Reg" : "Txt" }}
-             </span>
+            <!-- Type Badge -->
+            <span
+              :class="[
+                'shrink-0 px-1 rounded text-[10px] font-mono border',
+                rule.matchType === 'regex'
+                  ? 'bg-badge-reg-bg text-badge-reg-fg border-badge-reg-bg'
+                  : 'bg-badge-txt-bg text-badge-txt-fg border-badge-txt-bg',
+              ]"
+            >
+              {{ rule.matchType === "regex" ? "Reg" : "Txt" }}
+            </span>
 
-             <!-- Match Content (Truncated) -->
-             <div class="flex-1 min-w-0" :title="rule.matchValue">
-               <div
-                 class="truncate text-sm font-mono text-black bg-pink-50 rounded px-1"
-               >
-                 {{ rule.matchValue }}
-               </div>
-             </div>
+            <!-- Match Content (Truncated) -->
+            <div class="flex-1 min-w-0" :title="rule.matchValue">
+              <div
+                class="truncate text-sm font-mono text-black bg-pink-50 rounded px-1"
+              >
+                {{ rule.matchValue }}
+              </div>
+            </div>
 
             <!-- Arrow -->
             <span class="text-gray-300 shrink-0">→</span>
 
-             <!-- Target Content (Truncated) -->
-             <div class="flex-1 min-w-0" :title="rule.targetValue">
-               <div
-                 class="truncate text-sm font-mono text-black bg-green-50 rounded px-1"
-               >
-                 {{ rule.targetValue || "(空)" }}
-               </div>
-             </div>
+            <!-- Target Content (Truncated) -->
+            <div class="flex-1 min-w-0" :title="rule.targetValue">
+              <div
+                class="truncate text-sm font-mono text-black bg-green-50 rounded px-1"
+              >
+                {{ rule.targetValue || "(空)" }}
+              </div>
+            </div>
 
             <!-- Note (Visible if short, truncated if long) -->
             <div
@@ -222,7 +224,7 @@
               <button
                 @click="startEdit(rule)"
                 class="text-blue-500 hover:text-blue-700 p-0.5"
-                 :title="t.edit"
+                :title="t.edit"
               >
                 <svg
                   class="w-4 h-4"
@@ -241,7 +243,7 @@
               <button
                 @click="handleDeleteRule(rule.id)"
                 class="text-red-500 hover:text-red-700 p-0.5"
-                 :title="t.delete"
+                :title="t.delete"
               >
                 <svg
                   class="w-4 h-4"
@@ -276,15 +278,15 @@
             <textarea
               v-model="rule.editMatchValue"
               rows="1"
-              class="flex-1 min-w-0 p-1 text-sm border border-blue-200 rounded min-h-[28px] resize-y align-middle"
-               :placeholder="t.match"
+              class="flex-1 min-w-0 p-1 text-sm border border-blue-200 rounded min-h-7 resize-y align-middle"
+              :placeholder="t.match"
             />
             <span class="text-blue-300">➜</span>
             <textarea
               v-model="rule.editTargetValue"
               rows="1"
-              class="flex-1 min-w-0 p-1 text-sm border border-blue-200 rounded min-h-[28px] resize-y align-middle"
-               :placeholder="t.replace"
+              class="flex-1 min-w-0 p-1 text-sm border border-blue-200 rounded min-h-7 resize-y align-middle"
+              :placeholder="t.replace"
             />
             <input
               v-model="rule.editNote"
@@ -294,7 +296,7 @@
             <button
               type="submit"
               class="text-green-600 hover:bg-green-100 rounded p-1"
-               :title="t.save"
+              :title="t.save"
             >
               <svg
                 class="w-4 h-4"
@@ -314,7 +316,7 @@
               type="button"
               @click="cancelEdit(rule)"
               class="text-gray-500 hover:bg-gray-200 rounded p-1"
-               :title="t.cancel"
+              :title="t.cancel"
             >
               <svg
                 class="w-4 h-4"
@@ -425,9 +427,7 @@ const handleUpdateRule = async (rule: EditableReplaceRule) => {
 };
 
 const handleDeleteRule = async (id: number) => {
-  if (confirm(t.confirmDeleteRule)) {
-    await rulesStore.deleteRule(id);
-  }
+  await rulesStore.deleteRule(id);
 };
 
 // --- Export / Import Logic ---
@@ -435,7 +435,7 @@ const handleDeleteRule = async (id: number) => {
 const exportConfig = async () => {
   const rules = rulesStore.rules;
   if (rules.length === 0) {
-    alert(t.noRulesToExport);
+    alert("no rules to export.");
     return;
   }
 
@@ -450,15 +450,18 @@ const exportConfig = async () => {
   };
 
   const configStr = JSON.stringify(config);
-  const encoded = btoa(unescape(encodeURIComponent(configStr)));
+  const encoded = btoa(
+    String.fromCharCode(...new TextEncoder().encode(configStr)),
+  );
   const url = `context-protector://import/${encoded}`;
 
   try {
     await navigator.clipboard.writeText(url);
-    alert(t.configCopied);
+    alert("copy suc!");
   } catch (error) {
     console.error("Failed to copy:", error);
-    alert(t.copyFailedManual);
+    // alert(t.copyFailedManual);
+    alert("❌ copy failed!\n" + error);
   }
 };
 
@@ -474,7 +477,7 @@ const importConfig = async () => {
   // Always show prompt if clipboard is empty or access denied,
   // or confirm the content if read successfully
   if (!clipText) {
-     const input = prompt(t.pasteConfigCode);
+    const input = prompt("please input the import config text.");
     if (input) clipText = input;
   } else {
     // Optional: Ask for confirmation if we read automatically to avoid confusion
@@ -485,7 +488,7 @@ const importConfig = async () => {
       !clipText.trim().startsWith("ey")
     ) {
       // If clipboard content doesn't look like config, prompt user
-       const input = prompt(t.clipboardNotConfig, "");
+      const input = prompt("the input text is not a valid config", "");
       if (input) clipText = input;
       else return;
     }
@@ -502,7 +505,10 @@ const importConfig = async () => {
     }
 
     // 2. Decode
-    const jsonStr = decodeURIComponent(escape(window.atob(base64Str)));
+    const jsonStr = new TextDecoder().decode(
+      Uint8Array.from(atob(base64Str), (c) => c.charCodeAt(0)),
+    );
+
     const config = JSON.parse(jsonStr);
 
     if (!config || !Array.isArray(config.rules)) {
@@ -542,11 +548,13 @@ const importConfig = async () => {
     }
 
     alert(
-      t.importCompleted(addedCount.toString(), skippedCount.toString()),
+      // t.importCompleted(addedCount.toString(), skippedCount.toString()),
+      `import suc! added: ${addedCount}, skipped: ${skippedCount}`,
     );
   } catch (error) {
     console.error("Import failed:", error);
-    alert(t.importFailedFormat);
+    alert("import failed " + error);
+    // alert(t.importFailedFormat);
   }
 };
 </script>

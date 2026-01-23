@@ -1,7 +1,7 @@
 <template>
-   <div
-     class="min-h-screen bg-background text-foreground font-sans flex flex-col overflow-hidden"
-   >
+  <div
+    class="min-h-screen bg-background text-foreground font-sans flex flex-col overflow-hidden"
+  >
     <!-- Top App Bar -->
     <header
       class="z-50 bg-background-secondary border-b border-border px-4 py-3 shadow-sm flex-none"
@@ -10,14 +10,14 @@
         <!-- Brand & Info -->
         <div class="flex items-center gap-4 pt-1">
           <div class="flex flex-col">
-             <h1
-               class="text-xl font-bold tracking-tight text-foreground leading-none"
-             >
+            <h1
+              class="text-xl font-bold tracking-tight text-foreground leading-none"
+            >
               Context Protector
             </h1>
-             <span
-               class="text-[10px] font-medium text-foreground-secondary uppercase tracking-wider mt-1"
-             >
+            <span
+              class="text-[10px] font-medium text-foreground-secondary uppercase tracking-wider mt-1"
+            >
               {{ siteName }}
             </span>
           </div>
@@ -28,12 +28,12 @@
               alt-text="离线功能"
               tooltip="完全不联网功能"
             />
-              <a
-                href="https://github.com/anomalyco/opencode"
-                target="_blank"
-                class="size-7 p-1 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md flex items-center justify-center text-sm font-bold transition-colors"
-                title="View on GitHub"
-              >
+            <a
+              href="https://github.com/anomalyco/opencode"
+              target="_blank"
+              class="size-7 p-1 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md flex items-center justify-center text-sm font-bold transition-colors"
+              title="View on GitHub"
+            >
               <svg class="size-6" fill="currentColor" viewBox="0 0 24 24">
                 <path
                   d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
@@ -41,16 +41,16 @@
               </svg>
             </a>
 
-             <!-- Language Switch -->
-              <LanguageSwitcher
-                class="size-8 p-1 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md"
-              />
+            <!-- Language Switch -->
+            <LanguageSwitcher
+              class="size-8 p-1 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md"
+            />
 
-              <router-link
-                to="/help"
-                class="size-7 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md flex items-center justify-center text-sm font-bold transition-colors"
-                title="Help"
-              >
+            <router-link
+              to="/help"
+              class="size-7 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md flex items-center justify-center text-sm font-bold transition-colors"
+              title="Help"
+            >
               ?
             </router-link>
           </div>
@@ -69,16 +69,18 @@
       <div class="flex flex-col h-full">
         <!-- Input Toolbar (External) -->
         <div class="flex items-center justify-between px-1 mb-2">
-             <h2 class="text-sm font-bold text-foreground-secondary flex items-center gap-2">
+          <h2
+            class="text-sm font-bold text-foreground-secondary flex items-center gap-2"
+          >
             <span class="w-2 h-2 rounded-full bg-blue-500"></span>
             {{ t.rawInput }}
           </h2>
           <div class="flex gap-2">
-             <button
-               v-if="inputText"
-               @click="clearInput"
-               class="px-3 py-1 text-xs font-medium text-foreground-secondary hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
-             >
+            <button
+              v-if="inputText"
+              @click="clearInput"
+              class="px-3 py-1 text-xs font-medium text-foreground-secondary hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+            >
               {{ t.clear }}
             </button>
             <button
@@ -106,17 +108,17 @@
           </div>
         </div>
 
-         <!-- Input Area (Card) -->
-         <div
-           class="flex-1 bg-background rounded-xl shadow-sm border border-border overflow-hidden relative group hover:border-blue-300 transition-colors"
-         >
-           <textarea
-             v-model="inputText"
-             ref="inputTextarea"
-             class="w-full h-full p-4 bg-transparent border-none resize-none focus:ring-0 text-sm font-mono leading-relaxed text-foreground placeholder-foreground-secondary"
-              :placeholder="t.pasteCodePlaceholder"
-             @paste="handlePaste"
-           ></textarea>
+        <!-- Input Area (Card) -->
+        <div
+          class="flex-1 bg-background rounded-xl shadow-sm border border-border overflow-hidden relative group hover:border-blue-300 transition-colors"
+        >
+          <textarea
+            v-model="inputText"
+            ref="inputTextarea"
+            class="w-full h-full p-4 bg-transparent border-none resize-none focus:ring-0 text-sm font-mono leading-relaxed text-foreground placeholder-foreground-secondary"
+            :placeholder="t.pasteCodePlaceholder"
+            @paste="handlePaste"
+          ></textarea>
         </div>
       </div>
 
@@ -125,7 +127,9 @@
         <!-- Output Toolbar (External) -->
         <div class="flex items-center justify-between px-1 mb-2">
           <div class="flex items-center gap-4">
-            <h2 class="text-sm font-bold text-foreground-secondary flex items-center gap-2">
+            <h2
+              class="text-sm font-bold text-foreground-secondary flex items-center gap-2"
+            >
               <span class="w-2 h-2 rounded-full bg-green-500"></span>
               {{ t.processedResult }}
             </h2>
@@ -138,9 +142,9 @@
             </div>
 
             <!-- [Modification 3: Move copy controls here] -->
-             <div
-               class="flex items-center gap-3 ml-2 border-l pl-4 border-border"
-             >
+            <div
+              class="flex items-center gap-3 ml-2 border-l pl-4 border-border"
+            >
               <!-- Auto Copy Checkbox -->
               <label
                 class="flex items-center gap-1.5 cursor-pointer select-none"
@@ -148,20 +152,21 @@
                 <input
                   v-model="autoCopy"
                   type="checkbox"
-                   class="w-3.5 h-3.5 text-blue-600 rounded focus:ring-blue-500 border-border"
+                  class="w-3.5 h-3.5 text-blue-600 rounded focus:ring-blue-500 border-border"
                 />
-                <span class="text-xs text-foreground-secondary hover:text-foreground"
+                <span
+                  class="text-xs text-foreground-secondary hover:text-foreground"
                   >{{ t.autoCopy }}</span
                 >
               </label>
 
               <!-- Main Copy Button -->
-               <button
-                 @click="copyToClipboard"
-                 :disabled="!outputText"
-                 class="flex items-center gap-1.5 px-3 py-1 bg-background-secondary text-foreground-secondary text-xs font-bold rounded shadow-sm hover:bg-background-dark hover:text-foreground active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-background-secondary disabled:text-foreground-secondary"
-                 title="Ctrl+C"
-               >
+              <button
+                @click="copyToClipboard"
+                :disabled="!outputText"
+                class="flex items-center gap-1.5 px-3 py-1 bg-background-secondary text-foreground-secondary text-xs font-bold rounded shadow-sm hover:bg-background-dark hover:text-foreground active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-background-secondary disabled:text-foreground-secondary"
+                title="Ctrl+C"
+              >
                 <svg
                   class="w-3.5 h-3.5"
                   fill="none"
@@ -175,7 +180,7 @@
                     d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
                   />
                 </svg>
-                 {{ t.copy }}
+                {{ t.copy }}
               </button>
             </div>
           </div>
@@ -183,21 +188,21 @@
           <!-- Original navigation bar location removed -->
         </div>
 
-         <!-- Output Area (Card) -->
-         <!-- Add relative for internal absolute positioning of floating buttons -->
-         <div
-           class="flex-1 bg-background rounded-xl shadow-sm border border-border overflow-hidden relative hover:border-green-300 transition-colors"
-         >
+        <!-- Output Area (Card) -->
+        <!-- Add relative for internal absolute positioning of floating buttons -->
+        <div
+          class="flex-1 bg-background rounded-xl shadow-sm border border-border overflow-hidden relative hover:border-green-300 transition-colors"
+        >
           <!-- [Modification 1: Floating navigation buttons] -->
           <div
             v-if="replaceCount > 0"
             class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-30"
           >
-              <button
-                @click="searchPrevious"
-                class="w-10 h-10 flex items-center justify-center bg-search-button-bg text-foreground-secondary rounded-full shadow-lg border border-search-button-border hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
-                title="上一个 (Ctrl+↑)"
-              >
+            <button
+              @click="searchPrevious"
+              class="w-10 h-10 flex items-center justify-center bg-search-button-bg text-foreground-secondary rounded-full shadow-lg border border-search-button-border hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
+              title="上一个 (Ctrl+↑)"
+            >
               <svg
                 class="w-6 h-6 transform group-hover:-translate-y-0.5 transition-transform"
                 fill="none"
@@ -212,11 +217,11 @@
                 />
               </svg>
             </button>
-              <button
-                @click="searchNext"
-                class="w-10 h-10 flex items-center justify-center bg-search-button-bg text-foreground-secondary rounded-full shadow-lg border border-search-button-border hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
-                title="下一个 (Ctrl+↓)"
-              >
+            <button
+              @click="searchNext"
+              class="w-10 h-10 flex items-center justify-center bg-search-button-bg text-foreground-secondary rounded-full shadow-lg border border-search-button-border hover:bg-blue-600 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 group"
+              title="下一个 (Ctrl+↓)"
+            >
               <svg
                 class="w-6 h-6 transform group-hover:translate-y-0.5 transition-transform"
                 fill="none"
@@ -233,14 +238,14 @@
             </button>
           </div>
 
-           <div
-             ref="outputContainer"
-             class="w-full h-full p-4 overflow-auto font-mono text-sm whitespace-pre-wrap leading-relaxed selection:bg-green-100 selection:text-green-900 pb-20"
-             :class="{
-               'text-foreground-secondary italic flex items-center justify-center':
-                 !outputText,
-             }"
-           >
+          <div
+            ref="outputContainer"
+            class="w-full h-full p-4 overflow-auto font-mono text-sm whitespace-pre-wrap leading-relaxed selection:bg-green-100 selection:text-green-900 pb-20"
+            :class="{
+              'text-foreground-secondary italic flex items-center justify-center':
+                !outputText,
+            }"
+          >
             <template v-if="outputText">
               <div v-html="outputText"></div>
             </template>
@@ -317,13 +322,15 @@ const importConfig = (configStr: string) => {
           targetValue: rule.targetValue,
         });
       });
-      toast.success(t.configImported);
+      // toast.success(t.configImported);
+      toast.success("Configuration imported successfully");
     } else {
-      toast.error(t.invalidConfig);
+      // toast.error(t.invalidConfig);
+      toast.error("Invalid configuration");
     }
   } catch (error) {
     console.error("Failed to import config:", error);
-    toast.error(t.importFailed);
+    toast.error("Failed to import configuration");
   }
 };
 
@@ -390,7 +397,8 @@ const doReplace = async () => {
 
   // Reset scroll position
   if (outputContainer.value) outputContainer.value.scrollTop = 0;
-   toast.success(t.replaceCompleted(replaceCount.value.toString()));
+  // toast.success(t.replaceCompleted(replaceCount.value.toString()));
+  toast.success(`Replacement ${replaceCount.value} successfully`);
 
   if (autoCopy.value) {
     await copyToClipboard();
@@ -411,10 +419,12 @@ const copyToClipboard = async () => {
 
     await navigator.clipboard.writeText(plainText);
     await sleep(500);
-    toast.success(t.copiedToClipboard, { duration: 1500 });
+    // toast.success(t.copiedToClipboard, { duration: 1500 });
+    toast.success("Copied to clipboard", { duration: 1500 });
   } catch (error) {
     console.error("Failed to copy:", error);
-    toast.error(t.copyFailed);
+    // toast.error(t.copyFailed);
+    toast.error("Failed to copy");
   }
 };
 
@@ -514,7 +524,8 @@ onMounted(async () => {
     window.addEventListener("keydown", handleKeydown);
   } catch (error) {
     console.error("Initialization failed:", error);
-    toast.error(t.initFailed);
+    // toast.error(t.initFailed);
+    toast.error("Initialization failed");
   }
 });
 
