@@ -1,12 +1,18 @@
-# Context Protector
+<!--# Context Protector ![Context Protector](/public/favicon.ico)-->
+<h1 align="center">
+  <img src="/public/icon-192.png" alt="icon" width="24" height="24">   Context Protector
+</h1>
 
-![Context Protector](/public/icon-512.png)
-
+[English Documentation](./README.md) 
 **一个保护您在使用AI模型时隐私的工具**
 
 **在将内容粘贴到ChatGPT、Claude、Gemini或任何其他AI网站之前，替换您的敏感数据**
 
-[在线使用将](https://context-protector.api2o.com)
+
+<div align="center"><a href="https://context-protector.api2o.com" target="_blank">🌐在线使用</a></div>
+<video src="https://github.com/user-attachments/assets/5ef7b0ed-f9a3-4d06-af6d-4fffcdfcfdc7" controls  style="max-width: 80%;">
+  您的浏览器不支持视频标签。
+</video>
 
 ## ✨ 为什么选择 Context Protector？
 
@@ -32,6 +38,10 @@
 ## 📊 数据存储
 
 Context Protector使用**Origin Private File System (OPFS)**在您的浏览器中本地存储所有数据。
+
+## 🎥 使用演示
+
+
 
 ## 🛠️ 开发环境设置
 ```bash

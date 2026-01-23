@@ -1,6 +1,6 @@
 <!--# Context Protector ![Context Protector](/public/favicon.ico)-->
 <h1 align="center">
-  <img src="/public/icon-192.png" alt="icon" width="32" height="32">Context Protector
+  <img src="/public/icon-192.png" alt="icon" width="24" height="24">   Context Protector
 </h1>
 
 [中文文档](./README_CN.md) 
@@ -10,9 +10,6 @@
 
 
 <div align="center"><a href="https://context-protector.api2o.com" target="_blank">🌐Try  it</a></div>
-
-![Usage](./public/usage-video-first.png)
-
 <video src="https://github.com/user-attachments/assets/5ef7b0ed-f9a3-4d06-af6d-4fffcdfcfdc7" controls  style="max-width: 80%;">
   Your browser does not support the video tag.
 </video>
