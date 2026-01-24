@@ -456,7 +456,7 @@ const exportConfig = async () => {
 
   try {
     await navigator.clipboard.writeText(url);
-    alert("copy suc!");
+    alert("copied to clipboard suc!");
   } catch (error) {
     console.error("Failed to copy:", error);
     // alert(t.copyFailedManual);
@@ -540,7 +540,7 @@ const importConfig = async () => {
 
     alert(
       // t.importCompleted(addedCount.toString(), skippedCount.toString()),
-      `import suc! added: ${addedCount}, skipped: ${skippedCount}`,
+      `import from clipboard suc! added: ${addedCount}, skipped: ${skippedCount}`,
     );
   } catch (error) {
     console.error("Import failed:", error);

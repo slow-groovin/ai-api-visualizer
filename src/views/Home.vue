@@ -308,31 +308,7 @@ const convertRulesForApply = (rules: any[]) => {
   }));
 };
 
-const importConfig = (configStr: string) => {
-  try {
-    const jsonStr = configStr.replace("context-protector://import/", "");
-    const config = JSON.parse(jsonStr);
 
-    if (config.version === 1 && config.rules) {
-      config.rules.forEach(async (rule: any) => {
-        await rulesStore.addRule({
-          note: rule.note,
-          matchType: rule.matchType,
-          matchValue: rule.matchValue,
-          targetValue: rule.targetValue,
-        });
-      });
-      // toast.success(t.configImported);
-      toast.success("Configuration imported successfully");
-    } else {
-      // toast.error(t.invalidConfig);
-      toast.error("Invalid configuration");
-    }
-  } catch (error) {
-    console.error("Failed to import config:", error);
-    toast.error("Failed to import configuration");
-  }
-};
 
 /**
  * 【修改点2：高亮逻辑完全重写】
@@ -441,15 +417,7 @@ const clearInput = () => {
 
 // --- Event Handlers ---
 
-const handlePaste = (event?: ClipboardEvent) => {
-  const pastedText = event?.clipboardData?.getData("text") || inputText.value;
-
-  if (pastedText.startsWith("context-protector://")) {
-    event?.preventDefault();
-    importConfig(pastedText);
-    return;
-  }
-
+const handlePaste = (_?: ClipboardEvent) => {
   setTimeout(() => {
     doReplace();
   }, 150);
