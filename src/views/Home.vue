@@ -24,10 +24,12 @@
 
           <div class="flex items-center gap-2">
             <HoverInfo
-              icon-src="/offline.png"
-              :alt-text="t.offlineFunction"
+              class="p-1.5 rounded border bg-orange-100  border-orange-200 opacity-80"
               :tooltip="t.offlineTooltip"
-            />
+              placement="bottom"
+            >
+              <img src="/offline.png" :alt="t.offlineFunction" class="size-4  "/>
+            </HoverInfo>
             <a
               href="https://github.com/slow-groovin/context-protector"
               target="_blank"
