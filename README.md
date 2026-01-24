@@ -3,9 +3,10 @@
   <img src="/public/icon-192.png" alt="icon" width="24" height="24">   Context Protector
 </h1>
 
-<div align="center" style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
-<a href="./README_CN.md">中文README</a> |
+<div align="center" style="display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;">
+<a href="./README_CN.md">中文README</a> 
 <a href="https://context-protector.api2o.com" target="_blank">🌐Try it</a>
+<br/>
 <a href="https://vercel.com/new/clone?repository-url=https://github.com/slow-groovin/context-protector"><img src="https://vercel.com/button" alt="Deploy with Vercel" style="height: 24px;"></a>
 <a href="https://deploy.workers.cloudflare.com/?url=https://github.com/slow-groovin/context-protector"><img src="https://camo.githubusercontent.com/aa3de9a0130879a84691a2286f5302105d5f3554c5d0af4e3f2f24174eeeea25/68747470733a2f2f6465706c6f792e776f726b6572732e636c6f7564666c6172652e636f6d2f627574746f6e" alt="Deploy to Cloudflare Workers" style="height: 24px;"></a>
 </div>
