@@ -3,16 +3,23 @@
   <img src="/public/icon-192.png" alt="icon" width="24" height="24">   Context Protector
 </h1>
 
-[中文文档](./README_CN.md) 
+<div align="center" style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
+<a href="./README_CN.md">中文文档</a>
+<a href="https://context-protector.api2o.com" target="_blank">🌐Try it</a>
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/slow-groovin/context-protector)
+
+[![Deploy to Cloudflare Workers](https://camo.githubusercontent.com/aa3de9a0130879a84691a2286f5302105d5f3554c5d0af4e3f2f24174eeeea25/68747470733a2f2f6465706c6f792e776f726b6572732e636c6f7564666c6172652e636f6d2f627574746f6e)](https://deploy.workers.cloudflare.com/?url=https://github.com/slow-groovin/context-protector)
+</div>
+
 **Protect your privacy when using AI models**
 
 **Replace your sensitive data before pasting it to ChatGPT, Claude, Gemini, or any other AI sites**
 
-
-<div align="center"><a href="https://context-protector.api2o.com" target="_blank">🌐Try  it</a></div>
 <video src="https://github.com/user-attachments/assets/5ef7b0ed-f9a3-4d06-af6d-4fffcdfcfdc7" controls  style="max-width: 80%;">
   Your browser does not support the video tag.
 </video>
+
 
 ## ✨ Why Context Protector?
 
@@ -24,15 +31,22 @@ When using AI sites like ChatGPT, Claude, or Gemini, you often need to share cod
 
 ## 🚀 Installation and Usage
 
-### 🌐 Online (Recommended)
+### Online (Recommended)
+
 Simply visit [https://context-protector.api2o.com](https://context-protector.api2o.com) and start using immediately - no installation required.
 
-### 📱 PWA Installation
+**PWA Installation**
+
 1. Visit the web app
 2. Click the "Install" button in your browser's address bar
 3. Use it like a native app with offline support
 
-### 📦 Local Deployment
+### Self Hosted
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/slow-groovin/context-protector)
+
+[![Deploy to Cloudflare Workers](https://camo.githubusercontent.com/aa3de9a0130879a84691a2286f5302105d5f3554c5d0af4e3f2f24174eeeea25/68747470733a2f2f6465706c6f792e776f726b6572732e636c6f7564666c6172652e636f6d2f627574746f6e)](https://deploy.workers.cloudflare.com/?url=https://github.com/slow-groovin/context-protector)
+
+
 Clone, build and deploy locally.
 
 ## 📊 Data Storage
@@ -41,9 +55,8 @@ Context Protector stores all your data locally in your browser using the **Origi
 
 ## 🎥 Usage Demo
 
-
-
 ## 🛠️ Development Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/slow-groovin/context-protector-web.git
