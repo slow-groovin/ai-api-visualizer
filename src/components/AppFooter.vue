@@ -1,16 +1,25 @@
 <template>
   <footer 
-    v-if="isFooterEnabled"
+    v-if="shouldShowFooter"
     class="bg-background-secondary border-border px-4 py-2 mt-auto"
   >
     <div class="flex justify-between items-center text-sm">
       <!-- Left side: powered by -->
-      <div class="text-foreground-secondary">
+      <div 
+        v-if="showPoweredBy"
+        class="text-foreground-secondary"
+      >
         <span class="font-medium">Powered by {{ siteName }}</span>
       </div>
 
+      <!-- Spacer when only one side is shown -->
+      <div v-else></div>
+
       <!-- Right side: friendly links -->
-      <nav class="flex items-center gap-6">
+      <nav 
+        v-if="showFriendlyLinks"
+        class="flex items-center gap-6"
+      >
         <a
           v-for="link in friendlyLinks"
           :key="link.url"
@@ -30,14 +39,24 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-// Check if footer is enabled
-const isFooterEnabled = computed(() => {
-  return import.meta.env.VITE_FOOTER_ENABLED === 'true';
+// Check if footer should be shown (has content on either side)
+const shouldShowFooter = computed(() => {
+  return showPoweredBy.value || showFriendlyLinks.value;
+});
+
+// Check if powered by section should be shown
+const showPoweredBy = computed(() => {
+  return !!import.meta.env.VITE_FOOTER_POWERED_BY_SITE;
 });
 
 // Site name for footer
 const siteName = computed(() => {
-  return import.meta.env.VITE_FOOTER_POWERED_BY_SITE || "Context Protector";
+  return import.meta.env.VITE_FOOTER_POWERED_BY_SITE;
+});
+
+// Check if friendly links section should be shown
+const showFriendlyLinks = computed(() => {
+  return friendlyLinks.value.length > 0;
 });
 
 // Friendly links configuration
