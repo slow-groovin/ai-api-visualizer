@@ -17,7 +17,7 @@
 
 - [x]  快捷键:  Next/Previous, 复制 
 - [x] 规则配置页面, 悬浮式下拉, 而不是扩展元素高度
-- [x] 设计: 顶部Icon(text)右下方小字站点名(import.meta.vite_site_name)
+- [x] 设计: 顶部Icon(text)右下方小字站点名(import.meta.VITE_POWERED_BY_SITE)
 - [x] 设计: 顶部Icon右侧留出github link, offline(no internet)说明, download按钮
 - [ ] pwa详细配置
 - [x] 本地化

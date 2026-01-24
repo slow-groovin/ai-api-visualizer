@@ -29,7 +29,7 @@
               :tooltip="t.offlineTooltip"
             />
             <a
-              href="https://github.com/anomalyco/opencode"
+              href="https://github.com/slow-groovin/context-protector"
               target="_blank"
               class="size-7 p-1 bg-button-bg hover:bg-button-bg text-foreground-secondary hover:text-foreground rounded-md flex items-center justify-center text-sm font-bold transition-colors"
               title="View on GitHub"

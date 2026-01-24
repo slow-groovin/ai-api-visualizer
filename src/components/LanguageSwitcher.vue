@@ -51,13 +51,13 @@ onUnmounted(() => window.removeEventListener("click", handleClickOutside));
       class="absolute right-0 top-full mt-2 w-24 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
     >
       <button
-        v-for="lang in availableLocales"
-        :key="lang"
-        @click="handleSelect(lang)"
+        v-for="option in availableLocales"
+        :key="option.code"
+        @click="handleSelect(option.code)"
         class="block w-full px-4 py-2 text-left text-xs text-gray-700 hover:bg-gray-100 hover:text-blue-600"
-        :class="{ 'font-bold text-blue-600 bg-blue-50': locale === lang }"
+        :class="{ 'font-bold text-blue-600 bg-blue-50': locale === option.code }"
       >
-        {{ lang }}
+        {{ option.name }}
       </button>
     </div>
   </div>

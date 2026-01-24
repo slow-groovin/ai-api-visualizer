@@ -1,5 +1,6 @@
 import { ref, computed } from "vue";
-import { LOCALES, MESSAGES, type Locale } from "../types/i18n";
+import { LOCALES, LOCALE_DISPLAY_NAMES, type Locale } from "../types/i18n";
+import {  MESSAGES } from "../assets/i18n";
 
 const STORAGE_KEY = "app-locale";
 
@@ -34,12 +35,15 @@ export function useI18n() {
   const locale = computed(() => currentLocale.value);
 
   const t = computed(() => {
-    return new Proxy({} as (typeof MESSAGES)["zh-CN"], {
+    return new Proxy({} as (typeof MESSAGES)[Locale], {
       get: (_, key: string) => {
         const value =
-          MESSAGES[currentLocale.value][
-            key as keyof (typeof MESSAGES)["zh-CN"]
+          MESSAGES?.[currentLocale.value]?.[
+            key as keyof (typeof MESSAGES)[Locale]
           ];
+        if(!value){
+          console.debug(`i18n: ${key} is not exist.`)
+        }
         return value || key;
       },
     });
@@ -53,5 +57,13 @@ export function useI18n() {
     // nextTick();
   };
 
-  return { locale, t, setLocale, availableLocales: LOCALES };
+  // 可用语言选项：代码-显示名称
+  const availableLocales = computed(() => 
+    LOCALES.map(code => ({
+      code,
+      name: LOCALE_DISPLAY_NAMES[code]
+    }))
+  );
+
+  return { locale, t, setLocale, availableLocales };
 }

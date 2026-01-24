@@ -1,5 +1,8 @@
 <template>
-  <footer class="bg-background-secondary border-border px-4 py-2 mt-auto">
+  <footer 
+    v-if="isFooterEnabled"
+    class="bg-background-secondary border-border px-4 py-2 mt-auto"
+  >
     <div class="flex justify-between items-center text-sm">
       <!-- Left side: powered by -->
       <div class="text-foreground-secondary">
@@ -27,19 +30,31 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const siteName = import.meta.env.VITE_SITE_NAME || "Context Protector";
+// Check if footer is enabled
+const isFooterEnabled = computed(() => {
+  return import.meta.env.VITE_FOOTER_ENABLED === 'true';
+});
 
-/**
- * 友情链接配置
- * 可以根据需要扩展更多链接
- */
-const friendlyLinks = computed(() => [
-  {
-    label: "api2o.com",
-    url: "https://api2o.com",
-    description: "api2o",
-  },
-]);
+// Site name for footer
+const siteName = computed(() => {
+  return import.meta.env.VITE_FOOTER_POWERED_BY_SITE || "Context Protector";
+});
+
+// Friendly links configuration
+const friendlyLinks = computed(() => {
+  const linksEnv = import.meta.env.VITE_FOOTER_FRIENDLY_LINKS;
+  
+  if (!linksEnv) {
+    return [];
+  }
+  
+  try {
+    return JSON.parse(linksEnv);
+  } catch (error) {
+    console.warn('Invalid VITE_FOOTER_FRIENDLY_LINKS format, expected JSON array:', error);
+    return [];
+  }
+});
 </script>
 
 <style scoped>
