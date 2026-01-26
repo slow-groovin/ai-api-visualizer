@@ -8,6 +8,7 @@ const DB_NAME = "context-protector.sqlite3";
 let db: ReturnType<typeof drizzle<typeof schema>> | null = null;
 let sqlocalDrizzle: SQLocalDrizzle | null = null;
 let isInitialized = false;
+let migrationsCompleted = false;
 
 export async function initDatabase(): Promise<typeof db> {
   if (isInitialized && db) {
@@ -156,6 +157,7 @@ export async function runMigrations() {
     `);
 
     console.log("Migrations completed successfully with Drizzle");
+    migrationsCompleted = true;
   } catch (error) {
     console.error("Failed to run migrations:", error);
     throw error;
@@ -191,11 +193,19 @@ export function closeDatabase() {
       sqlocalDrizzle = null;
       db = null;
       isInitialized = false;
+      migrationsCompleted = false;
       console.log("✅ Database connection closed");
     }
   } catch (error) {
     console.error("Failed to close database:", error);
   }
+}
+
+/**
+ * Check if database is fully initialized and migrations are completed
+ */
+export function isDatabaseReady(): boolean {
+  return isInitialized && migrationsCompleted && db !== null;
 }
 
 // ⚠️ 关键修复3: 页面卸载时关闭数据库

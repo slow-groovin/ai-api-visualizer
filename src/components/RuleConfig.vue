@@ -344,6 +344,7 @@ import { ref, reactive, onMounted } from "vue";
 import { useRulesStore, type ReplaceRule } from "../stores/rules";
 import { toast } from "vue-sonner";
 import { useI18n } from "../composables/useI18n";
+import { isDatabaseReady } from "../database";
 interface EditableReplaceRule extends ReplaceRule {
   isEditing?: boolean;
   editNote?: string;
@@ -366,7 +367,9 @@ const newRule = reactive({
 });
 
 onMounted(async () => {
+  // Database initialization is handled in main.ts, only load rules here
   await rulesStore.loadRules();
+  
   const stored = localStorage.getItem("ruleConfigFirstUse");
   if (stored === null) {
     await rulesStore.initializeDefaultRules();

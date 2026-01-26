@@ -6,9 +6,9 @@ import DatabaseTest from '../views/debug/DatabaseTest.vue'
 import DrizzleOrmTest from '../views/debug/DrizzleOrmTest.vue'
 import EnvironmentInfo from '../views/debug/EnvironmentInfo.vue'
 import OpfsViewer from '../views/debug/OpfsViewer.vue'
-import Replace from '../views/debug/Replace.vue'
 import ToastDebug from '../views/debug/ToastDebug.vue'
 import ColorTest from '../views/debug/ColorTest.vue'
+import { defineAsyncComponent } from 'vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,7 +51,7 @@ const router = createRouter({
     {
       path: '/debug/replace',
       name: 'replace',
-      component: Replace
+      component: defineAsyncComponent(()=>import("../views/debug/Replace.vue"))
     },
     {
       path: '/debug/toast',

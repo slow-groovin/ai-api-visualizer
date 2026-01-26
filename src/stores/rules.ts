@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { getDatabase } from "../database/index";
+import { getDatabase, isDatabaseReady } from "../database/index";
 import { replaceRules } from "../database/schema";
 import { eq, desc } from "drizzle-orm";
 
@@ -21,6 +21,12 @@ export const useRulesStore = defineStore("rules", () => {
   const loadRules = async () => {
     isLoading.value = true;
     try {
+      // Ensure database is ready before attempting to load
+      if (!isDatabaseReady()) {
+        console.warn("Database not ready, waiting for initialization...");
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      
       const db = await getDatabase();
       if (!db) return;
 
