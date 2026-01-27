@@ -344,7 +344,6 @@ import { ref, reactive, onMounted } from "vue";
 import { useRulesStore, type ReplaceRule } from "../stores/rules";
 import { toast } from "vue-sonner";
 import { useI18n } from "../composables/useI18n";
-import { isDatabaseReady } from "../database";
 interface EditableReplaceRule extends ReplaceRule {
   isEditing?: boolean;
   editNote?: string;
