@@ -341,6 +341,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
+import { useLocalStorage } from "@vueuse/core";
 import { useRulesStore, type ReplaceRule } from "../stores/rules";
 import { toast } from "vue-sonner";
 import { useI18n } from "../composables/useI18n";
@@ -353,7 +354,8 @@ interface EditableReplaceRule extends ReplaceRule {
   isUpdating?: boolean;
 }
 
-const isOpen = ref(false);
+// 使用 useLocalStorage 持久化规则配置面板的展开/折叠状态到本地存储
+const isOpen = useLocalStorage("context-protector-rule-config-open", false);
 const rulesStore = useRulesStore();
 const isAdding = ref(false);
 const { t } = useI18n();

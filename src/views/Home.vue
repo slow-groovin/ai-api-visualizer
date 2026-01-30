@@ -319,6 +319,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from "vue";
+import { useLocalStorage } from "@vueuse/core";
 import { useRulesStore } from "../stores/rules";
 import { initDatabase, runMigrations } from "../database/index";
 import RuleConfig from "../components/RuleConfig.vue";
@@ -340,8 +341,10 @@ const { t } = useI18n();
 const inputText = ref("");
 const outputText = ref("");
 const outputContainer = ref<HTMLDivElement>();
-const autoCopy = ref(false);
-const isHeaderExpanded = ref(true); // New state for header visibility
+// 使用 useLocalStorage 持久化自动复制状态到本地存储
+const autoCopy = useLocalStorage("context-protector-auto-copy", false);
+// 使用 useLocalStorage 持久化头部展开/折叠状态到本地存储
+const isHeaderExpanded = useLocalStorage("context-protector-header-expanded", true);
 
 // Logic State
 const replaceCount = ref(0);
