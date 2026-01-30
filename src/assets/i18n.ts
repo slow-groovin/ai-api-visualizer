@@ -55,6 +55,8 @@ export const MESSAGES = {
     shortcutReplace: "Shortcut: Ctrl+Enter",
     previousItem: "Previous (Ctrl+↑)",
     nextItem: "Next (Ctrl+↓)",
+    collapse: "Collapse",
+    expand: "Expand",
   },
   "zh-CN": {
     welcome: "欢迎",
@@ -109,6 +111,8 @@ export const MESSAGES = {
     shortcutReplace: "快捷键: Ctrl+Enter",
     previousItem: "上一个 (Ctrl+↑)",
     nextItem: "下一个 (Ctrl+↓)",
+    collapse: "收起",
+    expand: "展开",
   },
   "ja-JP": {
     welcome: "ようこそ",
@@ -166,6 +170,8 @@ export const MESSAGES = {
     shortcutReplace: "ショートカット: Ctrl+Enter",
     previousItem: "前へ (Ctrl+↑)",
     nextItem: "次へ (Ctrl+↓)",
+    collapse: "折りたたむ",
+    expand: "展開する",
   },
   "zh-TW": {
     welcome: "歡迎",
@@ -220,6 +226,8 @@ export const MESSAGES = {
     shortcutReplace: "快捷鍵: Ctrl+Enter",
     previousItem: "上一個 (Ctrl+↑)",
     nextItem: "下一個 (Ctrl+↓)",
+    collapse: "收起",
+    expand: "展開",
   },
   "ko-KR": {
     welcome: "환영합니다",
@@ -274,6 +282,8 @@ export const MESSAGES = {
     shortcutReplace: "단축키: Ctrl+Enter",
     previousItem: "이전 (Ctrl+↑)",
     nextItem: "다음 (Ctrl+↓)",
+    collapse: "접기",
+    expand: "펼치기",
   },
   "es-ES": {
     welcome: "Bienvenido",
@@ -331,6 +341,8 @@ export const MESSAGES = {
     shortcutReplace: "Atajo: Ctrl+Enter",
     previousItem: "Anterior (Ctrl+↑)",
     nextItem: "Siguiente (Ctrl+↓)",
+    collapse: "Contraer",
+    expand: "Expandir",
   },
   "de-DE": {
     welcome: "Willkommen",
@@ -388,6 +400,8 @@ export const MESSAGES = {
     shortcutReplace: "Verknüpfung: Ctrl+Enter",
     previousItem: "Vorherige (Ctrl+↑)",
     nextItem: "Nächste (Ctrl+↓)",
+    collapse: "Einklappen",
+    expand: "Ausklappen",
   },
   "fr-FR": {
     welcome: "Bienvenue",
@@ -445,6 +459,8 @@ export const MESSAGES = {
     shortcutReplace: "Raccourci : Ctrl+Entrée",
     previousItem: "Précédent (Ctrl+↑)",
     nextItem: "Suivant (Ctrl+↓)",
+    collapse: "Réduire",
+    expand: "Développer",
   },
   "ru-RU": {
     welcome: "Добро пожаловать",
@@ -502,6 +518,8 @@ export const MESSAGES = {
     shortcutReplace: "Горячая клавиша: Ctrl+Enter",
     previousItem: "Предыдущий (Ctrl+↑)",
     nextItem: "Следующий (Ctrl+↓)",
+    collapse: "Свернуть",
+    expand: "Развернуть",
   },
   "ar-SA": {
     welcome: "مرحباً",
@@ -616,6 +634,8 @@ export const MESSAGES = {
     shortcutReplace: "Atalho: Ctrl+Enter",
     previousItem: "Anterior (Ctrl+↑)",
     nextItem: "Próximo (Ctrl+↓)",
+    collapse: "Recolher",
+    expand: "Expandir",
   },
 } as const;
 

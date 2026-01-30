@@ -1,6 +1,6 @@
 <template>
   <details
-    class="bg-background rounded-lg p-2 mb-2 group border border-border"
+    class="bg-background rounded-lg p-0 mb-0 group border border-border"
     :open="isOpen"
     @toggle="
       (event) => {
@@ -74,7 +74,7 @@
       </div>
     </summary>
 
-    <div class="mt-3 space-y-2 pl-2">
+    <div class="space-y-2 p-2">
       <!-- 1. Add New Rule (Strict Single Row) -->
       <div class="border border-green-200 rounded p-1 dark:bg-gray-300/30">
         <form @submit.prevent="handleAddRule" class="flex items-center gap-1">
