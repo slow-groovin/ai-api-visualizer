@@ -1,13 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Help from '../views/Help.vue'
-import Debug from '../views/Debug.vue'
-import DatabaseTest from '../views/debug/DatabaseTest.vue'
-import DrizzleOrmTest from '../views/debug/DrizzleOrmTest.vue'
-import EnvironmentInfo from '../views/debug/EnvironmentInfo.vue'
-import OpfsViewer from '../views/debug/OpfsViewer.vue'
-import ToastDebug from '../views/debug/ToastDebug.vue'
-import ColorTest from '../views/debug/ColorTest.vue'
 import { defineAsyncComponent } from 'vue'
 
 const router = createRouter({
@@ -26,42 +19,42 @@ const router = createRouter({
     {
       path: '/debug',
       name: 'debug',
-      component: Debug
+      component: defineAsyncComponent(() => import('../views/Debug.vue'))
     },
     {
       path: '/debug/database',
       name: 'database-test',
-      component: DatabaseTest
+      component: defineAsyncComponent(() => import('../views/debug/DatabaseTest.vue'))
     },
     {
       path: '/debug/drizzle-orm',
       name: 'drizzle-orm-test',
-      component: DrizzleOrmTest
+      component: defineAsyncComponent(() => import('../views/debug/DrizzleOrmTest.vue'))
     },
     {
       path: '/debug/environment',
       name: 'environment-info',
-      component: EnvironmentInfo
+      component: defineAsyncComponent(() => import('../views/debug/EnvironmentInfo.vue'))
     },
     {
       path: '/debug/opfs-viewer',
       name: 'opfs-viewer',
-      component: OpfsViewer
+      component: defineAsyncComponent(() => import('../views/debug/OpfsViewer.vue'))
     },
     {
       path: '/debug/replace',
       name: 'replace',
-      component: defineAsyncComponent(()=>import("../views/debug/Replace.vue"))
+      component: defineAsyncComponent(() => import('../views/debug/Replace.vue'))
     },
     {
       path: '/debug/toast',
       name: 'toast-debug',
-      component: ToastDebug
+      component: defineAsyncComponent(() => import('../views/debug/ToastDebug.vue'))
     },
     {
       path: '/debug/color-test',
       name: 'color-test',
-      component: ColorTest
+      component: defineAsyncComponent(() => import('../views/debug/ColorTest.vue'))
     }
   ]
 })
