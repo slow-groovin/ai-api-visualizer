@@ -20,8 +20,8 @@ export default defineConfig(({}) => ({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        name: "Context Protector",
-        short_name: "Context Protector",
+        name: "AI API Visualizer",
+        short_name: "AI API Visualizer",
         description:
           "An offline tool to replace sensitive text in your context",
         theme_color: "#ffffff",
