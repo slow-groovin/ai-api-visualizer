@@ -6,16 +6,19 @@
     <!-- Main Workspace -->
     <main class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 p-2 min-h-0">
       <!-- Input Column -->
-      <InputPanel 
-        v-model="inputText" 
-        :placeholder="t.pasteCodePlaceholder" 
-        @paste="handlePaste" 
+      <InputPanel
+        v-model="inputText"
+        :placeholder="t.pasteCodePlaceholder"
+        @update:modelValue="handleInput"
       />
 
+      <div>
+        {{ parsedData?.standard }} - {{ parsedData?.dataType }}
+      </div>
       <!-- Output Column -->
-      <OutputPanel 
-        :content="outputText" 
-        :placeholder="t.waitingForInput" 
+      <OutputPanel
+        :parsed-data="parsedData"
+        :placeholder="t.waitingForInput"
       />
     </main>
 
@@ -25,63 +28,73 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-import { useLocalStorage } from "@vueuse/core";
+/**
+ * Home View
+ * Main page with input/output panels for LLM API data visualization.
+ */
+import { ref, computed } from "vue";
 import { useI18n } from "../composables/useI18n";
 import AppHeader from "../components/AppHeader.vue";
 import InputPanel from "../components/InputPanel.vue";
 import OutputPanel from "../components/OutputPanel.vue";
 import AppFooter from "../components/AppFooter.vue";
+import { parseLLMData } from "../utils/llm/parser";
+import type { ApiStandard, DataType } from "../types/llm/flow";
 
 // --- State ---
 const { t } = useI18n();
 const inputText = ref("");
-const outputText = ref("");
-
-// Persistence settings
-const autoCopy = useLocalStorage("template-auto-copy", false);
-
-// --- Logic ---
 
 /**
- * Main processing function
+ * Parsed data interface
  */
-const processText = async () => {
-  if (!inputText.value.trim()) return;
+interface ParsedData {
+  standard: ApiStandard;
+  dataType: DataType;
+  data: unknown;
+}
 
-  // Business Logic: Transform input to output
-  // Currently just a placeholder implementation
-  outputText.value = `<span class="highlighted-text">${inputText.value}</span>`;
-
-  if (autoCopy.value) {
-    await copyToClipboard();
+/**
+ * Computed parsed data from input
+ */
+const parsedData = computed<ParsedData | null>(() => {
+  if (!inputText.value.trim()) {
+    return null;
   }
-};
 
-const copyToClipboard = async () => {
-  if (!inputText.value) return;
-  try {
-    await navigator.clipboard.writeText(inputText.value);
-  } catch (error) {
-    console.error("Failed to copy:", error);
+  const result = parseLLMData(inputText.value);
+
+  if (!result.success) {
+    return null;
   }
+
+  return {
+    standard: result.standard,
+    dataType: result.dataType,
+    data: result.data,
+  };
+});
+
+// --- Event Handlers ---
+
+/**
+ * Handle input change
+ */
+const handleInput = () => {
+  // Computed property will automatically update parsedData
 };
 
-const handlePaste = () => {
-  // Delay processing slightly to ensure model value is updated
-  setTimeout(() => {
-    processText();
-  }, 100);
-};
-
+// --- Keyboard Shortcuts ---
 const handleKeydown = (event: KeyboardEvent) => {
   if (event.ctrlKey && event.key === "Enter") {
     event.preventDefault();
-    processText();
+    // Trigger any additional processing if needed
   }
 };
 
 // --- Lifecycle Hooks ---
+import { onMounted, onUnmounted } from "vue";
+
 onMounted(() => {
   window.addEventListener("keydown", handleKeydown);
 });

@@ -1,0 +1,119 @@
+/**
+ * LLM API Common Styles
+ * =====================
+ * Shared styles for LLM API request/response rendering.
+ * Used across OpenAI, Claude, Gemini and other providers.
+ *
+ * Design Principles:
+ * - CSS variables for theming (colors, spacing, typography)
+ * - BEM-like naming for clarity
+ * - Mobile-first responsive design
+ * - Minimal, professional appearance
+ */
+
+/* ============================================
+   CSS VARIABLES - Design Tokens
+   ============================================ */
+:root {
+  /* Role-based Border Colors */
+  --llm-border-system: #f59e0b;
+  --llm-border-user: #3b82f6;
+  --llm-border-assistant: #10b981;
+  --llm-border-tool: #8b5cf6;
+  --llm-border-model: #10b981;
+  --llm-border-function: #8b5cf6;
+  --llm-border-thinking: #afafafac;
+
+  /* Background Colors */
+  --llm-bg-hover: #f8fafc;
+  --llm-bg-content: rgba(136, 188, 197, 0.08);
+  --llm-bg-tool: #f8fafc;
+  --llm-bg-card: #ffffff;
+  --llm-bg-header: #f8fafc;
+  --llm-bg-raw: #f8fafc;
+
+  /* Text Colors */
+  --llm-text-primary: #1e293b;
+  --llm-text-secondary: #64748b;
+  --llm-text-muted: #94a3b8;
+  --llm-text-link: #1d4ed8;
+  --llm-text-code: #374151;
+
+  /* Role Badge Background Colors */
+  --llm-badge-user-bg: #dbeafe;
+  --llm-badge-user-text: #1d4ed8;
+  --llm-badge-assistant-bg: #dcfce7;
+  --llm-badge-assistant-text: #166534;
+  --llm-badge-system-bg: #fef3c7;
+  --llm-badge-system-text: #92400e;
+  --llm-badge-thinking-bg: #d6d6d69a;
+  --llm-badge-thinking-text: #757575;
+  --llm-badge-tool-bg: #d7b9f771;
+  --llm-badge-tool-text: #7b47d5;
+  --llm-badge-model-bg: #dcfce7;
+  --llm-badge-model-text: #166534;
+  /* function == tool */
+  /* --llm-badge-function-bg: #f3e8ff;
+  --llm-badge-function-text: #7c3aed; */
+
+  /* Finish Reason Badge Colors */
+  --llm-finish-stop-bg: #dcfce7;
+  --llm-finish-stop-text: #166534;
+  --llm-finish-length-bg: #fef3c7;
+  --llm-finish-length-text: #92400e;
+  --llm-finish-tool-bg: #dbeafe;
+  --llm-finish-tool-text: #1e40af;
+  --llm-finish-filter-bg: #fecaca;
+  --llm-finish-filter-text: #991b1b;
+
+  /* Tool Badge Colors */
+  --llm-tool-name-bg: #f3e8ff;
+  --llm-tool-name-text: #7c3aed;
+  --llm-tool-badge-bg: #dbeafe;
+  --llm-tool-badge-text: #1d4ed8;
+
+  /* Button Active State (Blue) */
+  --llm-btn-active-bg: rgba(59, 130, 246, 0.05);
+  --llm-btn-active-border: #3b82f6;
+  --llm-btn-active-text: #3b82f6;
+
+  /* Message Border Colors */
+  --llm-message-border: rgba(126, 180, 233, 0.31);
+
+  /* Error State Colors */
+  --llm-error-bg: #fee2e2;
+  --llm-error-text: #dc2626;
+
+
+  /* Info Badge Colors (for cache badges etc) */
+  --llm-info-bg: #dbeafe;
+  --llm-info-text: #1e40af;
+
+  /* Border Colors */
+  --llm-border-color: #ccd3dc;
+  --llm-border-hover: #f1f5f9;
+  --llm-border-divider: #d1d5db;
+  --llm-border-dark: #999999;
+
+  /* Typography */
+  --llm-font-mono: 'Monaco', 'Menlo', 'Consolas', 'SF Mono', monospace;
+  --llm-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing */
+  --llm-spacing-xs: 2px;
+  --llm-spacing-sm: 4px;
+  --llm-spacing-md: 8px;
+  --llm-spacing-lg: 12px;
+  --llm-spacing-xl: 16px;
+  --llm-spacing-2xl: 24px;
+
+  /* Border Radius */
+  --llm-radius-sm: 3px;
+  --llm-radius-md: 4px;
+  --llm-radius-lg: 6px;
+  --llm-radius-xl: 8px;
+
+  /* Transitions */
+  --llm-transition-fast: 0.2s;
+  --llm-transition-normal: 0.3s;
+}

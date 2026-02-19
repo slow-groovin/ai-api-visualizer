@@ -3,9 +3,15 @@ import vue from "@vitejs/plugin-vue";
 import tailwind from "@tailwindcss/vite";
 import sqlocal from "sqlocal/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig(({}) => ({
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   server: {
     headers: {
       // "Cross-Origin-Embedder-Policy": "require-corp",

@@ -15,6 +15,7 @@
     "@vueuse/core": "^14.1.0",
     "drizzle-kit": "^0.31.8",
     "drizzle-orm": "^0.45.1",
+    "marked": "^17.0.3",
     "pinia": "^3.0.4",
     "radash": "^12.1.1",
     "sqlocal": "^0.16.0",
