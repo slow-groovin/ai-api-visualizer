@@ -3,7 +3,6 @@
     <!-- Output Container -->
     <div class="control-bar">
       <RadioButtonGroup v-model:model-value="standard" :options="standardOptions" />
-      <br />
       <RadioButtonGroup v-model:model-value="dataType" :options="dataTypeOptions" />
     </div>
     <ViewDashboardProxy :standard="standard" :data-type="dataType" :data="inputText" />
@@ -45,5 +44,12 @@ div::-webkit-scrollbar-thumb {
 
 div::-webkit-scrollbar-thumb:hover {
   background-color: #9ca3af;
+}
+
+.control-bar {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 8px 12px;
 }
 </style>

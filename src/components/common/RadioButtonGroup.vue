@@ -2,6 +2,7 @@
 interface Option {
   value: T;
   label: string;
+  icon?: string;
 }
 
 interface Props {
@@ -29,6 +30,7 @@ const handleSelect = (value: T) => {
       :class="{ active: modelValue === opt.value }"
       @click="handleSelect(opt.value)"
     >
+      <img v-if="opt.icon" :src="opt.icon" class="option-icon" :alt="opt.label" />
       {{ opt.label }}
     </button>
   </div>
@@ -53,6 +55,15 @@ const handleSelect = (value: T) => {
   border-radius: 4px;
   transition: all 0.2s;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.option-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
 }
 
 .radio-btn:hover {
