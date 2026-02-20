@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { ContentFormat } from '../../../utils/llm/format/formatContent';
+import type { ContentFormat } from '../../../utils/format';
 
 interface Props {
   currentFormat: ContentFormat;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useSessionStorage } from '@vueuse/core';
-import { hashId } from '@/utils/id/hashId';
+import { hashId } from '@/utils/hash';
 
 type BadgeType = 'text' | 'image' | 'tool' | 'thinking' | 'system';
 

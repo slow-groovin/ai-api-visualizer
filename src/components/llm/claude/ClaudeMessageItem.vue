@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { hashId } from '@/utils/id/hashId';
+import { hashId } from '@/utils/hash';
 import { computed } from 'vue';
 import { type ContentBlock, type ClaudeMessage } from '../../../types/claude/claude-request';
 import ImageBlock from '@/components/content/ImageBlock.vue';

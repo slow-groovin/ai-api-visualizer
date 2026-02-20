@@ -4,7 +4,7 @@ import { useSessionStorage } from '@vueuse/core';
 import RoleBadge from '../RoleBadge.vue';
 import SmartViewer from '../../content/SmartViewer.vue';
 import type { SystemMessage } from '../../../types/claude/claude-request';
-import { hashId } from '@/utils/id/hashId';
+import { hashId } from '@/utils/hash';
 
 interface Props {
   message: SystemMessage;

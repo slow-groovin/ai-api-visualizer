@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { hashId } from '@/utils/id/hashId';
+import { hashId } from '@/utils/hash';
 import SmartViewer from '../../content/SmartViewer.vue';
 import ImageBlock from '../../content/ImageBlock.vue';
 import type {

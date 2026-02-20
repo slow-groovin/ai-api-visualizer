@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, watch, type Ref } from 'vue';
 import { useSessionStorage } from '@vueuse/core';
-import { hashId } from '@/utils/id/hashId';
+import { hashId } from '@/utils/hash';
 import RoleBadge from './RoleBadge.vue';
 import SmartViewer from '../content/SmartViewer.vue';
 

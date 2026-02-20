@@ -88,7 +88,7 @@ import FormatSelector from '@/components/common/FormatSelector.vue';
 import CopyButton from '@/components/common/CopyButton.vue';
 import WrapLineButton from '@/components/common/WrapLineButton.vue';
 import ExpandButton from '@/components/common/ExpandButton.vue';
-import { detectContentFormat, type ContentFormat } from '@/utils/format/formatContent';
+import { detectContentFormat, type ContentFormat } from '@/utils/format';
 
 interface Props {
   id?: string;
