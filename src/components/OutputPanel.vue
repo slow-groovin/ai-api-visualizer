@@ -3,14 +3,10 @@
     <!-- Output Container -->
     <div class="control-bar">
       <RadioButtonGroup v-model:model-value="standard" :options="standardOptions" />
-      <br/>
+      <br />
       <RadioButtonGroup v-model:model-value="dataType" :options="dataTypeOptions" />
     </div>
-    <ViewDashboardProxy
-            :standard="standard"
-            :data-type="dataType"
-            :data="inputText"
-          />
+    <ViewDashboardProxy :standard="standard" :data-type="dataType" :data="inputText" />
   </div>
 </template>
 

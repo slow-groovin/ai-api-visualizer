@@ -9,7 +9,6 @@
       <InputPanel
         v-model="llmStore.inputText"
         :placeholder="t.pasteCodePlaceholder"
-        @update:modelValue="handleInput"
       />
 
       <!-- Output Column -->
@@ -26,78 +25,19 @@
  * Home View
  * Main page with input/output panels for LLM API data visualization.
  */
-import { computed } from "vue";
-import { useI18n } from "../composables/useI18n";
+import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
 import InputPanel from "../components/InputPanel.vue";
 import OutputPanel from "../components/OutputPanel.vue";
-import AppFooter from "../components/AppFooter.vue";
-import { parseLLMData } from "../utils/llm/parser";
+import { useI18n } from "../composables/useI18n";
 import { useLLMStore } from "../stores/llm";
-import type { ApiStandard, DataType } from "../types/llm";
 
 // --- State ---
 const { t } = useI18n();
 const llmStore = useLLMStore();
 
-/**
- * Parsed data interface
- */
-interface ParsedData {
-  standard: ApiStandard;
-  dataType: DataType;
-  data: unknown;
-}
-
-/**
- * Computed parsed data from input
- */
-const parsedData = computed<ParsedData | null>(() => {
-  if (!llmStore.inputText.trim()) {
-    return null;
-  }
-
-  const result = parseLLMData(llmStore.inputText);
-
-  if (!result.success) {
-    return null;
-  }
-
-  return {
-    standard: result.standard,
-    dataType: result.dataType,
-    data: result.data,
-  };
-});
-
-// --- Event Handlers ---
-
-/**
- * Handle input change
- */
-const handleInput = () => {
-  // Computed property will automatically update parsedData
-};
-
-// --- Keyboard Shortcuts ---
-const handleKeydown = (event: KeyboardEvent) => {
-  if (event.ctrlKey && event.key === "Enter") {
-    event.preventDefault();
-    // Trigger any additional processing if needed
-  }
-};
-
-// --- Lifecycle Hooks ---
-import { onMounted, onUnmounted } from "vue";
-
-onMounted(() => {
-  window.addEventListener("keydown", handleKeydown);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("keydown", handleKeydown);
-});
 </script>
+
 
 <style scoped>
 :deep(.highlighted-text) {
