@@ -13,8 +13,8 @@
   <header v-else
     class="z-50 bg-background-secondary border-b border-border px-4 py-2 shadow-sm flex-none flex items-center gap-3">
     <!-- Brand -->
-    <img :src="icon" alt="logo" class="max-h-8 w-auto shrink-0" />
-    <div class="flex items-baseline gap-2 leading-tight -ml-3">
+    <img :src="icon" alt="logo" class="max-h-8 w-auto shrink-0 logo-icon" />
+    <div class="flex items-baseline gap-2 leading-tight">
       <h1 class="text-base font-bold tracking-tight text-foreground whitespace-nowrap">AI API Visualizer</h1>
       <p class="text-xs text-foreground-secondary whitespace-nowrap">Visualize Request/Response of ChatGPT / Claude /
         Gemini API Online.</p>
@@ -37,9 +37,9 @@
     <LanguageSwitcher class="icon-btn" />
     <DarkModeToggle />
 
-    <router-link to="/help" class="icon-btn font-bold" title="Help">?</router-link>
+    <router-link to="/help" class="font-bold icon-btn size-7" title="Help">?</router-link>
 
-    <button @click="isHeaderExpanded = false" class="icon-btn" title="Collapse Header">
+    <button @click="isHeaderExpanded = false" class="" title="Collapse Header">
       <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
       </svg>
@@ -58,3 +58,33 @@ import icon from '@/assets/icon.png';
 const { t } = useI18n();
 const isHeaderExpanded = useLocalStorage("template-header-expanded", true);
 </script>
+
+<style scoped>
+
+html:not(.dark) .logo-icon {
+  filter: brightness(0.6) contrast(1.9);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border-radius: 0.5rem;
+  background-color: rgb(var(--button-bg));
+  border: 1px solid #8977a226;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  border-color: rgb(var(--border-dark));
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+</style>
