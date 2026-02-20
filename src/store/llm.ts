@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { DataType, ApiStandard, Flow } from '../types/flow';
+import { DataType, ApiStandard, Flow } from '../types/llm';
 
 
 export const useCurrentFlowStore = defineStore('current-store', () => {

@@ -1,5 +1,5 @@
 import { unsafeWindow } from '$';
-import { CallAction, Flow } from '../types/flow';
+import { CallAction, Flow } from '../types/llm';
 // import { logger } from './logtape';
 
 

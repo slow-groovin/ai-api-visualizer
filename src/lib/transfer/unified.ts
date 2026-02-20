@@ -1,4 +1,4 @@
-import type { ApiStandard, DataType } from "@/types/flow";
+import type { ApiStandard, DataType } from "@/types/llm";
 import type { TransferResult } from "./types";
 import { openaiTransferService } from "./openai-transfer-service";
 import { claudeTransferService } from "./claude-transfer-service";

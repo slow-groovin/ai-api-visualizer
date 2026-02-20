@@ -1,4 +1,4 @@
-import type { ApiStandard } from "../../types/flow";
+import type { ApiStandard } from "../../types/llm";
 
 
 /**

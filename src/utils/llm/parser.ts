@@ -3,7 +3,7 @@
  * 解析用户输入的 JSON 数据，识别 API 类型和请求/响应类型
  */
 
-import type { ApiStandard, DataType } from '../../types/llm/flow';
+import type { ApiStandard, DataType } from '../../types/llm';
 
 /**
  * 解析结果接口

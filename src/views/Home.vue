@@ -12,13 +12,9 @@
         @update:modelValue="handleInput"
       />
 
-      <div>
-        {{ parsedData?.standard }} - {{ parsedData?.dataType }}
-      </div>
       <!-- Output Column -->
       <OutputPanel
-        :parsed-data="parsedData"
-        :placeholder="t.waitingForInput"
+        :input-text="inputText"
       />
     </main>
 
@@ -39,7 +35,7 @@ import InputPanel from "../components/InputPanel.vue";
 import OutputPanel from "../components/OutputPanel.vue";
 import AppFooter from "../components/AppFooter.vue";
 import { parseLLMData } from "../utils/llm/parser";
-import type { ApiStandard, DataType } from "../types/llm/flow";
+import type { ApiStandard, DataType } from "../types/llm";
 
 // --- State ---
 const { t } = useI18n();
