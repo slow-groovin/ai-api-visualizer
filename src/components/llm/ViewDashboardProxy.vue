@@ -3,7 +3,6 @@ import { computed, ref, onErrorCaptured, defineAsyncComponent } from 'vue';
 import type { ApiStandard, DataType } from '@/types/llm';
 import type { TransferResult } from '@/lib/transfer/types';
 import { unifiedTransferData } from '@/lib/transfer/unified';
-import RadioButtonGroup from '@/components/common/RadioButtonGroup.vue';
 
 interface Props {
   standard: ApiStandard;
@@ -13,44 +12,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
-const emit = defineEmits<{
-  'update:standard': [standard: ApiStandard];
-  'update:dataType': [dataType: DataType];
-}>();
-
-const standardOptions: { value: ApiStandard; label: string }[] = [
-  { value: 'openai', label: 'OpenAI' },
-  { value: 'claude', label: 'Claude' },
-  { value: 'gemini', label: 'Gemini' },
-];
-
-const dataTypeOptions: { value: DataType; label: string }[] = [
-  { value: 'request', label: 'Request' },
-  { value: 'response', label: 'Response' },
-  { value: 'sse', label: 'SSE' },
-];
-
-const manualStandard = ref<ApiStandard | null>(null);
-const manualDataType = ref<DataType | null>(null);
-
-const effectiveStandard = computed<ApiStandard>(() => {
-  return manualStandard.value ?? props.standard;
-});
-
-const effectiveDataType = computed<DataType>(() => {
-  return manualDataType.value ?? props.dataType;
-});
-
-const handleStandardChange = (value: ApiStandard) => {
-  manualStandard.value = value;
-  emit('update:standard', value);
-};
-
-const handleDataTypeChange = (value: DataType) => {
-  manualDataType.value = value;
-  emit('update:dataType', value);
-};
 
 const componentMap = {
   openai: {
@@ -81,7 +42,7 @@ onErrorCaptured((err: Error) => {
 
 const transferResult = computed<TransferResult>(() => {
   try {
-    return unifiedTransferData(effectiveStandard.value, effectiveDataType.value, props.data);
+    return unifiedTransferData(props.standard, props.dataType, props.data);
   } catch (err) {
     return {
       success: false,
@@ -92,7 +53,7 @@ const transferResult = computed<TransferResult>(() => {
 });
 
 const currentComponent = computed(() => {
-  return componentMap[effectiveStandard.value]?.[effectiveDataType.value];
+  return componentMap[props.standard]?.[props.dataType];
 });
 
 const componentData = computed(() => {
@@ -113,19 +74,6 @@ const retry = () => {
 
 <template>
   <div class="view-dashboard-proxy">
-    <div class="control-bar">
-      <RadioButtonGroup
-        :model-value="effectiveStandard"
-        :options="standardOptions"
-        @update:model-value="handleStandardChange"
-      />
-      <RadioButtonGroup
-        :model-value="effectiveDataType"
-        :options="dataTypeOptions"
-        @update:model-value="handleDataTypeChange"
-      />
-    </div>
-
     <div v-if="hasComponentError" class="error-state">
       <div class="error-icon">💥</div>
       <div class="error-title">Component Load Failed</div>
@@ -157,13 +105,5 @@ const retry = () => {
 <style scoped>
 .view-dashboard-proxy {
   position: relative;
-}
-
-.control-bar {
-  display: flex;
-  gap: 12px;
-  padding: 8px;
-  background: rgba(0, 0, 0, 0.02);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 </style>
