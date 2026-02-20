@@ -44,7 +44,7 @@ const props = defineProps<Props>();
   align-items: center;
   gap: 8px;
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: var(--llm-font-xl);
   color: #1e293b;
 }
 

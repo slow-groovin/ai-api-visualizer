@@ -69,7 +69,7 @@ const closeDropdown = () => {
 }
 
 .format-label {
-  font-size: 0.85rem;
+  font-size: var(--llm-font-sm);
   color: #64748b;
   font-family: ui-monospace, monospace;
   text-transform: uppercase;
@@ -109,7 +109,7 @@ const closeDropdown = () => {
   text-align: left;
   border: none;
   background: none;
-  font-size: 0.875rem;
+  font-size: var(--llm-font-sm);
   color: #374151;
   cursor: pointer;
   transition: background 0.15s;

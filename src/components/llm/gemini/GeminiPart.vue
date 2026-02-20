@@ -168,13 +168,13 @@ const prettyJson = (data: unknown) => JSON.stringify(data, null, 2);
 }
 
 .block-index {
-  font-size: 1.3rem; /* Reference Size */
+  font-size: var(--llm-font-lg); /* Reference Size */
   color: #94a3b8;
   font-weight: 500;
 }
 
 .block-type-badge {
-  font-size: 1rem; /* Reference Size (visual estimation approx 0.8-1rem based on look) */
+  font-size: var(--llm-font-base); /* Reference Size (visual estimation approx 0.8-1rem based on look) */
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 4px;
@@ -184,7 +184,7 @@ const prettyJson = (data: unknown) => JSON.stringify(data, null, 2);
 
 .block-name {
   font-family: var(--llm-font-mono, monospace);
-  font-size: 1.4rem; /* Reference Size */
+  font-size: var(--llm-font-xl); /* Reference Size */
   font-weight: 600;
   color: var(--llm-badge-tool-use-text, #b45309);
   background: var(--llm-badge-tool-use-bg, #fffbeb);
@@ -256,7 +256,7 @@ const prettyJson = (data: unknown) => JSON.stringify(data, null, 2);
 
 /* 通用组件适配 */
 .meta-label {
-  font-size: 0.8rem;
+  font-size: var(--llm-font-base);
   color: #64748b;
   margin-bottom: 4px;
   font-family: var(--llm-font-mono, monospace);
@@ -274,7 +274,7 @@ const prettyJson = (data: unknown) => JSON.stringify(data, null, 2);
 
 .file-uri {
   font-family: var(--llm-font-mono, monospace);
-  font-size: 0.9rem;
+  font-size: var(--llm-font-base);
   color: #334155;
 }
 
@@ -282,7 +282,7 @@ const prettyJson = (data: unknown) => JSON.stringify(data, null, 2);
   font-family: var(--llm-font-mono, monospace);
   font-weight: 600;
   margin-bottom: 6px;
-  font-size: 0.85rem;
+  font-size: var(--llm-font-sm);
   text-transform: uppercase;
 }
 
@@ -293,7 +293,7 @@ const prettyJson = (data: unknown) => JSON.stringify(data, null, 2);
   padding: 10px;
   border-radius: 6px; /* 更圆润一点，符合现代风格 */
   font-family: var(--llm-font-mono, monospace);
-  font-size: 0.85rem;
+  font-size: var(--llm-font-sm);
   white-space: pre-wrap;
   overflow-x: auto;
 }
@@ -310,7 +310,7 @@ const prettyJson = (data: unknown) => JSON.stringify(data, null, 2);
 .result-header { margin-bottom: 8px; }
 .outcome-badge {
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: var(--llm-font-xs);
   font-weight: bold;
   padding: 2px 6px;
   border-radius: 3px;

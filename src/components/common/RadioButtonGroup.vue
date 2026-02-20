@@ -47,7 +47,7 @@ const handleSelect = (value: T) => {
 
 .radio-btn {
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: var(--llm-font-base);
   border: none;
   background: transparent;
   color: #666;

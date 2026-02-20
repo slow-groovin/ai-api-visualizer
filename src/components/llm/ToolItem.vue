@@ -125,18 +125,18 @@ const descPreview = computed(() => {
 
 .toggle-icon {
   color: #64748b;
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
 }
 
 .tool-index {
-  font-size: 1.3rem;
+  font-size: var(--llm-font-lg);
   color: #94a3b8;
   font-weight: 500;
 }
 
 .tool-name {
   font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
-  font-size: 1.6rem;
+  font-size: var(--llm-font-xl);
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 4px;
@@ -146,7 +146,7 @@ const descPreview = computed(() => {
 }
 
 .tool-desc-preview {
-  font-size: 1.3rem;
+  font-size: var(--llm-font-lg);
   color: #64748b;
   font-style: italic;
   overflow: hidden;
@@ -157,7 +157,7 @@ const descPreview = computed(() => {
 
 .raw-btn {
   padding: 4px 10px;
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   color: #64748b;
   background: transparent;
   border: 1px solid #d1d5db;
@@ -198,7 +198,7 @@ const descPreview = computed(() => {
 }
 
 .section-label {
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
   font-weight: 600;
   color: #64748b;
   text-transform: uppercase;

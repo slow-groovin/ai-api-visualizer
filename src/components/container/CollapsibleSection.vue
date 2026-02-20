@@ -145,7 +145,7 @@ defineExpose({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 6px 12px;
   /* 使用CSS变量: 50%透明度的主色 */
   background: color-mix(in srgb, var(--llm-subject-color, #e2e8f0) 20%, transparent);
   border: none;
@@ -175,7 +175,7 @@ defineExpose({
 }
 
 .title {
-  font-size: 2rem; /* 保持原尺寸 */
+  font-size: var(--llm-font-2xl); /* 保持原尺寸 */
   font-weight: 600;
   color: #1e293b;
 }
@@ -186,9 +186,9 @@ defineExpose({
   justify-content: center;
   background-color: #dbeafe; 
   color: #1e40af;
-  font-size: 1.5rem; /* 保持原尺寸 */
+  font-size: var(--llm-font-xl); /* 保持原尺寸 */
   font-weight: 600;
-  padding: 4px 8px;
+  padding: 2px 4px;
   border-radius: 6px;
 }
 .chevron-icon {

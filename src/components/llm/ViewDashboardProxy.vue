@@ -166,18 +166,18 @@ const retry = () => {
 }
 
 .state-icon {
-  font-size: 48px;
+  font-size: var(--llm-font-2xl);
   line-height: 1;
 }
 
 .state-title {
-  font-size: 16px;
+  font-size: var(--llm-font-base);
   font-weight: 500;
   color: var(--color-text-primary, #333);
 }
 
 .state-message {
-  font-size: 14px;
+  font-size: var(--llm-font-sm);
   color: var(--color-text-secondary, #666);
   text-align: center;
   max-width: 500px;
@@ -199,7 +199,7 @@ const retry = () => {
 .error-state .state-message {
   color: var(--color-error-light, #ef5350);
   font-family: monospace;
-  font-size: 12px;
+  font-size: var(--llm-font-xs);
   background: var(--color-error-bg, #ffebee);
   padding: 12px;
   border-radius: 4px;
@@ -222,7 +222,7 @@ const retry = () => {
 
 .retry-btn {
   padding: 8px 24px;
-  font-size: 14px;
+  font-size: var(--llm-font-sm);
   font-weight: 500;
   color: white;
   background: var(--color-primary, #1976d2);

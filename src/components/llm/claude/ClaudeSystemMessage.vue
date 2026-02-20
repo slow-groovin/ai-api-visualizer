@@ -74,12 +74,12 @@ const hasCacheControl = computed(() => {
 
 .toggle {
   color: var(--llm-text-secondary);
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
   transition: transform var(--llm-transition-fast);
 }
 
 .index {
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
   color: var(--llm-text-muted);
   font-weight: 500;
 }
@@ -87,7 +87,7 @@ const hasCacheControl = computed(() => {
 .cache-badge {
   padding: 2px 6px;
   border-radius: var(--llm-radius-sm);
-  font-size: 1rem;
+  font-size: var(--llm-font-base);
   font-weight: 600;
   text-transform: uppercase;
   /* 使用 CSS 变量 */

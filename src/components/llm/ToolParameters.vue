@@ -233,7 +233,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
   --color-success: #10b981;
   --font-mono: 'Monaco', 'Menlo', 'Consolas', monospace;
   
-  font-size: 14px;
+  font-size: var(--llm-font-sm);
   width: 100%;
 }
 
@@ -294,7 +294,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
   transform: rotate(-90deg);
 }
 .icon-caret {
-  font-size: 10px;
+  font-size: var(--llm-font-xs);
   transition: transform 0.2s;
 }
 .expand-placeholder {
@@ -306,13 +306,13 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
   font-family: var(--font-mono);
   font-weight: 600;
   color: var(--color-text-main);
-  font-size: 14px;
+  font-size: var(--llm-font-sm);
 }
 
 /* 属性类型 */
 .property-type {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--llm-font-xs);
   color: var(--color-primary);
   background: #e0f2fe;
   padding: 1px 6px;
@@ -321,7 +321,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
 
 /* Badges */
 .badge {
-  font-size: 10px;
+  font-size: var(--llm-font-xs);
   font-weight: 700;
   text-transform: uppercase;
   padding: 1px 4px;
@@ -343,7 +343,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
 .property-desc {
   margin-top: 4px;
   color: var(--color-text-sub);
-  font-size: 13px;
+  font-size: var(--llm-font-sm);
   line-height: 1.5;
   padding-left: 24px; /* 对齐 icon 之后的文本 */
 }
@@ -358,7 +358,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
   flex-wrap: wrap;
 }
 .meta-label {
-  font-size: 11px;
+  font-size: var(--llm-font-xs);
   font-weight: 600;
   color: var(--color-text-sub);
   text-transform: uppercase;
@@ -372,7 +372,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
 /* Code Pills */
 .code-pill {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--llm-font-xs);
   padding: 2px 6px;
   background: var(--color-bg-subtle);
   border: 1px solid var(--color-border);
@@ -392,7 +392,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
 }
 
 .nested-label {
-  font-size: 11px;
+  font-size: var(--llm-font-xs);
   font-weight: 600;
   color: var(--color-text-sub);
   margin-bottom: 8px;

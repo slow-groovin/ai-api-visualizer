@@ -142,19 +142,19 @@ const citationCount = computed(() => {
 
 .toggle {
   color: #64748b;
-  font-size: 0.9rem;
+  font-size: var(--llm-font-base);
 }
 
 .index {
   font-weight: 600;
   color: #374151;
-  font-size: 1.5rem;
+  font-size: var(--llm-font-xl);
 }
 
 .finish-reason {
   padding: 2px 8px;
   border-radius: 4px;
-  font-size: 1.5rem;
+  font-size: var(--llm-font-xl);
   font-weight: 500;
   text-transform: uppercase;
 }
@@ -193,7 +193,7 @@ const citationCount = computed(() => {
 
 .citation-count,
 .token-count {
-  font-size: 0.85rem;
+  font-size: var(--llm-font-sm);
   color: #64748b;
   background: #e2e8f0;
   padding: 2px 8px;
@@ -206,7 +206,7 @@ const citationCount = computed(() => {
 }
 
 .section-title {
-  font-size: 0.9rem;
+  font-size: var(--llm-font-base);
   font-weight: 600;
   color: #1e293b;
   margin-bottom: 12px;
@@ -292,7 +292,7 @@ const citationCount = computed(() => {
 .safety-probability {
   padding: 2px 8px;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: var(--llm-font-sm);
   font-weight: 500;
   text-transform: uppercase;
 }
@@ -322,7 +322,7 @@ const citationCount = computed(() => {
   color: white;
   padding: 2px 8px;
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: var(--llm-font-xs);
   font-weight: 600;
 }
 </style>

@@ -99,7 +99,7 @@ const parsedArgs = computed<Record<string, string>>(() => {
 }
 
 .param-name {
-  font-size: 1.3rem;
+  font-size: var(--llm-font-lg);
   font-weight: 600;
   color: #2563eb;
   min-width: 80px;
@@ -109,7 +109,7 @@ const parsedArgs = computed<Record<string, string>>(() => {
 
 .param-value {
   flex: 1;
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
   min-width: 0;
 }
 

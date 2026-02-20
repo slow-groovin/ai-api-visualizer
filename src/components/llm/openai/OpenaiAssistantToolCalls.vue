@@ -74,7 +74,7 @@ function scrollTo(selector: string) {
 
 .view-raw-btn {
   padding: 1px 2px;
-  font-size: 0.9rem;
+  font-size: var(--llm-font-base);
   color: #94a3b8;
   background: transparent;
   border: none;
@@ -105,14 +105,14 @@ function scrollTo(selector: string) {
   align-items: center;
   /* gap: 8px; */
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: var(--llm-font-xl);
   color: #1e293b;
 }
 
 .badge-call {
   padding: 2px 6px;
   border-radius: 3px;
-  font-size: 1rem;
+  font-size: var(--llm-font-base);
   font-weight: 600;
   text-transform: uppercase;
 
@@ -122,14 +122,14 @@ function scrollTo(selector: string) {
 
 .tool-idx {
   color: #64748b;
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
 }
 .tool-fn{
   margin-left: 1rem;
 }
 .tool-id {
   margin-left: auto;
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   color: #94a3b8;
   font-family: 'Monaco', 'Menlo', monospace;
 }

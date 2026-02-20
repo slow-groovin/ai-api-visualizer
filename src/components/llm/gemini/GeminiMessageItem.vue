@@ -182,11 +182,11 @@ const getBadgeInfo = (part: Part): { type: 'text' | 'image' | 'tool' | 'thinking
   display: flex;
   align-items: center;
   gap: var(--llm-spacing-sm);
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
 }
 
 .file-icon {
-  font-size: 1.4rem;
+  font-size: var(--llm-font-xl);
 }
 
 .file-uri {
@@ -214,20 +214,20 @@ const getBadgeInfo = (part: Part): { type: 'text' | 'image' | 'tool' | 'thinking
 }
 
 .code-icon {
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
 }
 
 .code-lang {
   color: #9cdcfe;
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
 }
 
 .code-content {
   margin: 0;
   font-family: var(--llm-font-mono);
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   line-height: 1.5;
   overflow-x: auto;
   white-space: pre-wrap;
@@ -248,13 +248,13 @@ const getBadgeInfo = (part: Part): { type: 'text' | 'image' | 'tool' | 'thinking
 }
 
 .result-icon {
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
 }
 
 .result-outcome {
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
 }
 
 .outcome-success { color: #16a34a; }
@@ -267,7 +267,7 @@ const getBadgeInfo = (part: Part): { type: 'text' | 'image' | 'tool' | 'thinking
   background: rgba(255, 255, 255, 0.7);
   border-radius: var(--llm-radius-sm);
   font-family: var(--llm-font-mono);
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   overflow-x: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -282,7 +282,7 @@ const getBadgeInfo = (part: Part): { type: 'text' | 'image' | 'tool' | 'thinking
 .unknown-part pre {
   margin: 0;
   font-family: var(--llm-font-mono);
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   overflow-x: auto;
 }
 </style>

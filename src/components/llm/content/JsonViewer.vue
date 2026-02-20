@@ -78,7 +78,7 @@ const highlightedCode = computed(() => {
 .json-code {
   margin: 0;
   padding: 12px;
-  font-size: 12px;
+  font-size: var(--llm-font-xs);
   line-height: 1.5;
   white-space: v-bind('wrapLines ? "pre-wrap" : "pre"');
   word-break: v-bind('wrapLines ? "break-all" : "normal"');

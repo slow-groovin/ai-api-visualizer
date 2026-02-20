@@ -129,13 +129,13 @@ const badgeTypeClass = computed(() => {
 
 
 .block-index {
-  font-size: 1.3rem;
+  font-size: var(--llm-font-lg);
   color: #94a3b8;
   font-weight: 500;
 }
 
 .block-type-badge {
-  font-size: 1rem;
+  font-size: var(--llm-font-base);
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 4px;
@@ -145,7 +145,7 @@ const badgeTypeClass = computed(() => {
 
 .block-name {
   font-family: var(--llm-font-mono);
-  font-size: 1.4rem;
+  font-size: var(--llm-font-xl);
   font-weight: 600;
   color: var(--llm-badge-tool-use-text);
   background: var(--llm-badge-tool-use-bg);
@@ -192,7 +192,7 @@ const badgeTypeClass = computed(() => {
 
 .tool-id {
   font-family: 'Monaco', 'Menlo', monospace;
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   color: #6b7280;
 }
 
@@ -212,7 +212,7 @@ const badgeTypeClass = computed(() => {
 }
 
 .citations-label {
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   font-weight: 600;
   color: #64748b;
   text-transform: uppercase;
@@ -225,7 +225,7 @@ const badgeTypeClass = computed(() => {
   align-items: center;
   gap: 8px;
   padding: 4px 0;
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
 }
 
 .citation-range {

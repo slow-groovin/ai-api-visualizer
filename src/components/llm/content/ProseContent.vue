@@ -53,7 +53,7 @@ const htmlContent = computed(() => {
 
 .prose {
   /* 基准字体 15px */
-  font-size: 1.5rem; 
+  font-size: var(--llm-font-xl); 
   line-height: 1.75;
   color: #374151;
   word-wrap: break-word;

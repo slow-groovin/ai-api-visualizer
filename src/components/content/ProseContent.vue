@@ -53,7 +53,7 @@ const htmlContent = computed(() => {
 
 .prose {
   /* 基准字体 15px */
-  font-size: 1.5rem; 
+  font-size: var(--llm-font-base); 
   line-height: 1.75;
   color: #374151;
   word-wrap: break-word;
@@ -69,9 +69,9 @@ const htmlContent = computed(() => {
   margin-bottom: 0.8em;
 }
 
-:deep(h1) { font-size: 1.75em; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.3em; }
-:deep(h2) { font-size: 1.5em; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.3em; }
-:deep(h3) { font-size: 1.25em; }
+:deep(h1) { font-size: var(--llm-font-2xl); border-bottom: 1px solid #e5e7eb; padding-bottom: 0.3em; }
+:deep(h2) { font-size: var(--llm-font-xl); border-bottom: 1px solid #e5e7eb; padding-bottom: 0.3em; }
+:deep(h3) { font-size: var(--llm-font-lg); }
 
 :deep(p) {
   margin-bottom: 0.25em;
@@ -90,7 +90,7 @@ const htmlContent = computed(() => {
 /* 代码样式 */
 :deep(code) {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.9em;
+  font-size: var(--llm-font-sm);
   background-color: #f1f5f9;
   color: #ef4444; /* 经典行内代码配色 */
   padding: 0.2em 0.4em;

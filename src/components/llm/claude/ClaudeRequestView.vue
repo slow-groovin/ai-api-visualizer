@@ -162,7 +162,7 @@ const hasSystemMessages = computed(() => {
 
 .header h2 {
   margin: 0 0 var(--llm-spacing-md) 0;
-  font-size: 2rem;
+  font-size: var(--llm-font-2xl);
   font-weight: 600;
   color: #1f2937;
   display: flex;
@@ -181,7 +181,7 @@ const hasSystemMessages = computed(() => {
   align-items: center;
   justify-content: center;
   gap: var(--llm-spacing-md);
-  font-size: 14px;
+  font-size: var(--llm-font-sm);
   color: #6b7280;
   flex-wrap: wrap;
 }
@@ -190,7 +190,7 @@ const hasSystemMessages = computed(() => {
   background: #f3f4f6;
   padding: 2px 6px;
   border-radius: var(--llm-radius-sm);
-  font-size: 13px;
+  font-size: var(--llm-font-sm);
   font-family: var(--llm-font-mono);
   color: #374151;
 }

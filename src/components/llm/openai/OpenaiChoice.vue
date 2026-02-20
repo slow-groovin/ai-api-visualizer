@@ -128,7 +128,7 @@ const finishReason = computed(() => {
 .choice-index {
   font-weight: 600;
   color: #1e293b;
-  font-size: 1.4rem;
+  font-size: var(--llm-font-xl);
 }
 
 .choice-badge {
@@ -136,14 +136,14 @@ const finishReason = computed(() => {
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 1.2000000000000002rem;
+  font-size: var(--llm-font-lg);
   font-weight: 600;
 }
 
 .finish-reason-badge {
   padding: 2px 6px;
   border-radius: 4px;
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   font-weight: 500;
   text-transform: lowercase;
 }
@@ -151,7 +151,7 @@ const finishReason = computed(() => {
 .toggle-icon {
   transition: transform 0.2s;
   color: #64748b;
-  font-size: 1.2000000000000002rem;
+  font-size: var(--llm-font-lg);
 }
 
 .choice-content {
@@ -172,7 +172,7 @@ const finishReason = computed(() => {
 .refusal-badge {
   padding: 2px 6px;
   border-radius: 3px;
-  font-size: 1rem;
+  font-size: var(--llm-font-base);
   font-weight: 600;
   text-transform: uppercase;
   background: #dc2626;
@@ -181,7 +181,7 @@ const finishReason = computed(() => {
 
 .refusal-text {
   color: #991b1b;
-  font-size: 1.4rem;
+  font-size: var(--llm-font-xl);
 }
 
 .reasoning {
@@ -193,7 +193,7 @@ const finishReason = computed(() => {
 
 .reasoning-label {
   padding: 4px 12px;
-  font-size: 0.85rem;
+  font-size: var(--llm-font-sm);
   font-weight: 600;
   text-transform: uppercase;
   color: #7c3aed;

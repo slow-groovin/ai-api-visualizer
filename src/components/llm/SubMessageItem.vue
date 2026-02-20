@@ -83,12 +83,12 @@ const badgeClass = computed(() => `badge-${props.badgeType}`);
 
 .toggle {
   color: var(--llm-text-secondary, #64748b);
-  font-size: 1.1rem;
+  font-size: var(--llm-font-base);
   transition: transform var(--llm-transition-fast, 0.2s);
 }
 
 .index {
-  font-size: 1.2rem;
+  font-size: var(--llm-font-base);
   color: var(--llm-text-secondary, #64748b);
   font-weight: 500;
 }
@@ -98,7 +98,7 @@ const badgeClass = computed(() => `badge-${props.badgeType}`);
   align-items: center;
   padding: 3px 10px;
   border-radius: var(--llm-radius-sm, 4px);
-  font-size: 0.9rem;
+  font-size: var(--llm-font-sm);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.02em;

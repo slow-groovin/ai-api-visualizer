@@ -266,7 +266,7 @@ const handleFormatChange = (format: ContentFormat) => {
   backdrop-filter: blur(2px);
   padding: 2px 6px;
   border-radius: 4px;
-  font-size: 0.85rem;
+  font-size: var(--llm-font-sm);
   color: #64748b;
   cursor: pointer;
   transition: all 0.2s;
@@ -277,7 +277,7 @@ const handleFormatChange = (format: ContentFormat) => {
 }
 
 .text-content {
-  font-size: 1.5rem;
+  font-size: var(--llm-font-base);
   font-family: inherit;
   white-space: pre-wrap;
   word-wrap: break-word;

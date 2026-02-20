@@ -115,7 +115,7 @@ const hasError = computed(() => {
 
 .header h2 {
   margin: 0 0 var(--llm-spacing-md) 0;
-  font-size: 2rem;
+  font-size: var(--llm-font-2xl);
   font-weight: 600;
   color: #1f2937;
   display: flex;
@@ -135,7 +135,7 @@ const hasError = computed(() => {
   align-items: center;
   justify-content: center;
   gap: var(--llm-spacing-md);
-  font-size: 14px;
+  font-size: var(--llm-font-sm);
   color: #6b7280;
   flex-wrap: wrap;
 }
@@ -144,7 +144,7 @@ const hasError = computed(() => {
   background: #f3f4f6;
   padding: 2px 6px;
   border-radius: var(--llm-radius-sm);
-  font-size: 13px;
+  font-size: var(--llm-font-sm);
   font-family: var(--llm-font-mono);
   color: #374151;
 }
@@ -156,7 +156,7 @@ const hasError = computed(() => {
 .stop-reason {
   padding: 2px 8px;
   border-radius: var(--llm-radius-md);
-  font-size: 12px;
+  font-size: var(--llm-font-xs);
   font-weight: 500;
 }
 
@@ -197,7 +197,7 @@ const hasError = computed(() => {
 
 .error-type {
   font-family: var(--llm-font-mono);
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
   font-weight: 600;
   color: #dc2626;
   text-transform: uppercase;
@@ -205,7 +205,7 @@ const hasError = computed(() => {
 }
 
 .error-message {
-  font-size: 1.4rem;
+  font-size: var(--llm-font-xl);
   color: #7f1d1d;
   line-height: 1.5;
 }

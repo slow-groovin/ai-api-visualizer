@@ -27,7 +27,7 @@ const whiteSpace = computed(() => props.wrapLines ? 'pre-wrap' : 'pre');
   color: #e2e8f0;
   padding: 12px;
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: var(--llm-font-base);
   line-height: 1.5;
   overflow-x: auto;
   margin: 0;

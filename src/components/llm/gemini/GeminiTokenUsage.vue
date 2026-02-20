@@ -117,7 +117,7 @@ const formatPercent = (percent: number) => `${percent}%`;
 
 .label {
   padding: 0;
-  font-size: 1.2rem;
+  font-size: var(--llm-font-lg);
   color: #64748b;
   text-transform: uppercase;
   font-weight: 900;
@@ -126,7 +126,7 @@ const formatPercent = (percent: number) => `${percent}%`;
 }
 
 .value {
-  font-size: 2.25rem;
+  font-size: var(--llm-font-2xl);
   font-weight: 700;
   color: #0f172a;
   line-height: 1.2;
@@ -144,7 +144,7 @@ const formatPercent = (percent: number) => `${percent}%`;
 }
 
 .detail-item {
-  font-size: 1.75rem;
+  font-size: var(--llm-font-2xl);
   color: #475569;
   display: flex;
   align-items: center;
