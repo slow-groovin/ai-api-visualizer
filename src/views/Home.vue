@@ -7,15 +7,13 @@
     <main class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 p-2 min-h-0">
       <!-- Input Column -->
       <InputPanel
-        v-model="inputText"
+        v-model="llmStore.inputText"
         :placeholder="t.pasteCodePlaceholder"
         @update:modelValue="handleInput"
       />
 
       <!-- Output Column -->
-      <OutputPanel
-        :input-text="inputText"
-      />
+      <OutputPanel />
     </main>
 
     <!-- Footer Component -->
@@ -28,18 +26,19 @@
  * Home View
  * Main page with input/output panels for LLM API data visualization.
  */
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useI18n } from "../composables/useI18n";
 import AppHeader from "../components/AppHeader.vue";
 import InputPanel from "../components/InputPanel.vue";
 import OutputPanel from "../components/OutputPanel.vue";
 import AppFooter from "../components/AppFooter.vue";
 import { parseLLMData } from "../utils/llm/parser";
+import { useLLMStore } from "../stores/llm";
 import type { ApiStandard, DataType } from "../types/llm";
 
 // --- State ---
 const { t } = useI18n();
-const inputText = ref("");
+const llmStore = useLLMStore();
 
 /**
  * Parsed data interface
@@ -54,11 +53,11 @@ interface ParsedData {
  * Computed parsed data from input
  */
 const parsedData = computed<ParsedData | null>(() => {
-  if (!inputText.value.trim()) {
+  if (!llmStore.inputText.trim()) {
     return null;
   }
 
-  const result = parseLLMData(inputText.value);
+  const result = parseLLMData(llmStore.inputText);
 
   if (!result.success) {
     return null;

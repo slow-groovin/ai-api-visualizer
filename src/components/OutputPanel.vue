@@ -6,11 +6,11 @@
       <br/>
       <RadioButtonGroup v-model:model-value="dataType" :options="dataTypeOptions" />
     </div>
-    <!-- <ViewDashboardProxy
+    <ViewDashboardProxy
             :standard="standard"
             :data-type="dataType"
             :data="inputText"
-          /> -->
+          />
   </div>
 </template>
 
@@ -19,24 +19,17 @@
  * OutputPanel Component
  * Renders the LLM API data visualization using ViewDashboardProxy.
  */
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import ViewDashboardProxy from './llm/ViewDashboardProxy.vue';
 import { dataTypeOptions, standardOptions, type ApiStandard, type DataType } from '../types/llm';
 import RadioButtonGroup from './common/RadioButtonGroup.vue';
-const standard = ref('openai' as ApiStandard);
-const dataType = ref('response' as DataType);
+import { useLLMStore } from '../stores/llm';
 
-
-/**
- * Component props
- */
-interface Props {
-  /** Raw JSON string input */
-  inputText?: string;
-}
-
-const props = defineProps<Props>();
-
+// 获取 store 实例
+const llmStore = useLLMStore();
+// 使用 storeToRefs 解构以保持响应式
+const { inputText, standard, dataType } = storeToRefs(llmStore);
 </script>
 
 <style scoped>
