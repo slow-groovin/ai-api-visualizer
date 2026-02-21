@@ -106,7 +106,6 @@ const getFinishReasonSummary = () => {
   margin: 0 0 var(--llm-spacing-md) 0;
   font-size: var(--llm-font-lg);
   font-weight: 600;
-  color: #1f2937;
   display: flex;
   align-items: center;
   justify-content: center;

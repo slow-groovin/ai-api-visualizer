@@ -153,7 +153,7 @@ const hasSafetyBlock = computed(() => {
   margin: 0 0 var(--llm-spacing-md) 0;
   font-size: var(--llm-font-2xl);
   font-weight: 600;
-  color: #1f2937;
+  color: ;
   display: flex;
   align-items: center;
   justify-content: center;
