@@ -39,8 +39,6 @@
     <LanguageSwitcher class="icon-btn" />
     <DarkModeToggle />
 
-    <router-link to="/help" class="font-bold icon-btn size-7" title="Help">?</router-link>
-
     <button @click="isHeaderExpanded = false" class="" title="Collapse Header">
       <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />

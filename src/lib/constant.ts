@@ -1,3 +1,3 @@
 export const CONSTANTS = {
-  prefix: 'llm-better-view-',
+  prefix: 'ai-api-visualizer-',
 } as const;

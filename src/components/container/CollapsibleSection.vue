@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const isOpen = props.storageKey
-  ? useStorage(`llm-better-view-collapse-state-${props.storageKey}`, props.defaultOpen)
+  ? useStorage(`ai-api-visualizer-collapse-state-${props.storageKey}`, props.defaultOpen)
   : ref(props.defaultOpen);
 
 // 批量操作状态：null = 无操作，'collapsed' = 全部折叠，'expanded' = 全部展开
