@@ -4,6 +4,7 @@
     <div class="control-bar">
       <RadioButtonGroup v-model:model-value="standard" :options="standardOptions" />
       <RadioButtonGroup v-model:model-value="dataType" :options="dataTypeOptions" />
+      <AutoDetectToggle />
     </div>
     <ViewDashboardProxy :standard="standard" :data-type="dataType" :data="inputText" />
   </div>
@@ -19,6 +20,7 @@ import { storeToRefs } from 'pinia';
 import ViewDashboardProxy from './llm/ViewDashboardProxy.vue';
 import { dataTypeOptions, standardOptions, type ApiStandard, type DataType } from '../types/llm';
 import RadioButtonGroup from './common/RadioButtonGroup.vue';
+import AutoDetectToggle from './common/AutoDetectToggle.vue';
 import { useLLMStore } from '../stores/llm';
 
 // 获取 store 实例

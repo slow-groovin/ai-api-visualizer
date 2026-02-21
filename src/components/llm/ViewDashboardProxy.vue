@@ -8,7 +8,6 @@ import { useSampleLoader } from '@/composables/useSampleLoader';
 
 const { t } = useI18n();
 const { sampleInfoList, handleSampleClick } = useSampleLoader();
-
 interface Props {
   standard: ApiStandard;
   dataType: DataType;
@@ -61,6 +60,10 @@ const transferResult = computed<TransferResult>(() => {
     return { success: false, error: err instanceof Error ? err.message : '数据转换失败', timestamp: Date.now() };
   }
 });
+
+
+
+
 
 const currentComponent = computed(() => componentMap[props.standard]?.[props.dataType]);
 const componentData = computed(() => transferResult.value.success ? transferResult.value.data : null);
@@ -273,6 +276,7 @@ const getSampleLabel = (standard: string, label: string) => {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
 
 @keyframes spin {
   to { transform: rotate(360deg); }
