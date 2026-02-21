@@ -89,7 +89,7 @@ const finishReason = computed(() => {
       <div v-if="content" class="choice-message">
         <SmartViewer :text="content" />
       </div>
-      <OpenaiAssistantToolCalls v-if="toolCalls.length > 0" :tool-calls="toolCalls" variant="compact" />
+      <OpenaiAssistantToolCalls v-if="toolCalls.length > 0" :tool-calls="toolCalls" />
     </div>
   </div>
 </template>

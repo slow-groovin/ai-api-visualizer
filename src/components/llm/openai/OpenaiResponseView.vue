@@ -75,8 +75,7 @@ const getFinishReasonSummary = () => {
       <OpenaiTokenUsage :usage="data.usage" />
     </CollapsibleSection>
 
-    <CollapsibleSection title="Choices" :count="choices.length" :default-open="true" storage-key="response-choices"
-      variant="default">
+    <CollapsibleSection title="Choices" :count="choices.length" :default-open="true" storage-key="response-choices">
       <div v-if="choices.length === 0" class="empty-state">
         No choices
       </div>

@@ -75,7 +75,7 @@ const stopValue = computed(() => {
     </CollapsibleSection>
 
     <CollapsibleSection title="Messages" :count="messages.length" :default-open="true" storage-key="messages"
-      enable-bulk-actions variant="default">
+      enable-bulk-actions >
       <div v-if="messages.length === 0" class="empty-state">
         No messages
       </div>
@@ -88,7 +88,6 @@ const stopValue = computed(() => {
       title="Tools"
       storage-key="tools"
       :count="tools.length"
-      variant="tools"
       enable-bulk-actions
     >
       <ToolItem v-for="(tool, index) in tools" :key="index" :name="tool.function.name"
