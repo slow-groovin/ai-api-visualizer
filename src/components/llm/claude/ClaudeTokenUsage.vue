@@ -138,7 +138,7 @@ const formatPercent = (percent: number) => `${percent}%`;
 }
 
 .detail-item {
-  font-size: var(--llm-font-2xl);
+  font-size: var(--llm-font-lg);
   color: #475569;
   display: flex;
   align-items: center;

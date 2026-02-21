@@ -97,7 +97,7 @@ const getSampleLabel = (standard: string, label: string) => {
 
       <!-- 极简风格的 Sample Links -->
       <div class="quick-samples">
-        <span class="samples-label">试一试:</span>
+        <span class="samples-label">No data? Here are some samples:</span>
         <template v-for="(sample, index) in sampleInfoList" :key="sample.id">
           <a 
             href="#" 
@@ -178,8 +178,8 @@ const getSampleLabel = (standard: string, label: string) => {
 
 /* === 极简 Sample 样式 === */
 .quick-samples {
-  margin-top: 8px;
-  font-size: var(--llm-font-xs); /* 很小的字体，比如 12px */
+  margin-top: 10vh;
+  font-size: var(--llm-font-base);
   color: var(--color-text-tertiary, #999);
   text-align: center;
   line-height: 1.6;

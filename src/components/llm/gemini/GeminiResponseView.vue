@@ -67,7 +67,7 @@ const hasSafetyBlock = computed(() => {
       <h2><img :src="GeminiIcon" class="header-icon" alt="Gemini" /> Gemini API Response</h2>
       <div class="meta">
         <span>
-          <span class="llm-label">model</span>
+          <!-- <span class="llm-label">model</span> -->
           <code v-if="data.modelVersion">{{ data.modelVersion }}</code>
           <span v-else>Unknown Model</span>
         </span>
@@ -83,7 +83,7 @@ const hasSafetyBlock = computed(() => {
 
     <!-- Safety Block Warning -->
     <CollapsibleSection v-if="hasSafetyBlock" title="Safety Block Detected" :default-open="true"
-      storage-key="gemini-safety-block" variant="error">
+      storage-key="gemini-safety-block">
       <div class="safety-warning">
         <div class="warning-title">Content generation was blocked</div>
         <div class="warning-text">
@@ -95,7 +95,7 @@ const hasSafetyBlock = computed(() => {
 
     <!-- Prompt Feedback Section -->
     <CollapsibleSection v-if="promptFeedbackInfo" title="Prompt Feedback" :default-open="true"
-      storage-key="gemini-prompt-feedback" variant="system">
+      storage-key="gemini-prompt-feedback" >
       <LabelValueRow label="Block Reason" :value="promptFeedbackInfo.blockReason || 'None'"
         :formatter="(v) => v === 'None' ? 'Not blocked' : String(v)" />
       <div v-if="data.promptFeedback?.safetyRatings?.length" class="safety-list">
@@ -118,7 +118,7 @@ const hasSafetyBlock = computed(() => {
 
     <!-- Candidates Section -->
     <CollapsibleSection title="Candidates" :count="candidates.length" :default-open="true"
-      storage-key="gemini-candidates" variant="default">
+      storage-key="gemini-candidates">
       <div v-if="candidates.length === 0" class="empty-state">
         No candidates
       </div>
@@ -141,6 +141,7 @@ const hasSafetyBlock = computed(() => {
 <style scoped>
 .gemini-response-view {
   padding: var(--llm-spacing-sm);
+  --llm-subject-color: #1188e2;
 }
 
 .header {
@@ -165,41 +166,11 @@ const hasSafetyBlock = computed(() => {
   vertical-align: middle;
 }
 
-.meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--llm-spacing-md);
-  font-size: var(--llm-font-sm);
-  color: #6b7280;
-  flex-wrap: wrap;
-}
-
-.meta code {
-  background: #f3f4f6;
-  padding: 2px 6px;
-  border-radius: var(--llm-radius-sm);
-  font-size: var(--llm-font-sm);
-  font-family: var(--llm-font-mono);
-  color: #374151;
-}
-
-.divider {
-  color: #d1d5db;
-}
-
 .empty-state {
   text-align: center;
   color: var(--llm-text-secondary);
   font-style: italic;
   padding: 40px 20px;
-}
-
-.finish-summary {
-  padding: 2px 8px;
-  border-radius: var(--llm-radius-md);
-  font-size: var(--llm-font-xs);
-  font-weight: 500;
 }
 
 .finish-stop {

@@ -68,7 +68,7 @@ const hasSystemMessages = computed(() => {
       </h2>
       <div class="meta">
         <span>
-          <span class="llm-label">model</span>
+          <!-- <span class="llm-label">model</span> -->
           <code>{{ data.model }}</code>
         </span>
         <span class="divider">·</span>
@@ -97,8 +97,7 @@ const hasSystemMessages = computed(() => {
       title="System Messages" 
       :count="systemMessages.length"
       :default-open="true" 
-      storage-key="claude-system" 
-      variant="system"
+      storage-key="claude-system"
     >
       <ClaudeSystemMessage 
         v-for="(msg, index) in systemMessages" 
@@ -113,7 +112,6 @@ const hasSystemMessages = computed(() => {
       :count="messages.length"
       :default-open="true"
       storage-key="claude-messages"
-      variant="default"
       :enable-bulk-actions="true"
     >
       <div v-if="messages.length === 0" class="empty-state">No messages</div>
@@ -130,7 +128,6 @@ const hasSystemMessages = computed(() => {
       title="Tools"
       :count="tools.length"
       storage-key="claude-tools"
-      variant="tools"
       enable-bulk-actions
     >
       <ToolItem
@@ -153,6 +150,7 @@ const hasSystemMessages = computed(() => {
 <style scoped>
 .claude-request-view {
   padding: var(--llm-spacing-sm);
+   --llm-subject-color: #f45e07;
 }
 
 .header {
@@ -176,28 +174,7 @@ const hasSystemMessages = computed(() => {
   height: 32px;
 }
 
-.meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--llm-spacing-md);
-  font-size: var(--llm-font-sm);
-  color: #6b7280;
-  flex-wrap: wrap;
-}
 
-.meta code {
-  background: #f3f4f6;
-  padding: 2px 6px;
-  border-radius: var(--llm-radius-sm);
-  font-size: var(--llm-font-sm);
-  font-family: var(--llm-font-mono);
-  color: #374151;
-}
-
-.divider {
-  color: #d1d5db;
-}
 
 .empty-state {
   text-align: center;

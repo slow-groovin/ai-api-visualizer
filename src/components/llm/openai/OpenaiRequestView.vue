@@ -50,7 +50,7 @@ const stopValue = computed(() => {
       <h2><img :src="OpenaiIcon" class="header-icon" alt="OpenAI" /> OpenAI Chat Completions API Request</h2>
       <div class="meta">
         <span>
-          <span class="llm-label">model</span>
+          <!-- <span class="llm-label">model</span> -->
           <code>{{ data.model }}</code>
         </span>
         <span class="divider">·</span>
@@ -103,6 +103,7 @@ const stopValue = computed(() => {
 <style scoped>
 .openai-request-view {
   padding: var(--llm-spacing-sm);
+   --llm-subject-color: #878787;
 }
 
 .header {
@@ -127,27 +128,7 @@ const stopValue = computed(() => {
   vertical-align: middle;
 }
 
-.meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--llm-spacing-md);
-  font-size: var(--llm-font-base);
-  color: #6b7280;
-}
 
-.meta code {
-  background: #f3f4f6;
-  padding: 2px 6px;
-  border-radius: var(--llm-radius-sm);
-  font-size: var(--llm-font-base);
-  font-family: var(--llm-font-mono);
-  color: #374151;
-}
-
-.divider {
-  color: #d1d5db;
-}
 
 .empty-state {
   text-align: center;

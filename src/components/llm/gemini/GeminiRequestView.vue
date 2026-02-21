@@ -67,7 +67,7 @@ const systemInstructionText = computed(() => {
       <h2><img :src="GeminiIcon" class="header-icon" alt="Gemini" /> Gemini API Request</h2>
       <div class="meta">
         <span>
-          <span class="llm-label">model</span>
+          <!-- <span class="llm-label">model</span> -->
           <code v-if="modelName">{{ modelName }}</code>
           
 
@@ -108,13 +108,12 @@ const systemInstructionText = computed(() => {
 
     <!-- System Instruction Section -->
     <CollapsibleSection v-if="hasSystemInstruction" title="System Instruction" :default-open="true"
-      storage-key="gemini-system-instruction" variant="system">
+      storage-key="gemini-system-instruction">
       <SmartViewer :text="systemInstructionText" />
     </CollapsibleSection>
 
     <!-- Contents Section -->
-    <CollapsibleSection title="Contents" :count="contents.length" :default-open="true" storage-key="gemini-contents"
-      variant="default" enable-bulk-actions>
+    <CollapsibleSection title="Contents" :count="contents.length" :default-open="true" storage-key="gemini-contents" enable-bulk-actions>
       <div v-if="contents.length === 0" class="empty-state">
         No contents
       </div>
@@ -128,7 +127,6 @@ const systemInstructionText = computed(() => {
       title="Tools"
       :count="tools.reduce((acc, t) => acc + (t.functionDeclarations?.length || 0), 0)"
       storage-key="gemini-tools"
-      variant="tools"
       enable-bulk-actions
     >
       <template v-for="(tool, toolIdx) in tools" :key="toolIdx">
@@ -153,6 +151,7 @@ const systemInstructionText = computed(() => {
 <style scoped>
 .gemini-request-view {
   padding: var(--llm-spacing-sm);
+  --llm-subject-color: #1188e2;
 }
 
 .header {
@@ -177,28 +176,7 @@ const systemInstructionText = computed(() => {
   vertical-align: middle;
 }
 
-.meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--llm-spacing-md);
-  font-size: var(--llm-font-sm);
-  color: #6b7280;
-  flex-wrap: wrap;
-}
 
-.meta code {
-  background: #f3f4f6;
-  padding: 2px 6px;
-  border-radius: var(--llm-radius-sm);
-  font-size: var(--llm-font-sm);
-  font-family: var(--llm-font-mono);
-  color: #374151;
-}
-
-.divider {
-  color: #d1d5db;
-}
 
 .empty-state {
   text-align: center;

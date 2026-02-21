@@ -50,7 +50,7 @@ const hasError = computed(() => {
       <h2><img :src="ClaudeIcon" class="header-icon" alt="Claude" /> Claude Messages API Response</h2>
       <div class="meta">
         <span>
-          <span class="llm-label">model</span>
+          <!-- <span class="llm-label">model</span> -->
           <code>{{ data.model }}</code>
         </span>
         <span class="divider">·</span>
@@ -64,8 +64,7 @@ const hasError = computed(() => {
     </div>
 
     <!-- Error Section -->
-    <CollapsibleSection v-if="hasError" title="Error" :default-open="true" storage-key="claude-response-error"
-      variant="error">
+    <CollapsibleSection v-if="hasError" title="Error" :default-open="true" storage-key="claude-response-error">
       <div class="error-content">
         <div class="error-type">{{ data.error?.type }}</div>
         <div class="error-message">{{ data.error?.message }}</div>
@@ -89,7 +88,7 @@ const hasError = computed(() => {
 
     <!-- Content Blocks Section -->
     <CollapsibleSection title="Content Blocks" :count="contentBlocks.length" :default-open="true"
-      storage-key="claude-response-content" variant="default">
+      storage-key="claude-response-content">
       <div v-if="contentBlocks.length === 0" class="empty-state">
         No content blocks
       </div>
@@ -106,6 +105,7 @@ const hasError = computed(() => {
 <style scoped>
 .claude-response-view {
   padding: var(--llm-spacing-sm);
+   --llm-subject-color: #f45e07;
 }
 
 .header {
@@ -130,34 +130,11 @@ const hasError = computed(() => {
   vertical-align: middle;
 }
 
-.meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--llm-spacing-md);
-  font-size: var(--llm-font-sm);
-  color: #6b7280;
-  flex-wrap: wrap;
-}
-
-.meta code {
-  background: #f3f4f6;
-  padding: 2px 6px;
-  border-radius: var(--llm-radius-sm);
-  font-size: var(--llm-font-sm);
-  font-family: var(--llm-font-mono);
-  color: #374151;
-}
-
-.divider {
-  color: #d1d5db;
-}
-
 .stop-reason {
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: var(--llm-radius-md);
   font-size: var(--llm-font-xs);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .stop-end-turn {

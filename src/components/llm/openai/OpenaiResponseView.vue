@@ -49,7 +49,7 @@ const getFinishReasonSummary = () => {
       <h2><img :src="OpenaiIcon" class="header-icon" alt="OpenAI" /> OpenAI Chat Completions API Response</h2>
       <div class="meta">
         <span>
-          <span class="llm-label">model</span>
+          <!-- <span class="llm-label">model</span> -->
           <code>{{ data.model }}</code>
         </span>
         <span class="divider">·</span>
@@ -93,6 +93,8 @@ const getFinishReasonSummary = () => {
 <style scoped>
 .openai-response-view {
   padding: var(--llm-spacing-sm);
+   --llm-subject-color: #878787;
+
 }
 
 .header {
@@ -117,41 +119,11 @@ const getFinishReasonSummary = () => {
   vertical-align: middle;
 }
 
-.meta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--llm-spacing-md);
-  font-size: var(--llm-font-sm);
-  color: #6b7280;
-  flex-wrap: wrap;
-}
-
-.meta code {
-  background: #f3f4f6;
-  padding: 2px 6px;
-  border-radius: var(--llm-radius-sm);
-  font-size: var(--llm-font-sm);
-  font-family: var(--llm-font-mono);
-  color: #374151;
-}
-
-.divider {
-  color: #d1d5db;
-}
-
 .empty-state {
   text-align: center;
   color: var(--llm-text-secondary);
   font-style: italic;
   padding: 40px 20px;
-}
-
-.finish-summary {
-  padding: 2px 8px;
-  border-radius: var(--llm-radius-md);
-  font-size: var(--llm-font-xs);
-  font-weight: 500;
 }
 
 .finish-stop {
