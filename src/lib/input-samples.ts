@@ -19,7 +19,7 @@ export const sampleInfoList: SampleInfo[] = [
   { id: "gemini-sse", standard: "gemini", dataType: "sse", label: "Gemini SSE" },
 ];
 
-const sampleLoaders: Record<string, () => Promise<Record<DataType, string>>> = {
+const sampleLoaders: Record<string, () => Promise<Record<DataType, any>>> = {
   openai: () => import("./samples/openai").then(m => m.default),
   claude: () => import("./samples/claude").then(m => m.default),
   gemini: () => import("./samples/gemini").then(m => m.default),
@@ -31,7 +31,11 @@ export async function loadSample(standard: ApiStandard, dataType: DataType): Pro
     throw new Error(`No sample loader for standard: ${standard}`);
   }
   const samples = await loader();
-  return samples[dataType] || "";
+  const targetSample = samples[dataType];
+  if(typeof targetSample === "object") {
+    return JSON.stringify(targetSample, null, 2);
+  }
+  return targetSample || "";
 }
 
 export async function loadSampleById(sampleId: string): Promise<{ standard: ApiStandard; dataType: DataType; content: string } | null> {
