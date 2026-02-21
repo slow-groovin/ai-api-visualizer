@@ -13,7 +13,9 @@
   <header v-else
     class="z-50 bg-background-secondary border-b border-border px-4 py-2 shadow-sm flex-none flex items-center gap-3">
     <!-- Brand -->
-    <img :src="icon" alt="logo" class="max-h-8 w-auto shrink-0 logo-icon" />
+    <a href="/" class="flex items-center gap-3">
+      <img :src="icon" alt="logo" class="max-h-8 w-auto shrink-0 logo-icon" />
+    </a>
     <div class="flex items-baseline gap-2 leading-tight">
       <h1 class="text-base font-bold tracking-tight text-foreground whitespace-nowrap">AI API Visualizer</h1>
       <p class="text-xs text-foreground-secondary whitespace-nowrap">Visualize Request/Response of ChatGPT / Claude /
@@ -60,7 +62,6 @@ const isHeaderExpanded = useLocalStorage("template-header-expanded", true);
 </script>
 
 <style scoped>
-
 html:not(.dark) .logo-icon {
   filter: brightness(0.6) contrast(1.9);
 }
