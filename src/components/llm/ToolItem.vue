@@ -101,7 +101,7 @@ const descPreview = computed(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
+  padding: 4px 16px;
   background: #f8fafc;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -136,7 +136,7 @@ const descPreview = computed(() => {
 
 .tool-name {
   font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
-  font-size: var(--llm-font-xl);
+  font-size: var(--llm-font-base);
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 4px;
@@ -198,7 +198,7 @@ const descPreview = computed(() => {
 }
 
 .section-label {
-  font-size: var(--llm-font-lg);
+  font-size: var(--llm-font-base);
   font-weight: 600;
   color: #64748b;
   text-transform: uppercase;

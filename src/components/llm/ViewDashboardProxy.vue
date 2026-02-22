@@ -57,7 +57,7 @@ const transferResult = computed<TransferResult>(() => {
   try {
     return unifiedTransferData(props.standard, props.dataType, props.data);
   } catch (err) {
-    return { success: false, error: err instanceof Error ? err.message : '数据转换失败', timestamp: Date.now() };
+    return { success: false, error: err instanceof Error ? err.message : t.dataConversionFailed, timestamp: Date.now() };
   }
 });
 
@@ -68,8 +68,8 @@ const transferResult = computed<TransferResult>(() => {
 const currentComponent = computed(() => componentMap[props.standard]?.[props.dataType]);
 const componentData = computed(() => transferResult.value.success ? transferResult.value.data : null);
 const errorMessage = computed(() => {
-  if (componentError.value) return `组件渲染错误: ${componentError.value.message}`;
-  if (!currentComponent.value) return `不支持的组件类型: ${props.standard} - ${props.dataType}`;
+  if (componentError.value) return t.componentRenderError(componentError.value.message);
+  if (!currentComponent.value) return t.unsupportedComponentType(props.standard, props.dataType);
   return transferResult.value.error || null;
 });
 
@@ -100,7 +100,7 @@ const getSampleLabel = (standard: string, label: string) => {
 
       <!-- 极简风格的 Sample Links -->
       <div class="quick-samples">
-        <span class="samples-label">No data? Here are some samples:</span>
+        <span class="samples-label">{{ t.noDataSamples }}</span>
         <template v-for="(sample, index) in sampleInfoList" :key="sample.id">
           <a 
             href="#" 
@@ -117,24 +117,24 @@ const getSampleLabel = (standard: string, label: string) => {
     <!-- 状态：组件加载错误 -->
     <div v-else-if="componentError" class="state-container error-state">
       <div class="state-icon">💥</div>
-      <div class="state-title">组件加载失败</div>
+      <div class="state-title">{{ t.componentLoadFailed }}</div>
       <div class="state-message">{{ componentError.message }}</div>
       <button @click="retry" class="retry-btn" :disabled="isRetrying">
-        {{ isRetrying ? '重试中...' : '重试' }}
+        {{ isRetrying ? t.retrying : t.retry }}
       </button>
     </div>
 
     <!-- 状态：数据解析错误 -->
     <div v-else-if="errorMessage" class="state-container error-state">
       <div class="state-icon">⚠️</div>
-      <div class="state-title">数据解析失败</div>
+      <div class="state-title">{{ t.dataParseFailed }}</div>
       <div class="state-message">{{ errorMessage }}</div>
     </div>
 
     <!-- 状态：无数据内容 -->
     <div v-else-if="!componentData" class="state-container empty-state">
       <div class="state-icon">📭</div>
-      <div class="state-title">暂无数据</div>
+      <div class="state-title">{{ t.noData }}</div>
     </div>
 
     <!-- 状态：正常显示组件 -->
@@ -144,7 +144,7 @@ const getSampleLabel = (standard: string, label: string) => {
       <template #fallback>
         <div class="state-container loading-state">
           <div class="loading-spinner"></div>
-          <div class="state-title">加载中...</div>
+          <div class="state-title">{{ t.loading }}</div>
         </div>
       </template>
     </Suspense>

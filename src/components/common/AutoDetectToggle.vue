@@ -6,7 +6,9 @@
 import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLLMStore } from '@/stores/llm';
+import { useI18n } from '@/composables/useI18n';
 
+const { t } = useI18n();
 const llmStore = useLLMStore();
 const { autoDetect, inputText, detectedStandard, detectedDataType } = storeToRefs(llmStore);
 
@@ -31,12 +33,12 @@ const getDataTypeLabel = (type: string) => {
 // 计算当前检测结果作为标题 - 直接使用 store 中的检测结果
 const detectedInfo = computed(() => {
   if (!inputText.value.trim()) {
-    return '输入内容后将自动检测 API 格式';
+    return t.autoDetectInputHint;
   }
   if (detectedStandard.value === null || detectedDataType.value === null) {
-    return '无法检测格式';
+    return t.autoDetectFailed;
   }
-  return `检测到: ${getStandardLabel(detectedStandard.value)} / ${getDataTypeLabel(detectedDataType.value)}`;
+  return t.autoDetected(getStandardLabel(detectedStandard.value), getDataTypeLabel(detectedDataType.value));
 });
 </script>
 
@@ -45,7 +47,7 @@ const detectedInfo = computed(() => {
     <input
       type="checkbox"
       :checked="autoDetect"
-      @change="llmStore.autoDetect = $event.target.checked"
+      @change="llmStore.autoDetect = ($event.target as any).checked"
     />
     <span class="toggle-text">Auto Detect</span>
   </label>
