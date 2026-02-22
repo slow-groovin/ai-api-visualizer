@@ -15,10 +15,9 @@
  * OutputPanel Component
  * Renders the LLM API data visualization using ViewDashboardProxy.
  */
-import { computed } from 'vue';
 import { storeToRefs } from 'pinia';
 import ViewDashboardProxy from './llm/ViewDashboardProxy.vue';
-import { dataTypeOptions, standardOptions, type ApiStandard, type DataType } from '../types/llm';
+import { dataTypeOptions, standardOptions } from '../types/llm';
 import RadioButtonGroup from './common/RadioButtonGroup.vue';
 import AutoDetectToggle from './common/AutoDetectToggle.vue';
 import { useLLMStore } from '../stores/llm';

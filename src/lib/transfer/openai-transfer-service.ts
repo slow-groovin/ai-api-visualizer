@@ -103,7 +103,8 @@ export class OpenaiTransferService implements ITransferService {
     const events: OpenaiChatCompletionChunk[] = [];
     let blocks = sseText.replace(/\r\n/g, '\n').split('\n\n');
 
-    if (blocks.length === 1 && blocks[0].length > 100) {
+    const firstBlock = blocks[0];
+    if (blocks.length === 1 && firstBlock && firstBlock.length > 100) {
       const lines = sseText.split('\n');
       blocks = [];
       let currentBlock = '';
@@ -154,13 +155,13 @@ export class OpenaiTransferService implements ITransferService {
     const metaEvent = events.find(e => e.id && e.model) || finalEvent;
 
     return {
-      id: metaEvent.id || 'unknown',
+      id: metaEvent?.id || 'unknown',
       object: 'chat.completion',
-      created: metaEvent.created || Math.floor(Date.now() / 1000),
-      model: metaEvent.model || 'unknown',
-      system_fingerprint: metaEvent.system_fingerprint ?? null,
+      created: metaEvent?.created || Math.floor(Date.now() / 1000),
+      model: metaEvent?.model || 'unknown',
+      system_fingerprint: metaEvent?.system_fingerprint ?? null,
       choices: this.aggregateChoices(events),
-      usage: finalEvent.usage ?? undefined,
+      usage: finalEvent?.usage ?? undefined,
     };
   }
 

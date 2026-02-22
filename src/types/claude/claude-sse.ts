@@ -181,7 +181,7 @@ export function parseSSELine(line: string): SSEEvent | null {
   }
 
   return {
-    event: match[1].trim() as SSEEventType,
-    data: parseSSEData(dataMatch[1].trim()),
+    event: match[1]!.trim() as SSEEventType,
+    data: parseSSEData(dataMatch[1]!.trim()),
   };
 }

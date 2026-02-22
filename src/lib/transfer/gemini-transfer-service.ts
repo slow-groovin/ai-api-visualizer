@@ -95,7 +95,8 @@ export class GeminiTransferService implements ITransferService {
     let blocks = sseText.replace(/\r\n/g, '\n').split('\n\n');
 
     // Fallback for non-standard stream
-    if (blocks.length === 1 && blocks[0].length > 100) {
+    const firstBlock = blocks[0];
+    if (blocks.length === 1 && firstBlock && firstBlock.length > 100) {
       const lines = sseText.split('\n');
       blocks = [];
       let currentBlock = '';

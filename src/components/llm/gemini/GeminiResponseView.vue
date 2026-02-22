@@ -123,7 +123,7 @@ const hasSafetyBlock = computed(() => {
         No candidates
       </div>
       <GeminiCandidate v-for="candidate in candidates" :key="candidate.index" :candidate="candidate"
-        :index="candidate.index" :finish-reason-class="finishReasonClass" :show-header="candidates.length > 1" />
+        :index="candidate.index" />
     </CollapsibleSection>
 
     <!-- Response Info -->

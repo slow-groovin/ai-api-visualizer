@@ -139,7 +139,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
         class="property-row"
         :class="{ 
           'is-required': schemaRequired.includes(propName),
-          'has-nested': !!getNestedSchema(schemaProperties[propName])
+          'has-nested': !!getNestedSchema(schemaProperties[propName]!)
         }"
       >
         <!-- Property Main Info -->
@@ -147,7 +147,7 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
           <div class="property-header">
             <!-- 展开/折叠 按钮 (仅针对嵌套对象) -->
             <button
-              v-if="getNestedSchema(schemaProperties[propName])"
+              v-if="getNestedSchema(schemaProperties[propName]!)"
               class="expand-btn"
               @click="toggleExpand(propName)"
               :class="{ 'is-closed': !isExpanded(propName) }"
@@ -161,51 +161,51 @@ function getNestedSchema(prop: JSONSchemaProperty): JSONSchema | null {
             <span class="property-name">{{ propName }}</span>
             
             <!-- 参数类型 -->
-            <span class="property-type">{{ formatType(schemaProperties[propName]) }}</span>
+            <span class="property-type">{{ formatType(schemaProperties[propName]!) }}</span>
             
             <!-- Required 标记 -->
             <span v-if="schemaRequired.includes(propName)" class="badge required-badge">REQUIRED</span>
             
             <!-- Enum 标记 -->
-            <span v-if="schemaProperties[propName].enum" class="badge enum-badge">
+            <span v-if="schemaProperties[propName]?.enum" class="badge enum-badge">
               ENUM
             </span>
           </div>
 
           <!-- 描述 -->
-          <div v-if="schemaProperties[propName].description" class="property-desc">
-            {{ schemaProperties[propName].description }}
+          <div v-if="schemaProperties[propName]?.description" class="property-desc">
+            {{ schemaProperties[propName]!.description }}
           </div>
 
           <!-- Enum Values 详情 -->
-          <div v-if="schemaProperties[propName].enum" class="meta-block">
+          <div v-if="schemaProperties[propName]?.enum" class="meta-block">
             <span class="meta-label">Options:</span>
             <div class="enum-container">
-              <code v-for="val in schemaProperties[propName].enum" :key="String(val)" class="code-pill">
+              <code v-for="val in schemaProperties[propName]!.enum" :key="String(val)" class="code-pill">
                 {{ JSON.stringify(val) }}
               </code>
             </div>
           </div>
 
           <!-- Default Value -->
-          <div v-if="formatDefault(schemaProperties[propName])" class="meta-block">
+          <div v-if="formatDefault(schemaProperties[propName]!)" class="meta-block">
             <span class="meta-label">Default:</span>
-            <code class="code-pill default-pill">{{ formatDefault(schemaProperties[propName]) }}</code>
+            <code class="code-pill default-pill">{{ formatDefault(schemaProperties[propName]!) }}</code>
           </div>
         </div>
 
         <!-- 递归渲染嵌套属性 (Secondary Params) -->
         <div 
-          v-if="getNestedSchema(schemaProperties[propName])" 
+          v-if="getNestedSchema(schemaProperties[propName]!)" 
           v-show="isExpanded(propName)"
           class="nested-container"
         >
           <div class="nested-label">
-            {{ schemaProperties[propName].type === 'array' ? 'Item Properties:' : 'Properties:' }}
+            {{ schemaProperties[propName]!.type === 'array' ? 'Item Properties:' : 'Properties:' }}
           </div>
           <!-- 递归调用自身，depth + 1 -->
           <ToolParameters 
-            :schema="getNestedSchema(schemaProperties[propName])!" 
+            :schema="getNestedSchema(schemaProperties[propName]!)!" 
             :depth="depth + 1"
           />
         </div>

@@ -56,12 +56,12 @@ const prettyJson = (data: unknown) => JSON.stringify(data, null, 2);
 </script>
 
 <template>
-  <div class="content-block" :class="`type-${activeConfig.class}`">
+  <div class="content-block" :class="`type-${activeConfig!.class}`">
     
     <!-- Header: 样式严格参考 Reference -->
     <div class="block-header">
       <div class="header-left">
-        <span class="block-type-badge" :class="`badge-${activeConfig.class}`">{{ activeConfig.label }}</span>
+        <span class="block-type-badge" :class="`badge-${activeConfig!.class}`">{{ activeConfig!.label }}</span>
         <span class="block-index">#{{ index + 1 }}</span>
         
         <!-- Tool Name (Reference 风格) -->

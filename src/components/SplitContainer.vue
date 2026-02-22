@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 
 const props = defineProps<{
   storageKey?: string;
@@ -24,7 +24,6 @@ const minLeftWidth = props.minLeftWidth || 300;
 const minRightWidth = props.minRightWidth || 300;
 
 const leftWidth = ref(500);
-const containerRef = ref<HTMLElement | null>(null);
 
 const loadSavedWidth = () => {
   const saved = localStorage.getItem(storageKey);
