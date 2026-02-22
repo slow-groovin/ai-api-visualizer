@@ -1,7 +1,12 @@
 {
-  "name": "ai-api-visualizer-web",
+  "name": "ai-api-visualizer",
   "compatibility_date": "2026-01-20",
   "assets": {
     "directory": "./dist"
+  },
+  "vars": {
+    "VITE_DEBUG_MODE": "false", // 改为有默认值
+    "VITE_FOOTER_POWERED_BY_SITE": "",
+    "VITE_FOOTER_FRIENDLY_LINKS": ""
   }
 }
