@@ -34,7 +34,7 @@ export default defineConfig(() => {
           name: "AI API Visualizer",
           short_name: "AI API Visualizer",
           description:
-            "Visualize Request/Response body of ChatGPT(Chat Completion)/Claude/Gemini API Online.",
+            "Visualize Request/Response body of ChatGPT(Chat Completion)/Claude/Gemini API.",
           theme_color: "#ffffff",
           // id: "/",  // 固定应用 ID
           start_url: base,

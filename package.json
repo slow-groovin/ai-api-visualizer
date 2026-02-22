@@ -1,5 +1,6 @@
 {
   "name": "ai-api-visualizer",
+  "description": "Visualize Request/Response body of ChatGPT(Chat Completion)/Claude/Gemini API.",
   "private": true,
   "version": "0.0.3",
   "type": "module",
