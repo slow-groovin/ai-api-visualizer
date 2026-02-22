@@ -1,9 +1,15 @@
 <template>
   <div class="min-h-screen bg-background text-foreground font-sans flex flex-col">
     <AppHeader />
-    <main class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-2 p-2 min-h-0">
-      <InputPanel v-model="llmStore.inputText" :placeholder="t.pasteCodePlaceholder" />
-      <OutputPanel />
+    <main class="flex-1 p-2 min-h-0">
+      <SplitContainer storageKey="home-split-width">
+        <template #left>
+          <InputPanel v-model="llmStore.inputText" :placeholder="t.pasteCodePlaceholder" />
+        </template>
+        <template #right>
+          <OutputPanel />
+        </template>
+      </SplitContainer>
     </main>
     <AppFooter />
   </div>
@@ -15,6 +21,7 @@ import AppFooter from "../components/AppFooter.vue";
 import AppHeader from "../components/AppHeader.vue";
 import InputPanel from "../components/InputPanel.vue";
 import OutputPanel from "../components/OutputPanel.vue";
+import SplitContainer from "../components/SplitContainer.vue";
 import { useI18n } from "../composables/useI18n";
 import { useLLMStore } from "../stores/llm";
 import { useSampleLoader } from "../composables/useSampleLoader";
