@@ -13,9 +13,9 @@
   <header v-else
     class="z-50 bg-background-secondary border-b border-border px-4 py-2 shadow-sm flex-none flex items-center gap-3">
     <!-- Brand -->
-    <router-link to="/" class="flex items-center gap-3">
+    <a @click.prevent="goHome" href="#" class="flex items-center gap-3 cursor-pointer">
       <img :src="icon" alt="logo" class="max-h-8 w-auto shrink-0 logo-icon" />
-    </router-link>
+    </a>
     <div class="flex items-baseline gap-2 leading-tight">
       <h1 class="text-base font-bold tracking-tight text-foreground whitespace-nowrap">AI API Visualizer</h1>
       <p class="text-xs text-foreground-secondary whitespace-nowrap">Visualize Request/Response of ChatGPT / Claude /
@@ -57,6 +57,11 @@ import icon from '@/assets/icon.png';
 
 const { t } = useI18n();
 const isHeaderExpanded = useLocalStorage("template-header-expanded", true);
+
+const goHome = () => {
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  window.location.href = baseUrl;
+};
 </script>
 
 <style scoped>

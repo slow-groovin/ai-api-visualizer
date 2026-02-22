@@ -3,16 +3,18 @@
   <img src="/public/icon-192.png" alt="icon" width="24" height="24">   AI API Visualizer
 </h1>
 
-## 🌐Try it
-1. https://github.com/slow-groovin/ai-api-visualizer (github pagas) 
+**Visualize Request/Response body of ChatGPT(Chat Completion)/Claude/Gemini API.**
+
+
+**🌐Try it:**
+1. (github pagas)  https://slow-groovin.github.io/ai-api-visualizer/#/ 
 2. https://ai-api-visualizer.api2o.com 
 
 
-##
 
-**Visualize Request/Response body of ChatGPT(Chat Completion)/Claude/Gemini API.**
 
-<video src="https://github.com/user-attachments/assets/5ef7b0ed-f9a3-4d06-af6d-4fffcdfcfdc7" controls  style="max-width: 80%;">
+
+<video src="https://github.com/user-attachments/assets/00c8423b-fc1c-4848-b6f6-61a3e4e27582" controls  style="max-width: 80%;">
   Your browser does not support the video tag.
 </video>
 
@@ -24,5 +26,4 @@
 </div>
 
 
-## 
 This project was derived from the project: https://github.com/slow-groovin/mitmproxy-llm-better-view
