@@ -29,7 +29,7 @@ export default defineConfig(({}) => ({
         name: "AI API Visualizer",
         short_name: "AI API Visualizer",
         description:
-          "An offline tool to replace sensitive text in your context",
+          "Visualize Request/Response body of ChatGPT(Chat Completion)/Claude/Gemini API Online.",
         theme_color: "#ffffff",
         // id: "/",  // 固定应用 ID
         start_url: "/",
