@@ -1,8 +1,7 @@
 <template>
   <div class="min-h-screen bg-background text-foreground font-sans flex flex-col">
     <AppHeader />
-    <main class="flex-1 p-2 min-h-0">
-      <SplitContainer storageKey="home-split-width">
+    <SplitContainer storageKey="home-split-width" class="flex-1">
         <template #left>
           <InputPanel v-model="llmStore.inputText" :placeholder="t.pasteCodePlaceholder" />
         </template>
@@ -10,7 +9,6 @@
           <OutputPanel />
         </template>
       </SplitContainer>
-    </main>
     <AppFooter />
   </div>
 </template>
