@@ -1,7 +1,7 @@
 <template>
   <!-- Input Container -->
   <div
-    class="h-full bg-background rounded-xl shadow-sm border border-border  group hover:border-blue-300 transition-colors">
+    class="h-full overflow-hidden  bg-background rounded-xl shadow-sm border border-border  group hover:border-blue-300 transition-colors">
     <textarea :value="modelValue" @input="onInput" @paste="onPaste"
       class="w-full h-full overflow-auto  p-4 bg-transparent border-none resize-none focus:ring-0 text-sm font-mono leading-relaxed text-foreground placeholder-foreground-secondary"
       :placeholder="placeholder"></textarea>
